@@ -24,5 +24,13 @@ namespace GeometricaTests
             m[0, 0] = 5;
             Assert.AreEqual(5, m[0, 0], delta);
         }
+
+        [TestMethod]
+        public void Matrix3_UnitMatrix_InitializedCorrectly()
+        {
+            var m = Matrix3.Unit;
+
+            Assert.AreEqual("[1;0;0][0;1;0][0;0;1]", m.ToString());
+        }
     }
 }
