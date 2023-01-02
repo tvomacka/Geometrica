@@ -22,6 +22,12 @@ namespace Geometrica.DataStructures
             }
         }
 
+        public double this[int row, int column]
+        {
+            get => matrix[row, column];
+            set => matrix[row, column] = value;
+        }
+
         public override string ToString()
         {
             return $"[{matrix[0, 0]};{matrix[0, 1]};{matrix[0, 2]}][{matrix[1, 0]};{matrix[1, 1]};{matrix[1, 2]}][{matrix[2, 0]};{matrix[2, 1]};{matrix[2, 2]}]";
