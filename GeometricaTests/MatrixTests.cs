@@ -33,10 +33,18 @@ public class MatrixTests
     }
 
     [TestMethod]
-    public void Matrix3_Determinant_CanBeComputed()
+    public void Matrix3_UnitDeterminant_EqualToOne()
     {
         var m = Matrix3.Unit;
 
         Assert.AreEqual(1, m.Determinant(), delta);
+    }
+
+    [TestMethod]
+    public void Matrix3_Determinant_ComputedCorrectly()
+    {
+        var m = new Matrix3(9, 3, 5, -6, -9, 7, -1, -8, 1);
+
+        Assert.AreEqual(615, m.Determinant(), delta);
     }
 }
