@@ -5,6 +5,8 @@ VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Geometrica", "Geometrica\Geometrica.csproj", "{DB6C6BCA-B3C1-4214-8D39-D2A149296E85}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeometricaTests", "GeometricaTests\GeometricaTests.csproj", "{B00F35C4-C082-4263-B499-6650B404C647}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{DB6C6BCA-B3C1-4214-8D39-D2A149296E85}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DB6C6BCA-B3C1-4214-8D39-D2A149296E85}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DB6C6BCA-B3C1-4214-8D39-D2A149296E85}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B00F35C4-C082-4263-B499-6650B404C647}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B00F35C4-C082-4263-B499-6650B404C647}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B00F35C4-C082-4263-B499-6650B404C647}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B00F35C4-C082-4263-B499-6650B404C647}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

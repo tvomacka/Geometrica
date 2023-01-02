@@ -1,11 +1,17 @@
+using Geometrica.DataStructures;
+using System.Numerics;
+
 namespace GeometricaTests
 {
     [TestClass]
-    public class UnitTest1
+    public class MatrixTests
     {
         [TestMethod]
-        public void TestMethod1()
+        public void Matrix3_IsZero_ByDefault()
         {
+            var m = new Matrix3();
+
+            Assert.AreEqual("", m.ToString());
         }
     }
 }
