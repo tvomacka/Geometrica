@@ -31,4 +31,12 @@ public class MatrixTests
 
         Assert.AreEqual("[1;0;0][0;1;0][0;0;1]", m.ToString());
     }
+
+    [TestMethod]
+    public void Matrix3_Determinant_CanBeComputed()
+    {
+        var m = Matrix3.Unit;
+
+        Assert.AreEqual(1, m.Determinant(), delta);
+    }
 }
