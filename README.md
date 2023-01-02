@@ -1,10 +1,16 @@
 # Geometrica
+
 A library of various computational geometry tools.
 
-## Determinant Computation
+## Auxiliary Operations
 
-## Polynomials
+- Determinant Computation
 
-## Delaunay Triangulation
+## Algorithms
 
-## Kinetic Delaunay Triangulation
+- Point Location
+
+## Data Structures
+
+- Delaunay Triangulation
+- Voronoi Diagram
