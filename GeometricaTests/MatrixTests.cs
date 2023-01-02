@@ -11,7 +11,7 @@ namespace GeometricaTests
         {
             var m = new Matrix3();
 
-            Assert.AreEqual("", m.ToString());
+            Assert.AreEqual("[0;0;0][0;0;0][0;0;0]", m.ToString());
         }
     }
 }
