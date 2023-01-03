@@ -1,4 +1,6 @@
-﻿namespace Geometrica.Primitives;
+﻿using Geometrica.Algebra;
+
+namespace Geometrica.Primitives;
 
 public struct Point2
 {
@@ -9,6 +11,11 @@ public struct Point2
     {
         X = x;
         Y = y;
+    }
+
+    public static double Orientation(Point2 p, Point2 q, Point2 r)
+    {
+        return (new Matrix3(p.X, p.Y, 1, q.X, q.Y, 1, r.X, r.Y, 1)).Determinant();
     }
 
     public double DistanceTo(Point2 p)
