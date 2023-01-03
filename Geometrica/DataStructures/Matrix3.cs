@@ -1,8 +1,8 @@
 ﻿namespace Geometrica.DataStructures;
 
-public struct Matrix3
+public readonly struct Matrix3
 {
-    private double[,] matrix;
+    private readonly double[,] matrix;
 
     public Matrix3()
     {
@@ -38,7 +38,7 @@ public struct Matrix3
 
     public static Matrix3 Identity 
     { 
-        get => new Matrix3(1, 0, 0, 0, 1, 0, 0, 0, 1); 
+        get => new(1, 0, 0, 0, 1, 0, 0, 0, 1); 
     }
 
     public double Determinant()
