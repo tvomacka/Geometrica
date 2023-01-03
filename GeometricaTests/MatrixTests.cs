@@ -47,4 +47,13 @@ public class MatrixTests
 
         Assert.AreEqual(615, m.Determinant(), delta);
     }
+
+    [TestMethod]
+    public void Matrix3_Transpose_ReturnsCorrectResult()
+    {
+        var m = new Matrix3(9, 3, 5, -6, -9, 7, -1, -8, 1);
+        var t = m.Transpose();
+
+        Assert.AreEqual("", t.ToString());
+    }
 }
