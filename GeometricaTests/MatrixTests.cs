@@ -54,6 +54,6 @@ public class MatrixTests
         var m = new Matrix3(9, 3, 5, -6, -9, 7, -1, -8, 1);
         var t = m.Transpose();
 
-        Assert.AreEqual("", t.ToString());
+        Assert.AreEqual("[9;-6;-1][3;-9;-8][5;7;1]", t.ToString());
     }
 }

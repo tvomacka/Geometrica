@@ -56,8 +56,8 @@ public struct Matrix3
         return $"[{matrix[0, 0]};{matrix[0, 1]};{matrix[0, 2]}][{matrix[1, 0]};{matrix[1, 1]};{matrix[1, 2]}][{matrix[2, 0]};{matrix[2, 1]};{matrix[2, 2]}]";
     }
 
-    public object Transpose()
+    public Matrix3 Transpose()
     {
-        throw new NotImplementedException();
+        return new Matrix3(this[0,0], this[1,0], this[2,0], this[0,1], this[1,1], this[2,1], this[0,2], this[1,2], this[2,2]);
     }
 }
