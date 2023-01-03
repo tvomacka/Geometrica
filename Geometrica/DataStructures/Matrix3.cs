@@ -36,7 +36,7 @@ public struct Matrix3
         set => matrix[row, column] = value;
     }
 
-    public static Matrix3 Unit 
+    public static Matrix3 Identity 
     { 
         get => new Matrix3(1, 0, 0, 0, 1, 0, 0, 0, 1); 
     }

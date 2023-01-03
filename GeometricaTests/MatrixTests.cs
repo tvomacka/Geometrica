@@ -27,7 +27,7 @@ public class MatrixTests
     [TestMethod]
     public void Matrix3_UnitMatrix_InitializedCorrectly()
     {
-        var m = Matrix3.Unit;
+        var m = Matrix3.Identity;
 
         Assert.AreEqual("[1;0;0][0;1;0][0;0;1]", m.ToString());
     }
@@ -35,7 +35,7 @@ public class MatrixTests
     [TestMethod]
     public void Matrix3_UnitDeterminant_EqualToOne()
     {
-        var m = Matrix3.Unit;
+        var m = Matrix3.Identity;
 
         Assert.AreEqual(1, m.Determinant(), delta);
     }
