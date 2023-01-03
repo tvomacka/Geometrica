@@ -20,4 +20,13 @@ public class PointTests
 
         Assert.AreEqual(0, p.DistanceTo(p), 3);
     }
+
+    [TestMethod]
+    public void Point_DistanceTo_ReturnsCorrectValue()
+    {
+        var p = new Point2();
+        var q = new Point2(5, 0);
+
+        Assert.AreEqual(5, p.DistanceTo(q), 3);
+    }
 }

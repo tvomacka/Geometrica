@@ -13,7 +13,7 @@ public struct Point2
 
     public double DistanceTo(Point2 p)
     {
-        return 0;
+        return Math.Sqrt((p.X - X) * (p.X - X) + (p.Y - Y) * (p.Y - Y));
     }
 
     public override string ToString()
