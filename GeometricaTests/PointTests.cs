@@ -13,6 +13,7 @@ public class PointTests
         Assert.AreEqual("[0; 0]", p.ToString());
     }
 
+    [TestMethod]
     public void Point_DistanceToSelf_IsZero()
     {
         var p = new Point2();
