@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace Geometrica.Primitives;
 
-namespace Geometrica.Primitives
+public struct Triangle
 {
-    internal class Triangle
-    {
-    }
 }
