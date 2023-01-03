@@ -10,6 +10,6 @@ public class PointTests
     {
         var p = new Point2();
 
-        Assert.AreEqual("", p.ToString());
+        Assert.AreEqual("[0; 0]", p.ToString());
     }
 }
