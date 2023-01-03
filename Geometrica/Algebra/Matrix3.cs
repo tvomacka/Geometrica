@@ -1,4 +1,4 @@
-﻿namespace Geometrica.DataStructures;
+﻿namespace Geometrica.Algebra;
 
 public readonly struct Matrix3
 {
@@ -7,9 +7,9 @@ public readonly struct Matrix3
     public Matrix3()
     {
         matrix = new double[3, 3];
-        for(int i = 0; i < 3; i++)
+        for (int i = 0; i < 3; i++)
         {
-            for(int j = 0; j < 3; j++)
+            for (int j = 0; j < 3; j++)
             {
                 matrix[i, j] = 0;
             }
@@ -36,9 +36,9 @@ public readonly struct Matrix3
         set => matrix[row, column] = value;
     }
 
-    public static Matrix3 Identity 
-    { 
-        get => new(1, 0, 0, 0, 1, 0, 0, 0, 1); 
+    public static Matrix3 Identity
+    {
+        get => new(1, 0, 0, 0, 1, 0, 0, 0, 1);
     }
 
     public double Determinant()
@@ -58,6 +58,6 @@ public readonly struct Matrix3
 
     public Matrix3 Transpose()
     {
-        return new Matrix3(this[0,0], this[1,0], this[2,0], this[0,1], this[1,1], this[2,1], this[0,2], this[1,2], this[2,2]);
+        return new Matrix3(this[0, 0], this[1, 0], this[2, 0], this[0, 1], this[1, 1], this[2, 1], this[0, 2], this[1, 2], this[2, 2]);
     }
 }

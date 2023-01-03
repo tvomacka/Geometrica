@@ -1,4 +1,4 @@
-using Geometrica.DataStructures;
+using Geometrica.Algebra;
 
 namespace GeometricaTests;
 
