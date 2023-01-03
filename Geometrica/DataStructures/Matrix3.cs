@@ -1,6 +1,6 @@
 ﻿namespace Geometrica.DataStructures;
 
-public class Matrix3
+public struct Matrix3
 {
     private double[,] matrix;
 
