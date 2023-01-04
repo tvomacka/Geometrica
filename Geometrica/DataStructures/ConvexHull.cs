@@ -4,10 +4,11 @@ namespace Geometrica.DataStructures;
 
 public class ConvexHull
 {
-    public object Hull { get; set; }
+    private readonly List<Point2> points = new();
+    public readonly List<Point2> Hull = new();
 
-    public void Add(Point2 point2)
+    public void Add(Point2 point)
     {
-
+        points.Add(point);
     }
 }

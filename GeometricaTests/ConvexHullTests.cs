@@ -13,6 +13,6 @@ public class ConvexHullTests
         ch.Add(new Point2());
         ch.Add(new Point2(10, 10));
 
-        Assert.IsNull(ch.Hull);
+        Assert.AreEqual(0, ch.Hull.Count);
     }
 }
