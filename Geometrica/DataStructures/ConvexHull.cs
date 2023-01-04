@@ -11,4 +11,9 @@ public class ConvexHull
     {
         points.Add(point);
     }
+
+    public override string ToString()
+    {
+        return string.Join(" ", points);
+    }
 }
