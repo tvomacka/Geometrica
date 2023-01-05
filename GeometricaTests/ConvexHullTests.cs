@@ -29,7 +29,7 @@ public class ConvexHullTests
     }
 
     [TestMethod]
-    public void ConvexHull_OFFourPoints_IsConstructedCorrectly()
+    public void Point_AddedInsideTriangle_DoesNotChangeConvexHull()
     {
         var ch = new ConvexHull();
         ch.Add(new Point2());
