@@ -1,5 +1,6 @@
 ﻿using Geometrica.DataStructures;
 using Geometrica.Primitives;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GeometricaTests;
 
@@ -23,6 +24,18 @@ public class ConvexHullTests
         ch.Add(new Point2());
         ch.Add(new Point2(1, 0));
         ch.Add(new Point2(0, 1));
+
+        Assert.AreEqual("[0; 0] [1; 0] [0; 1]", ch.ToString());
+    }
+
+    [TestMethod]
+    public void ConvexHull_OFFourPoints_IsConstructedCorrectly()
+    {
+        var ch = new ConvexHull();
+        ch.Add(new Point2());
+        ch.Add(new Point2(1, 0));
+        ch.Add(new Point2(0, 1));
+        ch.Add(new Point2(0.1, 0.1));
 
         Assert.AreEqual("[0; 0] [1; 0] [0; 1]", ch.ToString());
     }
