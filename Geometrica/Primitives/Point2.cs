@@ -27,4 +27,9 @@ public struct Point2
     {
         return $"[{X}; {Y}]";
     }
+
+    public bool Inside(List<Point2> polygon)
+    {
+        return true;
+    }
 }

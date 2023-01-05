@@ -24,10 +24,28 @@ public class ConvexHull
         {
             Hull.AddRange(new List<int>(){ 0, 1, 2});
         }
+        else
+        {
+            if (!points.Last().Inside(GetHullPoints()))
+            {
+                //reconstruct the hull
+            }
+        }
+    }
+
+    private List<Point2> GetHullPoints()
+    {
+        var hullPoints = new List<Point2>();
+        foreach(var i in Hull)
+        {
+            hullPoints.Add(points[i]);
+        }
+
+        return hullPoints;
     }
 
     public override string ToString()
     {
-        return string.Join(" ", points);
+        return string.Join(" ", GetHullPoints());
     }
 }
