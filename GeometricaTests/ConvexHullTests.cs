@@ -70,6 +70,22 @@ public class ConvexHullTests
         Assert.AreEqual("[0; 0] [1; 0] [0; 1]", points);
     }
 
+    [TestMethod]
+    public void ConvexHull4_PointInside_ReturnsTriangle()
+    {
+        var pts = new List<Point2>()
+        {
+            new Point2(0, 0),
+            new Point2(0, 1),
+            new Point2(1, 0),
+            new Point2(0.1, 0.1)
+        };
+
+        var ch = ConvexHull.ConvexHull4(pts[0], pts[1], pts[2], pts[3]);
+        var points = String.Join(" ", ch);
+        Assert.AreEqual("[0; 0] [1; 0] [0; 1]", points);
+    }
+
     public void Sample()
     {
         var pts = new List<Point2>() 
