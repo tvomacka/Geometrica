@@ -31,7 +31,7 @@ public class ConvexHull
         }
     }
 
-    public List<Point2> CreateSimpleHull(List<Point2> pts)
+    public static List<Point2> CreateSimpleHull(List<Point2> pts)
     {
         if(pts == null)
         {
