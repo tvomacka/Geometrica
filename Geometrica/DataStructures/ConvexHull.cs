@@ -61,7 +61,7 @@ public class ConvexHull
         return null;
     }
 
-    public static List<Point2> ConvexHull4(Point2 point21, Point2 point22, Point2 point23, Point2 point24)
+    public static List<Point2> ConvexHull4(Point2 a, Point2 b, Point2 c, Point2 d)
     {
         //https://stackoverflow.com/questions/2122305/convex-hull-of-4-points
         return null;
