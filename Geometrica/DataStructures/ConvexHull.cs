@@ -53,7 +53,17 @@ public class ConvexHull
                 return new List<Point2>() { pts[0], pts[2], pts[1] };
             }
         }
+        if(pts.Count == 4)
+        {
+            return ConvexHull4(pts[0], pts[1], pts[2], pts[3]);
+        }    
 
+        return null;
+    }
+
+    public static List<Point2> ConvexHull4(Point2 point21, Point2 point22, Point2 point23, Point2 point24)
+    {
+        //https://stackoverflow.com/questions/2122305/convex-hull-of-4-points
         return null;
     }
 
