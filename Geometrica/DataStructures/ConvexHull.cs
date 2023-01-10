@@ -44,7 +44,7 @@ public class ConvexHull
         
         if(pts.Count() == 3)
         {
-            if (Point2.Orientation(pts[0], pts[1], pts[2]) < 0)
+            if (Point2.Orientation(pts[0], pts[1], pts[2]) > 0)
             {
                 return new List<Point2>() { pts[0], pts[1], pts[2] };
             }

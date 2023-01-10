@@ -40,6 +40,20 @@ public class ConvexHullTests
         Assert.AreEqual("[0; 0] [1; 0] [0; 1]", ch.ToString());
     }
 
+    [TestMethod]
+    public void BasicHull_ThreePoints_CounterClockwise()
+    {
+        var pts = new List<Point2>()
+        {
+            new Point2(0, 0),
+            new Point2(1, 0),
+            new Point2(0, 1),
+        };
+
+        var ch = new ConvexHull(pts);
+        Assert.AreEqual("[0; 0] [1; 0] [0; 1]", ch.ToString());
+    }
+
     public void Sample()
     {
         var pts = new List<Point2>() 
