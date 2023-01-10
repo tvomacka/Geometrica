@@ -15,7 +15,26 @@ public class ConvexHull
 
     public List<int> CreateConvexHull(List<Point2> pts)
     {
-        return null;
+        //divide and conquer
+        if(6 < pts.Count())
+        {
+            var half = pts.Count / 2;
+            return JoinHulls(CreateConvexHull(pts.GetRange(0, half)), CreateConvexHull(pts.GetRange(half, pts.Count() - half)));
+        }
+        else
+        {
+            return CreateSimpleHull(pts);
+        }
+    }
+
+    public List<int> CreateSimpleHull(List<Point2> pts)
+    {
+        throw new NotImplementedException();
+    }
+
+    public List<int> JoinHulls(List<int> list1, List<int> list2)
+    {
+        throw new NotImplementedException();
     }
 
     public void Add(Point2 point)
