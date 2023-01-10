@@ -7,6 +7,17 @@ public class ConvexHull
     private readonly List<Point2> points = new();
     public readonly List<int> Hull = new();
 
+    public ConvexHull(List<Point2> pts)
+    {
+        points = pts;
+        Hull = CreateConvexHull(pts);
+    }
+
+    public List<int> CreateConvexHull(List<Point2> pts)
+    {
+        return null;
+    }
+
     public void Add(Point2 point)
     {
         points.Add(point);
