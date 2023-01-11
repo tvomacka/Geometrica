@@ -5,4 +5,22 @@ Source File: /README.source.md
 To change this file edit the source file and then run MarkdownSnippets.
 -->
 
+# Library for Various Geometry-Related Tasks
 
+## Convex Hull
+
+<!-- snippet: CreateConvexHull -->
+<a id='snippet-createconvexhull'></a>
+```cs
+var pts = new List<Point2>() 
+{
+    new Point2(0, 0),
+    new Point2(1, 0),
+    new Point2(0, 1),
+    new Point2(0.1, 0.1)
+};
+
+var ch = new ConvexHull(pts);
+```
+<sup><a href='/GeometricaTests/ConvexHullTests.cs#L91-L101' title='Snippet source file'>snippet source</a> | <a href='#snippet-createconvexhull' title='Start of snippet'>anchor</a></sup>
+<!-- endSnippet -->
