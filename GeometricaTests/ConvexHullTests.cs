@@ -88,6 +88,7 @@ public class ConvexHullTests
 
     public void Sample()
     {
+        // begin-snippet: CreateConvexHull
         var pts = new List<Point2>() 
         {
             new Point2(0, 0),
@@ -97,5 +98,6 @@ public class ConvexHullTests
         };
 
         var ch = new ConvexHull(pts);
+        // end-snippet
     }
 }
