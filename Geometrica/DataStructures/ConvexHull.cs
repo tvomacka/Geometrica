@@ -74,7 +74,7 @@ public class ConvexHull
         cad = cad == abc;
 
         if (abd && bcd && cad) return abc ? new List<Point2>() { a, b, c } : new List<Point2> { a, c, b };
-        if (abd && bcd && !cad) return new List<Point2>() { a, b, c, d };
+        if (abd && bcd && !cad) return abc ? new List<Point2>() { a, b, c, d } : new List<Point2>() { a, d, c, b };
         if (abd && !bcd && cad) return new List<Point2>() { a, b, d, c };
         if (abd && !bcd && !cad) return new List<Point2>() { a, b, d };
         if (!abd && bcd && cad) return new List<Point2>() { a, d, b, c };
