@@ -64,10 +64,10 @@ public class ConvexHull
     public static List<Point2> ConvexHull4(Point2 a, Point2 b, Point2 c, Point2 d)
     {
         //https://stackoverflow.com/questions/2122305/convex-hull-of-4-points
-        var abc = Point2.Orientation(a, b, c) > 0;
-        var abd = Point2.Orientation(a, b, d) > 0;
-        var bcd = Point2.Orientation(b, c, d) > 0;
-        var cad = Point2.Orientation(c, a, d) > 0;
+        var abc = Point2.OrientedCCW(a, b, c);
+        var abd = Point2.OrientedCCW(a, b, d);
+        var bcd = Point2.OrientedCCW(b, c, d);
+        var cad = Point2.OrientedCCW(c, a, d);
 
         abd = abd == abc;
         bcd = bcd == abc;
