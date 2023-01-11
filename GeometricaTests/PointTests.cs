@@ -40,4 +40,14 @@ public class PointTests
 
         Assert.IsTrue(Point2.Orientation(p, q, r) < 0);
     }
+
+    [TestMethod]
+    public void Point_CCWOrientationTest_ReturnsTrue()
+    {
+        var p = new Point2(0, 0);
+        var q = new Point2(1, 0);
+        var r = new Point2(0, 1);
+
+        Assert.IsTrue(Point2.OrientedCCW(p, q, r));
+    }
 }
