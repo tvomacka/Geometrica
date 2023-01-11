@@ -69,14 +69,11 @@ public class ConvexHull
         var bcd = Point2.Orientation(b, c, d) > 0;
         var cad = Point2.Orientation(c, a, d) > 0;
 
-        if (!abc)
-        {
-            abd = !abd;
-            bcd = !bcd;
-            cad = !cad;
-        }
+        abd = abd == abc;
+        bcd = bcd == abc;
+        cad = cad == abc;
 
-        if (abd && bcd && cad) return new List<Point2>() { a, b, c };
+        if (abd && bcd && cad) return abc ? new List<Point2>() { a, b, c } : new List<Point2> { a, c, b };
         if (abd && bcd && !cad) return new List<Point2>() { a, b, c, d };
         if (abd && !bcd && cad) return new List<Point2>() { a, b, d, c };
         if (abd && !bcd && !cad) return new List<Point2>() { a, b, d };
