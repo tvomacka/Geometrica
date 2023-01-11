@@ -22,5 +22,5 @@ var pts = new List<Point2>()
 
 var ch = new ConvexHull(pts);
 ```
-<sup><a href='/GeometricaTests/ConvexHullTests.cs#L91-L101' title='Snippet source file'>snippet source</a> | <a href='#snippet-createconvexhull' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/GeometricaTests/ConvexHullTests.cs#L139-L149' title='Snippet source file'>snippet source</a> | <a href='#snippet-createconvexhull' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
