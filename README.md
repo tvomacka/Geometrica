@@ -7,6 +7,32 @@ To change this file edit the source file and then run MarkdownSnippets.
 
 # Library for Various Geometry-Related Tasks
 
+## Point Operations
+
+<!-- snippet: OrientationTest -->
+<a id='snippet-orientationtest'></a>
+```cs
+var p = new Point2(0, 0);
+var q = new Point2(0, 1);
+var r = new Point2(1, 0);
+
+Assert.IsTrue(Point2.Orientation(p, q, r) < 0);
+```
+<sup><a href='/GeometricaTests/PointTests.cs#L37-L43' title='Snippet source file'>snippet source</a> | <a href='#snippet-orientationtest' title='Start of snippet'>anchor</a></sup>
+<!-- endSnippet -->
+or
+<!-- snippet: CCWOrientationTest -->
+<a id='snippet-ccworientationtest'></a>
+```cs
+var p = new Point2(0, 0);
+var q = new Point2(1, 0);
+var r = new Point2(0, 1);
+
+Assert.IsTrue(Point2.OrientedCCW(p, q, r));
+```
+<sup><a href='/GeometricaTests/PointTests.cs#L49-L55' title='Snippet source file'>snippet source</a> | <a href='#snippet-ccworientationtest' title='Start of snippet'>anchor</a></sup>
+<!-- endSnippet -->
+
 ## Convex Hull
 
 <!-- snippet: CreateConvexHull -->
