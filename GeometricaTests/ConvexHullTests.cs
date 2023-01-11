@@ -71,7 +71,7 @@ public class ConvexHullTests
     }
 
     [TestMethod]
-    public void ConvexHull4_PointInside_ReturnsTriangle()
+    public void ConvexHull4_PointInsideCCwTriangle_ReturnsTriangle()
     {
         var pts = new List<Point2>()
         {
