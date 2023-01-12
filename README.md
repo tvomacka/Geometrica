@@ -9,6 +9,8 @@ To change this file edit the source file and then run MarkdownSnippets.
 
 ## Point Operations
 
+You can check the orientation of three points using an orientation test:
+
 <!-- snippet: OrientationTest -->
 <a id='snippet-orientationtest'></a>
 ```cs
@@ -20,7 +22,9 @@ Assert.IsTrue(Point2.Orientation(p, q, r) < 0);
 ```
 <sup><a href='/GeometricaTests/PointTests.cs#L37-L43' title='Snippet source file'>snippet source</a> | <a href='#snippet-orientationtest' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
+
 or
+
 <!-- snippet: CCWOrientationTest -->
 <a id='snippet-ccworientationtest'></a>
 ```cs
