@@ -186,6 +186,32 @@ public class ConvexHullTests
         Assert.AreEqual("[0; 0] [1; 0] [0; 1]", points);
     }
 
+    [TestMethod]
+    public void ConvexHull4_ADBC_CCW_ReturnsABDC()
+    {
+        var a = new Point2(0, 0);
+        var d = new Point2(1, 0);
+        var b = new Point2(1, 1);
+        var c = new Point2(0, 1);
+
+        var ch = ConvexHull.ConvexHull4(a, b, c, d);
+        var points = String.Join(" ", ch);
+        Assert.AreEqual("[0; 0] [1; 0] [1; 1] [0; 1]", points);
+    }
+
+    [TestMethod]
+    public void ConvexHull4_ADBC_CW_ReturnsABDC()
+    {
+        var a = new Point2(0, 0);
+        var c = new Point2(1, 0);
+        var b = new Point2(1, 1);
+        var d = new Point2(0, 1);
+
+        var ch = ConvexHull.ConvexHull4(a, b, c, d);
+        var points = String.Join(" ", ch);
+        Assert.AreEqual("[0; 0] [1; 0] [1; 1] [0; 1]", points);
+    }
+
     public void Sample()
     {
         // begin-snippet: CreateConvexHull
