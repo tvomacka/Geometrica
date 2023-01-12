@@ -2,8 +2,12 @@
 
 ## Point Operations
 
+You can check the orientation of three points using an orientation test:
+
 snippet: OrientationTest
+
 or
+
 snippet: CCWOrientationTest
 
 ## Convex Hull
