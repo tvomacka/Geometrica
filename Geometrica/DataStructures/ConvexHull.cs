@@ -79,8 +79,9 @@ public class ConvexHull
         if (abd && !bcd && !cad) return abc ? new List<Point2>() { a, b, d } : new List<Point2>() { a, d, b };
         if (!abd && bcd && cad) return abc ? new List<Point2>() { a, d, b, c } : new List<Point2>() { a, c, b, d};
         if (!abd && bcd && !cad) return abc ? new List<Point2>() { b, c, d } : new List<Point2>() { b, d, c };
-        if (!abd && !bcd && cad) return new List<Point2>() { c, a, d };
-        return null;
+        if (!abd && !bcd && cad) return abc ? new List<Point2>() { c, a, d } : new List<Point2>() { c, d, a };
+
+        throw new Exception("The computation of convex hull of 4 points should not be able to reach this part of code. Check that the provided points are valid.");
     }
 
     public List<Point2> JoinHulls(List<Point2> list1, List<Point2> list2)
