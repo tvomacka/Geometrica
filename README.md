@@ -12,7 +12,6 @@ To change this file edit the source file and then run MarkdownSnippets.
 You can check the orientation of three points using an orientation test:
 
 <!-- snippet: OrientationTest -->
-<a id='snippet-orientationtest'></a>
 ```cs
 var p = new Point2(0, 0);
 var q = new Point2(0, 1);
@@ -20,13 +19,11 @@ var r = new Point2(1, 0);
 
 Assert.IsTrue(Point2.Orientation(p, q, r) < 0);
 ```
-<sup><a href='/GeometricaTests/PointTests.cs#L37-L43' title='Snippet source file'>snippet source</a> | <a href='#snippet-orientationtest' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 or
 
 <!-- snippet: CCWOrientationTest -->
-<a id='snippet-ccworientationtest'></a>
 ```cs
 var p = new Point2(0, 0);
 var q = new Point2(1, 0);
@@ -34,13 +31,11 @@ var r = new Point2(0, 1);
 
 Assert.IsTrue(Point2.OrientedCCW(p, q, r));
 ```
-<sup><a href='/GeometricaTests/PointTests.cs#L49-L55' title='Snippet source file'>snippet source</a> | <a href='#snippet-ccworientationtest' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 ## Convex Hull
 
 <!-- snippet: CreateConvexHull -->
-<a id='snippet-createconvexhull'></a>
 ```cs
 var pts = new List<Point2>() 
 {
@@ -52,5 +47,4 @@ var pts = new List<Point2>()
 
 var ch = new ConvexHull(pts);
 ```
-<sup><a href='/GeometricaTests/ConvexHullTests.cs#L139-L149' title='Snippet source file'>snippet source</a> | <a href='#snippet-createconvexhull' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
