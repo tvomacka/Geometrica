@@ -20,7 +20,7 @@ public class ConvexHull
     public List<Point2> CreateConvexHull(List<Point2> pts)
     {
         //divide and conquer
-        if(pts.Count() > 6)
+        if(pts != null && pts.Count() > 6)
         {
             var half = pts.Count / 2;
             return JoinHulls(CreateConvexHull(pts.GetRange(0, half)), CreateConvexHull(pts.GetRange(half, pts.Count() - half)));
@@ -97,20 +97,22 @@ public class ConvexHull
 
     private void UpdateConvexHull()
     {
-        if (points.Count < 3) 
-        { 
-            Hull.Clear();
-            return;
-        }
-        else if (points.Count == 3)
+        switch (points.Count)
         {
-            Hull.AddRange(points);
-        }
-        else
-        {
-            if (!points.Last().Inside(Hull))
+            case < 3:
+                Hull.Clear();
+                return;
+            case 3:
+                Hull.AddRange(points);
+                break;
+            default:
             {
-                //reconstruct the hull
+                if (!points.Last().Inside(Hull))
+                {
+                    //reconstruct the hull
+                }
+
+                break;
             }
         }
     }
