@@ -20,7 +20,7 @@ public class ConvexHull
     public List<Point2> CreateConvexHull(List<Point2> pts)
     {
         //divide and conquer
-        if(pts != null && pts.Count() > 6)
+        if(pts != null && 6 < pts.Count())
         {
             var half = pts.Count / 2;
             return JoinHulls(CreateConvexHull(pts.GetRange(0, half)), CreateConvexHull(pts.GetRange(half, pts.Count() - half)));
@@ -37,7 +37,7 @@ public class ConvexHull
         {
             throw new ArgumentNullException($"The argument {nameof(pts)} must not be null. Please provide a list points.");
         }
-        if(3 > pts.Count() || pts.Count > 6)
+        if(pts.Count() < 3|| 6 < pts.Count)
         {
             throw new ArgumentException($"This method must only be used for 3 to 5 points. You provided a list of {pts.Count()} points.");
         }
