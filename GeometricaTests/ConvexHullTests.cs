@@ -51,7 +51,7 @@ public class ConvexHullTests
         };
 
         var ch = ConvexHull.CreateSimpleHull(pts);
-        var points = String.Join(" ", ch);
+        var points = string.Join(" ", ch);
         Assert.AreEqual("[0; 0] [1; 0] [0; 1]", points);
     }
 
@@ -66,7 +66,7 @@ public class ConvexHullTests
         };
 
         var ch = ConvexHull.CreateSimpleHull(pts);
-        var points = String.Join(" ", ch);
+        var points = string.Join(" ", ch);
         Assert.AreEqual("[0; 0] [1; 0] [0; 1]", points);
     }
 
@@ -82,7 +82,7 @@ public class ConvexHullTests
         };
 
         var ch = ConvexHull.ConvexHull4(pts[0], pts[1], pts[2], pts[3]);
-        var points = String.Join(" ", ch);
+        var points = string.Join(" ", ch);
         Assert.AreEqual("[0; 0] [1; 0] [0; 1]", points);
     }
 
@@ -98,7 +98,7 @@ public class ConvexHullTests
         };
 
         var ch = ConvexHull.ConvexHull4(pts[0], pts[1], pts[2], pts[3]);
-        var points = String.Join(" ", ch);
+        var points = string.Join(" ", ch);
         Assert.AreEqual("[0; 0] [1; 0] [0; 1]", points);
     }
 
@@ -114,7 +114,7 @@ public class ConvexHullTests
         };
 
         var ch = ConvexHull.ConvexHull4(pts[0], pts[1], pts[2], pts[3]);
-        var points = String.Join(" ", ch);
+        var points = string.Join(" ", ch);
         Assert.AreEqual("[0; 0] [1; 0] [1; 1] [0; 1]", points);
     }
 
@@ -130,7 +130,7 @@ public class ConvexHullTests
         };
 
         var ch = ConvexHull.ConvexHull4(pts[0], pts[1], pts[2], pts[3]);
-        var points = String.Join(" ", ch);
+        var points = string.Join(" ", ch);
         Assert.AreEqual("[0; 0] [1; 0] [1; 1] [0; 1]", points);
     }
 
@@ -143,7 +143,7 @@ public class ConvexHullTests
         var c = new Point2(0, 1);
 
         var ch = ConvexHull.ConvexHull4(a, b, c, d);
-        var points = String.Join(" ", ch);
+        var points = string.Join(" ", ch);
         Assert.AreEqual("[0; 0] [1; 0] [1; 1] [0; 1]", points);
     }
 
@@ -156,7 +156,7 @@ public class ConvexHullTests
         var b = new Point2(0, 1);
 
         var ch = ConvexHull.ConvexHull4(a, b, c, d);
-        var points = String.Join(" ", ch);
+        var points = string.Join(" ", ch);
         Assert.AreEqual("[0; 0] [1; 0] [1; 1] [0; 1]", points);
     }
 
@@ -169,7 +169,7 @@ public class ConvexHullTests
         var c = new Point2(0.1, 0.1);
 
         var ch = ConvexHull.ConvexHull4(a, b, c, d);
-        var points = String.Join(" ", ch);
+        var points = string.Join(" ", ch);
         Assert.AreEqual("[0; 0] [1; 0] [0; 1]", points);
     }
 
@@ -182,7 +182,7 @@ public class ConvexHullTests
         var c = new Point2(0.1, 0.1);
 
         var ch = ConvexHull.ConvexHull4(a, b, c, d);
-        var points = String.Join(" ", ch);
+        var points = string.Join(" ", ch);
         Assert.AreEqual("[0; 0] [1; 0] [0; 1]", points);
     }
 
@@ -195,7 +195,7 @@ public class ConvexHullTests
         var a = new Point2(0.1, 0.1);
 
         var ch = ConvexHull.ConvexHull4(a, b, c, d);
-        var points = String.Join(" ", ch);
+        var points = string.Join(" ", ch);
         Assert.AreEqual("[0; 0] [1; 0] [0; 1]", points);
     }
 
@@ -208,7 +208,7 @@ public class ConvexHullTests
         var a = new Point2(0.1, 0.1);
 
         var ch = ConvexHull.ConvexHull4(a, b, c, d);
-        var points = String.Join(" ", ch);
+        var points = string.Join(" ", ch);
         Assert.AreEqual("[0; 0] [1; 0] [0; 1]", points);
     }
 
@@ -221,7 +221,7 @@ public class ConvexHullTests
         var b = new Point2(0.1, 0.1);
 
         var ch = ConvexHull.ConvexHull4(a, b, c, d);
-        var points = String.Join(" ", ch);
+        var points = string.Join(" ", ch);
         Assert.AreEqual("[0; 0] [1; 0] [0; 1]", points);
     }
 
@@ -234,7 +234,7 @@ public class ConvexHullTests
         var b = new Point2(0.1, 0.1);
 
         var ch = ConvexHull.ConvexHull4(a, b, c, d);
-        var points = String.Join(" ", ch);
+        var points = string.Join(" ", ch);
         Assert.AreEqual("[0; 0] [1; 0] [0; 1]", points);
     }
 
@@ -247,7 +247,7 @@ public class ConvexHullTests
         var c = new Point2(0, 1);
 
         var ch = ConvexHull.ConvexHull4(a, b, c, d);
-        var points = String.Join(" ", ch);
+        var points = string.Join(" ", ch);
         Assert.AreEqual("[0; 0] [1; 0] [1; 1] [0; 1]", points);
     }
 
@@ -260,7 +260,7 @@ public class ConvexHullTests
         var d = new Point2(0, 1);
 
         var ch = ConvexHull.ConvexHull4(a, b, c, d);
-        var points = String.Join(" ", ch);
+        var points = string.Join(" ", ch);
         Assert.AreEqual("[0; 0] [1; 0] [1; 1] [0; 1]", points);
     }
 
@@ -274,7 +274,7 @@ public class ConvexHullTests
         var e = new Point2(0, 2);
 
         var ch = ConvexHull.ConvexHull5(a, b, c, d, e);
-        var points = String.Join(" ", ch);
+        var points = string.Join(" ", ch);
         Assert.AreEqual("", points);
     }
 
