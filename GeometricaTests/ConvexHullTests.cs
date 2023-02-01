@@ -264,6 +264,20 @@ public class ConvexHullTests
         Assert.AreEqual("[0; 0] [1; 0] [1; 1] [0; 1]", points);
     }
 
+    [TestMethod]
+    public void ConvexHull5_ABCDE_ReturnsABCDE()
+    {
+        var a = new Point2(0, 0);
+        var c = new Point2(2, 0);
+        var b = new Point2(2, 3);
+        var d = new Point2(1, 3);
+        var e = new Point2(0, 2);
+
+        var ch = ConvexHull.ConvexHull5(a, b, c, d, e);
+        var points = String.Join(" ", ch);
+        Assert.AreEqual("", points);
+    }
+
     public void Sample()
     {
         // begin-snippet: CreateConvexHull
