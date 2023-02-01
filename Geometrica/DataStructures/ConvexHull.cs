@@ -20,7 +20,7 @@ public class ConvexHull
     public List<Point2> CreateConvexHull(List<Point2> pts)
     {
         //divide and conquer
-        if(pts != null && 6 < pts.Count())
+        if (pts != null && 6 < pts.Count())
         {
             var half = pts.Count / 2;
             return JoinHulls(CreateConvexHull(pts.GetRange(0, half)), CreateConvexHull(pts.GetRange(half, pts.Count() - half)));
@@ -33,16 +33,16 @@ public class ConvexHull
 
     public static List<Point2> CreateSimpleHull(List<Point2> pts)
     {
-        if(pts == null)
+        if (pts == null)
         {
             throw new ArgumentNullException($"The argument {nameof(pts)} must not be null. Please provide a list points.");
         }
-        if(pts.Count() < 3|| 6 < pts.Count)
+        if (pts.Count() < 3 || 6 < pts.Count)
         {
             throw new ArgumentException($"This method must only be used for 3 to 5 points. You provided a list of {pts.Count()} points.");
         }
-        
-        if(pts.Count() == 3)
+
+        if (pts.Count() == 3)
         {
             if (Point2.Orientation(pts[0], pts[1], pts[2]) > 0)
             {
@@ -53,10 +53,10 @@ public class ConvexHull
                 return new List<Point2>() { pts[0], pts[2], pts[1] };
             }
         }
-        if(pts.Count == 4)
+        if (pts.Count == 4)
         {
             return ConvexHull4(pts[0], pts[1], pts[2], pts[3]);
-        }    
+        }
 
         return null;
     }
@@ -75,9 +75,9 @@ public class ConvexHull
 
         if (abd && bcd && cad) return abc ? new List<Point2>() { a, b, c } : new List<Point2> { a, c, b };
         if (abd && bcd && !cad) return abc ? new List<Point2>() { a, b, c, d } : new List<Point2>() { a, d, c, b };
-        if (abd && !bcd && cad) return abc ? new List<Point2>() { a, b, d, c } : new List<Point2>() { a, c, d, b};
+        if (abd && !bcd && cad) return abc ? new List<Point2>() { a, b, d, c } : new List<Point2>() { a, c, d, b };
         if (abd && !bcd && !cad) return abc ? new List<Point2>() { a, b, d } : new List<Point2>() { a, d, b };
-        if (!abd && bcd && cad) return abc ? new List<Point2>() { a, d, b, c } : new List<Point2>() { a, c, b, d};
+        if (!abd && bcd && cad) return abc ? new List<Point2>() { a, d, b, c } : new List<Point2>() { a, c, b, d };
         if (!abd && bcd && !cad) return abc ? new List<Point2>() { b, c, d } : new List<Point2>() { b, d, c };
         if (!abd && !bcd && cad) return abc ? new List<Point2>() { c, a, d } : new List<Point2>() { c, d, a };
 
@@ -106,14 +106,14 @@ public class ConvexHull
                 Hull.AddRange(points);
                 break;
             default:
-            {
-                if (!points.Last().Inside(Hull))
                 {
-                    //reconstruct the hull
-                }
+                    if (!points.Last().Inside(Hull))
+                    {
+                        //reconstruct the hull
+                    }
 
-                break;
-            }
+                    break;
+                }
         }
     }
 
@@ -124,6 +124,51 @@ public class ConvexHull
 
     public static IEnumerable<Point2> ConvexHull5(Point2 a, Point2 b, Point2 c, Point2 d, Point2 e)
     {
-        return new List<Point2> { a, b, c, d, e };
+        Point2[] pts = { a, b, c, d, e };
+        var chLines = new List<Tuple<int, int>>();
+        
+        for (var i = 0; i < 5; i++)
+        {
+            for (var j = i + 1; j < 5; j++)
+            {
+                var orientations = new bool[3];
+                var oIndex = 0;
+                for (var k = 0; k < 5; k++)
+                {
+                    if (k != i && k != j)
+                    {
+                        orientations[oIndex++] = Point2.OrientedCCW(pts[i], pts[j], pts[k]);
+                    }
+                }
+
+                if (orientations[0] == orientations[1] && orientations[0] == orientations[2])
+                {
+                    chLines.Add(new Tuple<int, int>(i, j));
+                }
+            }
+        }
+
+        var cHull = new List<Point2>
+        {
+            pts[chLines[0].Item1],
+            pts[chLines[0].Item2]
+        };
+        var lastIndex = chLines[0].Item2;
+        chLines.RemoveAt(0);
+        
+        while (chLines.Count > 1)
+        {
+            var t = chLines.Single(l => l.Item1 == lastIndex || l.Item2 == lastIndex);
+            lastIndex = t.Item1 == lastIndex ? t.Item2 : t.Item1;
+            cHull.Add(pts[lastIndex]);
+            chLines.Remove(t);
+        }
+
+        if (!Point2.OrientedCCW(cHull[0], cHull[1], cHull[2]))
+        {
+            cHull.Reverse();
+        }
+
+        return cHull;
     }
 }

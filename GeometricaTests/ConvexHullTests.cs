@@ -275,7 +275,7 @@ public class ConvexHullTests
 
         var ch = ConvexHull.ConvexHull5(a, b, c, d, e);
         var points = string.Join(" ", ch);
-        Assert.AreEqual("[0; 0] [2; 3] [2; 0] [1; 3] [0; 2]", points);
+        Assert.AreEqual("[0; 0] [2; 0] [2; 3] [1; 3] [0; 2]", points);
     }
 
     public void Sample()
