@@ -39,10 +39,10 @@ Assert.IsTrue(Point2.OrientedCCW(p, q, r));
 ```cs
 var pts = new List<Point2>() 
 {
-    new Point2(0, 0),
-    new Point2(1, 0),
-    new Point2(0, 1),
-    new Point2(0.1, 0.1)
+    new(0, 0),
+    new(1, 0),
+    new(0, 1),
+    new(0.1, 0.1)
 };
 
 var ch = new ConvexHull(pts);
