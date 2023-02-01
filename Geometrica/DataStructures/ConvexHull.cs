@@ -121,4 +121,9 @@ public class ConvexHull
     {
         return string.Join(" ", Hull);
     }
+
+    public static IEnumerable<Point2> ConvexHull5(Point2 a, Point2 b, Point2 c, Point2 d, Point2 e)
+    {
+        return new List<Point2> { a, b, c, d, e };
+    }
 }
