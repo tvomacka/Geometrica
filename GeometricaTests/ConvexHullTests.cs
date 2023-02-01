@@ -1,6 +1,5 @@
 ﻿using Geometrica.DataStructures;
 using Geometrica.Primitives;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GeometricaTests;
 
