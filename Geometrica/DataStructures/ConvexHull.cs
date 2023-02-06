@@ -90,8 +90,13 @@ public class ConvexHull
         throw new Exception("The computation of convex hull of 4 points should not be able to reach this part of code. Check that the provided points are valid.");
     }
 
-    public List<Point2> JoinHulls(List<Point2> list1, List<Point2> list2)
+    public List<Point2> JoinHulls(List<Point2> ch1, List<Point2> ch2)
     {
+        //najdi bod p uvnitr ch1
+        //zjisti zda p je uvnitr ch2
+        //p je uvnitr ch2 - spoj ch1 a ch2 do seznamu, serazene vuci p podle uhlu, jdi na grahamovo prohledavani
+        //p neni uvnitr ch2 - ch2 lezi vuci p v klinu s uhlem <= PI => 1. lze vyradit, 2. setridit vuci p spolu s ch1
+        //grahamovo prohledavani serazenych vrcholu
         throw new NotImplementedException();
     }
 
