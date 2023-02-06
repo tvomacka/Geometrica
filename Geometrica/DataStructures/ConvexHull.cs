@@ -131,6 +131,9 @@ public class ConvexHull
 
     public static List<Point2> GrahamSearch(Point2[] points)
     {
+        //find some point in the middle
+        //order all of the points by angle respective to the middle point
+        //traverse all of the sorted points, create convex hull
         throw new NotImplementedException();
     }
 
