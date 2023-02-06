@@ -1,4 +1,5 @@
-﻿using Geometrica.Primitives;
+﻿using System.Drawing;
+using Geometrica.Primitives;
 
 namespace Geometrica.DataStructures;
 
@@ -128,6 +129,10 @@ public class ConvexHull
         }
     }
 
+    public static List<Point2> JarvisSearch(Point2[] points)
+    {
+        throw NotImplementedException();
+    }
 
     public static List<Point2> BruteForce(Point2[] points)
     {
