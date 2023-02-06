@@ -132,7 +132,7 @@ public class ConvexHull
             {
                 var orientations = new bool[3];
                 var oIndex = 0;
-                for (var k = 0; k < 5; k++)
+                for (var k = 0; k < points.Length; k++)
                 {
                     if (k != i && k != j)
                     {
