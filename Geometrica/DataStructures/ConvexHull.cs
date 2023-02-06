@@ -131,7 +131,22 @@ public class ConvexHull
 
     public static List<Point2> GrahamSearch(Point2[] points)
     {
-        //find some point in the middle
+        var r = new Random();
+        int i, j, k;
+        i = r.Next(points.Length);
+        do
+        {
+            j = r.Next(points.Length);
+        } while (i == j);
+
+        do
+        {
+            k = r.Next(points.Length);
+        } while (i == k || j == k);
+
+        var p = new Point2((points[i].X + points[j].X + points[k].X) / 3.0,
+            (points[i].Y + points[j].Y + points[k].Y) / 3.0);
+        
         //order all of the points by angle respective to the middle point
         //traverse all of the sorted points, create convex hull
         throw new NotImplementedException();
