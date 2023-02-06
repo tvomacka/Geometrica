@@ -128,10 +128,6 @@ public class ConvexHull
         }
     }
 
-    public override string ToString()
-    {
-        return string.Join(" ", Hull);
-    }
 
     public static List<Point2> BruteForce(Point2[] points)
     {
@@ -180,5 +176,10 @@ public class ConvexHull
         }
 
         return cHull;
+    }
+
+    public override string ToString()
+    {
+        return string.Join(" ", Hull);
     }
 }
