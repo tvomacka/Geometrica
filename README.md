@@ -48,3 +48,21 @@ var pts = new List<Point2>()
 var ch = new ConvexHull(pts);
 ```
 <!-- endSnippet -->
+
+Uses a divide and conquer algorightm to create convex hulls by default.
+
+```mermaid
+flowchart TD
+  A[p = set of points] --> B{"size(p) < 6?"}
+  B -- Yes --> C["Return CH(p)"]
+  B -- No --> D[Split p in half to p_1 and p_2]
+  D --> E["CH(p_1)"] & F["CH(p_2)"]
+  E --> G["Join CH(p_1) and CH(p_2)"]
+  F --> G
+  G --> H["Return CH(p)"]
+```
+
+The divide and conquer algorithm uses a brute force approach to construct the convex hulls of 5 point subsets. It is however possible to use this brute force approach for larger sets of points directly if desired.
+
+
+missingsnippet: BruteForceConvexHull
