@@ -67,4 +67,14 @@ flowchart TD
 The divide and conquer algorithm uses a brute force approach to construct the convex hulls of 5 point subsets. It is however possible to use this brute force approach for larger sets of points directly if desired.
 
 
-missingsnippet: BruteForceConvexHull
+<!-- snippet: BruteForceConvexHull -->
+```cs
+var a = new Point2(0, 0);
+var c = new Point2(2, 0);
+var b = new Point2(2, 3);
+var d = new Point2(1, 3);
+var e = new Point2(0, 2);
+
+var ch = ConvexHull.BruteForce(new Point2[] { a, b, c, d, e });
+```
+<!-- endSnippet -->
