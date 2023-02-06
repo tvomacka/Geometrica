@@ -129,7 +129,7 @@ public class ConvexHull
         }
     }
 
-    public static List<Point2> JarvisSearch(Point2[] points)
+    public static List<Point2> GrahamSearch(Point2[] points)
     {
         throw new NotImplementedException();
     }
