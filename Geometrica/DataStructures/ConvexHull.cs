@@ -20,7 +20,7 @@ public class ConvexHull
     public List<Point2> CreateConvexHull(List<Point2> pts)
     {
         //divide and conquer
-        if (pts != null && 6 < pts.Count)
+        if (6 < pts?.Count)
         {
             var half = pts.Count / 2;
             return JoinHulls(CreateConvexHull(pts.GetRange(0, half)), CreateConvexHull(pts.GetRange(half, pts.Count - half)));
