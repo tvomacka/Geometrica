@@ -30,4 +30,4 @@ flowchart TD
 The divide and conquer algorithm uses a brute force approach to construct the convex hulls of 5 point subsets. It is however possible to use this brute force approach for larger sets of points directly if desired.
 
 
-snippet: BruteForceConvexHull
+missingsnippet: BruteForceConvexHull
