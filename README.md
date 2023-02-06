@@ -75,6 +75,6 @@ var b = new Point2(2, 3);
 var d = new Point2(1, 3);
 var e = new Point2(0, 2);
 
-var ch = ConvexHull.BruteForce(new Point2[] { a, b, c, d, e });
+var ch = ConvexHull.BruteForce(new[] { a, b, c, d, e });
 ```
 <!-- endSnippet -->
