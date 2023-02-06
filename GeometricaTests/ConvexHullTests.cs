@@ -266,6 +266,7 @@ public class ConvexHullTests
     [TestMethod]
     public void ConvexHull5_ABCDE_ReturnsABCDE()
     {
+        // begin-snippet: BruteForceConvexHull
         var a = new Point2(0, 0);
         var c = new Point2(2, 0);
         var b = new Point2(2, 3);
@@ -273,6 +274,8 @@ public class ConvexHullTests
         var e = new Point2(0, 2);
 
         var ch = ConvexHull.BruteForce(new Point2[] { a, b, c, d, e });
+        // end-snippet
+
         var points = string.Join(" ", ch);
         Assert.AreEqual("[0; 0] [2; 0] [2; 3] [1; 3] [0; 2]", points);
     }
