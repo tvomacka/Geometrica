@@ -131,7 +131,7 @@ public class ConvexHull
 
     public static List<Point2> JarvisSearch(Point2[] points)
     {
-        throw NotImplementedException();
+        throw new NotImplementedException();
     }
 
     public static List<Point2> BruteForce(Point2[] points)
