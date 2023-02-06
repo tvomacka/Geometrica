@@ -37,6 +37,7 @@ public class ConvexHull
         {
             throw new ArgumentNullException($"The argument {nameof(pts)} must not be null. Please provide a list points.");
         }
+
         if (pts.Count() < 3 || 6 < pts.Count)
         {
             throw new ArgumentException($"This method must only be used for 3 to 5 points. You provided a list of {pts.Count()} points.");
@@ -56,6 +57,11 @@ public class ConvexHull
         if (pts.Count == 4)
         {
             return ConvexHull4(pts[0], pts[1], pts[2], pts[3]);
+        }
+
+        if (pts.Count == 5)
+        {
+            return BruteForce(pts.ToArray());
         }
 
         return null;
@@ -122,7 +128,7 @@ public class ConvexHull
         return string.Join(" ", Hull);
     }
 
-    public static IEnumerable<Point2> BruteForce(Point2[] points)
+    public static List<Point2> BruteForce(Point2[] points)
     {
         var chLines = new List<Tuple<int, int>>();
         
