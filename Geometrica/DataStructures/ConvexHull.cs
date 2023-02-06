@@ -122,14 +122,13 @@ public class ConvexHull
         return string.Join(" ", Hull);
     }
 
-    public static IEnumerable<Point2> ConvexHull5(Point2 a, Point2 b, Point2 c, Point2 d, Point2 e)
+    public static IEnumerable<Point2> BruteForce(Point2[] points)
     {
-        Point2[] pts = { a, b, c, d, e };
         var chLines = new List<Tuple<int, int>>();
         
-        for (var i = 0; i < 5; i++)
+        for (var i = 0; i < points.Length; i++)
         {
-            for (var j = i + 1; j < 5; j++)
+            for (var j = i + 1; j < points.Length; j++)
             {
                 var orientations = new bool[3];
                 var oIndex = 0;
@@ -137,7 +136,7 @@ public class ConvexHull
                 {
                     if (k != i && k != j)
                     {
-                        orientations[oIndex++] = Point2.OrientedCCW(pts[i], pts[j], pts[k]);
+                        orientations[oIndex++] = Point2.OrientedCCW(points[i], points[j], points[k]);
                     }
                 }
 
@@ -150,8 +149,8 @@ public class ConvexHull
 
         var cHull = new List<Point2>
         {
-            pts[chLines[0].Item1],
-            pts[chLines[0].Item2]
+            points[chLines[0].Item1],
+            points[chLines[0].Item2]
         };
         var lastIndex = chLines[0].Item2;
         chLines.RemoveAt(0);
@@ -160,7 +159,7 @@ public class ConvexHull
         {
             var t = chLines.Single(l => l.Item1 == lastIndex || l.Item2 == lastIndex);
             lastIndex = t.Item1 == lastIndex ? t.Item2 : t.Item1;
-            cHull.Add(pts[lastIndex]);
+            cHull.Add(points[lastIndex]);
             chLines.Remove(t);
         }
 

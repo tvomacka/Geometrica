@@ -272,7 +272,7 @@ public class ConvexHullTests
         var d = new Point2(1, 3);
         var e = new Point2(0, 2);
 
-        var ch = ConvexHull.ConvexHull5(a, b, c, d, e);
+        var ch = ConvexHull.BruteForce(new Point2[] { a, b, c, d, e });
         var points = string.Join(" ", ch);
         Assert.AreEqual("[0; 0] [2; 0] [2; 3] [1; 3] [0; 2]", points);
     }
