@@ -5,7 +5,9 @@ Source File: /README.source.md
 To change this file edit the source file and then run MarkdownSnippets.
 -->
 
-# Library for Various Geometry-Related Tasks
+# Geometrica: A Library for Various Geometry-Related Tasks
+
+[![on-push-do-docs](https://github.com/tvomacka/Geometrica/actions/workflows/on-push-do-docs.yml/badge.svg)](https://github.com/tvomacka/Geometrica/actions/workflows/on-push-do-docs.yml)
 
 ## Point Operations
 
