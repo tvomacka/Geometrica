@@ -148,10 +148,15 @@ public class ConvexHull
         var innerPoint = new Point2((points[i].X + points[j].X + points[k].X) / 3.0,
             (points[i].Y + points[j].Y + points[k].Y) / 3.0);
         
-        //order all of the points by angle respective to the middle point
         var pts = SortPointsByAngle(innerPoint, points);
-        //traverse all of the sorted points, create convex hull
-        throw new NotImplementedException();
+
+        var cHull = new List<Point2>();
+        for (i = 0; i < pts.Length - 1; i++)
+        {
+            //traverse all of the sorted points, create convex hull
+        }
+
+        return cHull;
     }
 
     public static Point2[] SortPointsByAngle(Point2 innerPoint, Point2[] points)
