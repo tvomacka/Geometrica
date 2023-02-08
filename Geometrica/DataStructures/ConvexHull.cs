@@ -1,5 +1,6 @@
-﻿using System.Drawing;
-using Geometrica.Primitives;
+﻿using Geometrica.Primitives;
+using static System.Double;
+using static System.Math;
 
 namespace Geometrica.DataStructures;
 
@@ -158,10 +159,36 @@ public class ConvexHull
         var angle = new double[points.Length];
         for (var i = 0; i < points.Length; i++)
         {
-            var q = points[i] - innerPoint;
-            q = q.Normalize();
-            //angle[i] = 
+            angle[i] = GetPointAngle((points[i] - innerPoint).Normalize());
         }
+        Array.Sort(angle, points);
+
+        return points;
+    }
+
+    public static double GetPointAngle(Point2 p)
+    {
+        if (p.X >= 0 && p.Y >= 0)
+        {
+            return Asin(p.Y);
+        }
+
+        if (p.X <= 0 && p.Y >= 0)
+        {
+            return PI - Asin(p.Y);
+        }
+
+        if (p.X <= 0 && p.Y <= 0)
+        {
+            return PI - Asin(p.Y);
+        }
+
+        if (p.X >= 0 && p.Y <= 0)
+        {
+            return 2 * PI + Asin(p.Y);
+        }
+
+        return NaN;
     }
 
     public static List<Point2> BruteForce(Point2[] points)
