@@ -153,9 +153,15 @@ public class ConvexHull
         throw new NotImplementedException();
     }
 
-    public static object SortPointsByAngle(Point2 innerPoint, Point2[] points)
+    public static Point2[] SortPointsByAngle(Point2 innerPoint, Point2[] points)
     {
-        throw new NotImplementedException();
+        var angle = new double[points.Length];
+        for (var i = 0; i < points.Length; i++)
+        {
+            var q = points[i] - innerPoint;
+            q = q.Normalize();
+            //angle[i] = 
+        }
     }
 
     public static List<Point2> BruteForce(Point2[] points)

@@ -294,6 +294,21 @@ public class ConvexHullTests
         Assert.AreEqual("", points);
     }
 
+    [TestMethod]
+    public void Points_CanBeSorted_ByAngle()
+    {
+        var p = new Point2(0, 0);
+        
+        var a = new Point2(1, 1);
+        var b = new Point2(1, 0);
+        var c = new Point2(0, 1);
+
+        var sorted = ConvexHull.SortPointsByAngle(p, new[] { a, b, c });
+
+        var pts = string.Join(" ", sorted);
+        Assert.AreEqual("", pts);
+    }
+
     public void Sample()
     {
         // begin-snippet: CreateConvexHull
