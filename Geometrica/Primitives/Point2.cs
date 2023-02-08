@@ -7,6 +7,8 @@ public struct Point2
     public double X;
     public double Y;
 
+    public static Point2 operator -(Point2 a, Point2 b) => new(a.X - b.X, a.Y - b.Y);
+
     public Point2(double x, double y) : this()
     {
         X = x;
@@ -36,5 +38,11 @@ public struct Point2
     public bool Inside(List<Point2> polygon)
     {
         return true;
+    }
+
+    public Point2 Normalize()
+    {
+        var length = Math.Sqrt(X * X + Y * Y);
+        return new Point2(X / length, Y / length);
     }
 }
