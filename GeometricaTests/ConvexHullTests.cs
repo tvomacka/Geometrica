@@ -306,7 +306,7 @@ public class ConvexHullTests
         var sorted = ConvexHull.SortPointsByAngle(p, new[] { a, b, c });
 
         var pts = string.Join(" ", sorted);
-        Assert.AreEqual("", pts);
+        Assert.AreEqual("[1; 0] [1; 1] [0; 1]", pts);
     }
 
     [TestMethod]
