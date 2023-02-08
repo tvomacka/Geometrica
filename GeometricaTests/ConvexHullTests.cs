@@ -309,6 +309,38 @@ public class ConvexHullTests
         Assert.AreEqual("", pts);
     }
 
+    [TestMethod]
+    public void Point_AngleInFirstQuadrant()
+    {
+        const double angle = Math.PI * 0.25;
+        var alpha = ConvexHull.GetPointAngle(new Point2(Math.Cos(angle), Math.Sin(angle)).Normalize());
+        Assert.AreEqual(alpha, angle, 0.001);
+    }
+
+    [TestMethod]
+    public void Point_AngleInSecondQuadrant()
+    {
+        const double angle = Math.PI * 0.75;
+        var alpha = ConvexHull.GetPointAngle(new Point2(Math.Cos(angle), Math.Sin(angle)).Normalize());
+        Assert.AreEqual(alpha, angle, 0.001);
+    }
+
+    [TestMethod]
+    public void Point_AngleInThirdQuadrant()
+    {
+        const double angle = Math.PI * 1.25;
+        var alpha = ConvexHull.GetPointAngle(new Point2(Math.Cos(angle), Math.Sin(angle)).Normalize());
+        Assert.AreEqual(alpha, angle, 0.001);
+    }
+
+    [TestMethod]
+    public void Point_AngleInFourthQuadrant()
+    {
+        const double angle = Math.PI * 1.75;
+        var alpha = ConvexHull.GetPointAngle(new Point2(Math.Cos(angle), Math.Sin(angle)).Normalize());
+        Assert.AreEqual(alpha, angle, 0.001);
+    }
+
     public void Sample()
     {
         // begin-snippet: CreateConvexHull
