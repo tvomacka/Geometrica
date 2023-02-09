@@ -37,6 +37,13 @@ Assert.IsTrue(Point2.OrientedCCW(p, q, r));
 
 ## Convex Hull
 
+This module contains different algorithms for convex hull creation from a given point set.
+
+- [ ] Direct hull from 3 or 4 points
+- [ ] Brute force
+- [ ] Graham Scan
+- [ ] Divide and Conquer
+
 <!-- snippet: CreateConvexHull -->
 ```cs
 var pts = new List<Point2>() 
