@@ -281,7 +281,7 @@ public class ConvexHullTests
     }
 
     [TestMethod]
-    public void GrahamSearch_FourCHPoints_ReturnsCH4()
+    public void GrahamScan_FourCHPoints_ReturnsCH4()
     {
         var a = new Point2(0, 0);
         var b = new Point2(1, 0);
