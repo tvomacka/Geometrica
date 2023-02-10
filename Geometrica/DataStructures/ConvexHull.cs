@@ -132,23 +132,16 @@ public class ConvexHull
 
     public static List<Point2> GrahamScan(Point2[] points)
     {
-        var r = new Random();
-        int i, j, k;
-        i = r.Next(points.Length);
-        do
+        var leftMostPoint = points[0];
+        foreach (var p in points)
         {
-            j = r.Next(points.Length);
-        } while (i == j);
-
-        do
-        {
-            k = r.Next(points.Length);
-        } while (i == k || j == k);
-
-        var innerPoint = new Point2((points[i].X + points[j].X + points[k].X) / 3.0,
-            (points[i].Y + points[j].Y + points[k].Y) / 3.0);
+            if (p.X < leftMostPoint.X)
+            {
+                leftMostPoint = p;
+            }
+        }
         
-        var pts = SortPointsByAngle(innerPoint, points);
+        var pts = SortPointsByAngle(leftMostPoint, points);
 
         var cHull = new List<Point2>();
         for (i = 0; i < pts.Length - 1; i++)
