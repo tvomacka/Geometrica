@@ -78,3 +78,7 @@ var e = new Point2(0, 2);
 var ch = ConvexHull.BruteForce(new[] { a, b, c, d, e });
 ```
 <!-- endSnippet -->
+
+# Credits
+
+- [ ] Refactoring the code with [ReSharper](https://jb.gg/OpenSourceSupport).
