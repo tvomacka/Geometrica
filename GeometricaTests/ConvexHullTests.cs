@@ -288,7 +288,7 @@ public class ConvexHullTests
         var c = new Point2(1, 1);
         var d = new Point2(0, 1);
 
-        var ch = ConvexHull.GrahamSearch(new[] { a, b, c, d });
+        var ch = ConvexHull.GrahamScan(new[] { a, b, c, d });
 
         var points = string.Join(" ", ch);
         Assert.AreEqual("", points);

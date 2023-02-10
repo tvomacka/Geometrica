@@ -130,7 +130,7 @@ public class ConvexHull
         }
     }
 
-    public static List<Point2> GrahamSearch(Point2[] points)
+    public static List<Point2> GrahamScan(Point2[] points)
     {
         var r = new Random();
         int i, j, k;
