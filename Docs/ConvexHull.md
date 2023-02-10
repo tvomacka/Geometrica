@@ -7,6 +7,28 @@ This module contains different algorithms for convex hull creation from a given 
 - [ ] Graham Scan
 - [ ] Divide and Conquer
 
+## Directly Creating Small Convex Hulls
+
+## Brute Force
+
+ It possible to create convex hulls using the brute force algorithms on arbitrary large sets of points using the following static method:
+ 
+<!-- snippet: BruteForceConvexHull -->
+```cs
+var a = new Point2(0, 0);
+var c = new Point2(2, 0);
+var b = new Point2(2, 3);
+var d = new Point2(1, 3);
+var e = new Point2(0, 2);
+
+var ch = ConvexHull.BruteForce(new[] { a, b, c, d, e });
+```
+<!-- endSnippet -->
+
+Note that the computational complexity of this algorithm is _O(n<sup>3</sup>)_.
+
+## Graham Scan
+
 ## Divide and Conquer
 
 ```mermaid
@@ -20,17 +42,4 @@ flowchart TD
   G --> H["Return CH(p)"]
 ```
 
-The divide and conquer algorithm uses a brute force approach to construct the convex hulls of 5 point subsets. It is however possible to use this brute force approach for larger sets of points directly if desired.
-
-
-<!-- snippet: BruteForceConvexHull -->
-```cs
-var a = new Point2(0, 0);
-var c = new Point2(2, 0);
-var b = new Point2(2, 3);
-var d = new Point2(1, 3);
-var e = new Point2(0, 2);
-
-var ch = ConvexHull.BruteForce(new[] { a, b, c, d, e });
-```
-<!-- endSnippet -->
+The divide and conquer algorithm creates convex hulls of 3-4 point subsets directly and uses the brute force approach for 5 point subsets. The _Join_ step is performed using Graham Scan.
