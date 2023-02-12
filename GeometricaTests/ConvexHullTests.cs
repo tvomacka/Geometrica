@@ -283,15 +283,17 @@ public class ConvexHullTests
     [TestMethod]
     public void GrahamScan_FourCHPoints_ReturnsCH4()
     {
+        // begin-snippet: GrahamScanConvexHull
         var a = new Point2(0, 0);
         var b = new Point2(1, 0);
         var c = new Point2(1, 1);
         var d = new Point2(0, 1);
 
         var ch = ConvexHull.GrahamScan(new[] { a, b, c, d });
+        // end-script
 
         var points = string.Join(" ", ch);
-        Assert.AreEqual("", points);
+        Assert.AreEqual("[0; 0] [1; 0] [1; 1] [0; 1]", points);
     }
 
     [TestMethod]
