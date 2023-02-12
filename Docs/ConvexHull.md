@@ -28,6 +28,8 @@ var ch = ConvexHull.BruteForce(new[] { a, b, c, d, e });
 Note that the computational complexity of this algorithm is _O(n<sup>3</sup>)_.
 
 ## Graham Scan
+<!-- snippet: GrahamScanConvexHull -->
+<!-- endSnippet -->
 
 ## Divide and Conquer
 
