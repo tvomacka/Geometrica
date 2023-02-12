@@ -130,31 +130,37 @@ public class ConvexHull
         }
     }
 
-    public static List<Point2> GrahamSearch(Point2[] points)
+    public static List<Point2> GrahamScan(Point2[] points)
     {
-        var r = new Random();
-        int i, j, k;
-        i = r.Next(points.Length);
-        do
+        var leftMostPoint = points[0];
+        foreach (var p in points)
         {
-            j = r.Next(points.Length);
-        } while (i == j);
-
-        do
-        {
-            k = r.Next(points.Length);
-        } while (i == k || j == k);
-
-        var innerPoint = new Point2((points[i].X + points[j].X + points[k].X) / 3.0,
-            (points[i].Y + points[j].Y + points[k].Y) / 3.0);
-        
-        var pts = SortPointsByAngle(innerPoint, points);
-
-        var cHull = new List<Point2>();
-        for (i = 0; i < pts.Length - 1; i++)
-        {
-            //traverse all of the sorted points, create convex hull
+            if (p.X < leftMostPoint.X)
+            {
+                leftMostPoint = p;
+            }
         }
+        
+        var pts = SortPointsByAngle(leftMostPoint, points);
+        var stack = new Stack<Point2>();
+
+        foreach (var p in pts)
+        {
+            while (stack.Count > 1 && !Ccw(p, stack))
+            {
+                stack.Pop();
+            }
+
+            bool Ccw(Point2 q, Stack<Point2> s)
+            {
+                return Point2.OrientedCCW(s.ElementAt(1), s.ElementAt(0), q);
+            }
+
+            stack.Push(p);
+        }
+
+        var cHull = stack.ToList();
+        cHull.Reverse();
 
         return cHull;
     }
