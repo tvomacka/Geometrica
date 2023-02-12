@@ -29,6 +29,14 @@ Note that the computational complexity of this algorithm is _O(n<sup>3</sup>)_.
 
 ## Graham Scan
 <!-- snippet: GrahamScanConvexHull -->
+```cs
+var a = new Point2(0, 0);
+var b = new Point2(1, 0);
+var c = new Point2(1, 1);
+var d = new Point2(0, 1);
+
+var ch = ConvexHull.GrahamScan(new[] { a, b, c, d });
+```
 <!-- endSnippet -->
 
 ## Divide and Conquer
