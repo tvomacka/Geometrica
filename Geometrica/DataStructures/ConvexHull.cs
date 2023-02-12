@@ -144,26 +144,25 @@ public class ConvexHull
         var pts = SortPointsByAngle(leftMostPoint, points);
         var stack = new Stack<Point2>();
 
-        for()
-        while (stack.Count > 1 && ccw)
+        foreach (var p in pts)
         {
+            while (stack.Count > 1 && !Ccw(p, stack))
+            {
+                stack.Pop();
+            }
 
+            bool Ccw(Point2 q, Stack<Point2> s)
+            {
+                return Point2.OrientedCCW(s.ElementAt(1), s.ElementAt(0), q);
+            }
+
+            stack.Push(p);
         }
 
+        var cHull = stack.ToList();
+        cHull.Reverse();
+
         return cHull;
-
-//        let points be the list of points
-//        let stack = empty_stack()
-
-//        find the lowest y-coordinate and leftmost point, called P0
-//            sort points by polar angle with P0, if several points have the same polar angle then only keep the farthest
-
-//        for point in points:
-//          # pop the last point from the stack if we turn clockwise to reach this point
-//          while count stack > 1 and ccw(next_to_top(stack), top(stack), point) <= 0:
-//              pop stack
-//          push point to stack
-//        end
     }
 
     public static Point2[] SortPointsByAngle(Point2 innerPoint, Point2[] points)
