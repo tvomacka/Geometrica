@@ -11,8 +11,8 @@ This module contains different algorithms for convex hull creation from a given 
 
 These are special cases of brute force approach to very small point sets.
 
-<!-- missingSnippet: ConvexHull3and4 -->
-<!-- endmissingSnippet -->
+<!-- snippet: ConvexHull4 -->
+<!-- endSnippet -->
 
 ## Brute Force
 
