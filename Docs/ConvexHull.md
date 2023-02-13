@@ -9,6 +9,11 @@ This module contains different algorithms for convex hull creation from a given 
 
 ## Directly Creating Small Convex Hulls
 
+These are special cases of brute force approach to very small point sets.
+
+<!-- missingSnippet: ConvexHull3and4 -->
+<!-- endmissingSnippet -->
+
 ## Brute Force
 
  It possible to create convex hulls using the brute force algorithms on arbitrary large sets of points using the following static method:
