@@ -12,11 +12,29 @@ This module contains different algorithms for convex hull creation from a given 
 These are special cases of brute force approach to very small point sets. The convex hull of four points can be created using a specific method:
 
 <!-- snippet: ConvexHull4 -->
+```cs
+var a = new Point2(0, 0);
+var c = new Point2(1, 0);
+var b = new Point2(1, 1);
+var d = new Point2(0, 1);
+
+var convexHull4 = ConvexHull.ConvexHull4(a, b, c, d);
+```
 <!-- endSnippet -->
 
 Or for a general case of sets of up to five points (inclusive) a more generic method can be used:
 
 <!-- snippet: SimpleConvexHull -->
+```cs
+var pts = new List<Point2>()
+{
+    new Point2(0, 0),
+    new Point2(0, 1),
+    new Point2(1, 0)
+};
+
+var ch = ConvexHull.CreateSimpleHull(pts);
+```
 <!-- endSnippet -->
 
 ## Brute Force
