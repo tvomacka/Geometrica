@@ -94,12 +94,32 @@ public class ConvexHull
 
     public List<Point2> JoinHulls(List<Point2> ch1, List<Point2> ch2)
     {
-        //najdi bod p uvnitr ch1
+        var p = GetPointInside(ch1);
         //zjisti zda p je uvnitr ch2
-        //p je uvnitr ch2 - spoj ch1 a ch2 do seznamu, serazene vuci p podle uhlu, jdi na grahamovo prohledavani
-        //p neni uvnitr ch2 - ch2 lezi vuci p v klinu s uhlem <= PI => 1. lze vyradit, 2. setridit vuci p spolu s ch1
+        if (IsPointInside(p, ch2))
+        {
+            //p je uvnitr ch2 - spoj convexHull a ch2 do seznamu, serazene vuci p podle uhlu, jdi na grahamovo prohledavani
+        }
+        else
+        {
+            //p neni uvnitr ch2 - ch2 lezi vuci p v klinu s uhlem <= PI => 1. lze vyradit, 2. setridit vuci p spolu s convexHull
+        }
         //grahamovo prohledavani serazenych vrcholu
         throw new NotImplementedException();
+    }
+
+    private static bool IsPointInside(Point2 p, List<Point2> convexHull)
+    {
+        return Point2.OrientedCCW(p, convexHull[0], convexHull[1]);
+    }
+
+    private static Point2 GetPointInside(List<Point2> convexHull)
+    {
+        return new Point2()
+        {
+            X = (convexHull[0].X + convexHull[1].X + convexHull[2].X) / 3,
+            Y = (convexHull[0].Y + convexHull[1].Y + convexHull[2].Y) / 3
+        };
     }
 
     public void Add(Point2 point)
