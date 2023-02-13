@@ -358,6 +358,19 @@ public class ConvexHullTests
         Assert.IsTrue(ConvexHull.IsPointInside(new(0.5, 0.5), ch));
     }
 
+    [TestMethod]
+    public void PointOutside_ConvexHull_IsRejected()
+    {
+        var a = new Point2(0, 0);
+        var c = new Point2(1, 0);
+        var b = new Point2(1, 1);
+        var d = new Point2(0, 1);
+
+        var ch = ConvexHull.ConvexHull4(a, b, c, d);
+
+        Assert.IsFalse(ConvexHull.IsPointInside(new(1.5, 1.5), ch));
+    }
+
     public void Samples()
     {
         // begin-snippet: CreateConvexHull
