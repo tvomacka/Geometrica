@@ -37,6 +37,8 @@ var ch = ConvexHull.CreateSimpleHull(pts);
 ```
 <!-- endSnippet -->
 
+Note that in the case of five points, this general method uses the brute-force approach.
+
 ## Brute Force
 
  It possible to create convex hulls using the brute force algorithms on arbitrary large sets of points using the following static method:
