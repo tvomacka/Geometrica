@@ -371,6 +371,20 @@ public class ConvexHullTests
         Assert.IsFalse(ConvexHull.IsPointInside(new(1.5, 1.5), ch));
     }
 
+    [TestMethod]
+    public void PointInside_ConvexHull_CanBeGenerated()
+    {
+        var a = new Point2(0, 0);
+        var c = new Point2(1.5, 0);
+        var b = new Point2(1.5, 3);
+        var d = new Point2(0, 3);
+
+        var ch = ConvexHull.ConvexHull4(a, b, c, d);
+        var pIn = ConvexHull.GetPointInside(ch);
+
+        Assert.AreEqual("[1; 1]", pIn.ToString());
+    }
+
     public void Samples()
     {
         // begin-snippet: CreateConvexHull
