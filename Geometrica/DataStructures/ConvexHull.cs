@@ -108,12 +108,12 @@ public class ConvexHull
         throw new NotImplementedException();
     }
 
-    private static bool IsPointInside(Point2 p, List<Point2> convexHull)
+    public static bool IsPointInside(Point2 p, List<Point2> convexHull)
     {
         return Point2.OrientedCCW(p, convexHull[0], convexHull[1]);
     }
 
-    private static Point2 GetPointInside(List<Point2> convexHull)
+    public static Point2 GetPointInside(List<Point2> convexHull)
     {
         return new Point2()
         {
