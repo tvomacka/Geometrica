@@ -302,7 +302,7 @@ public class ConvexHullTests
     public void Points_CanBeSorted_ByAngle()
     {
         var p = new Point2(0, 0);
-        
+
         var a = new Point2(1, 1);
         var b = new Point2(1, 0);
         var c = new Point2(0, 1);
@@ -385,10 +385,32 @@ public class ConvexHullTests
         Assert.AreEqual("[1; 1]", pIn.ToString());
     }
 
+    [TestMethod]
+    public void JoinHulls_PointInsideBothHulls()
+    {
+        var a = new Point2(1, 3);
+        var b = new Point2(5, 3);
+        var c = new Point2(5, 6);
+        var d = new Point2(1, 6);
+        var ch1 = new List<Point2>() { a, b, c, d };
+
+        var e = new Point2(0, 0);
+        var f = new Point2(4, 0);
+        var g = new Point2(4, 5);
+        var h = new Point2(0, 5);
+        var ch2 = new List<Point2>() { e, f, g, h };
+
+        var ch = ConvexHull.JoinHulls(ch1, ch2);
+
+        var s = string.Join(" ", ch);
+        Assert.AreEqual("[0; 0] [4; 0] [5; 3] [5; 6] [1; 6] [0; 5]", s);
+
+    }
+
     public void Samples()
     {
         // begin-snippet: CreateConvexHull
-        var pts = new List<Point2>() 
+        var pts = new List<Point2>()
         {
             new(0, 0),
             new(1, 0),
