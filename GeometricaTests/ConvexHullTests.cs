@@ -343,7 +343,7 @@ public class ConvexHullTests
         Assert.AreEqual(alpha, angle, 0.001);
     }
 
-    public void Sample()
+    public void Samples()
     {
         // begin-snippet: CreateConvexHull
         var pts = new List<Point2>() 
@@ -355,6 +355,15 @@ public class ConvexHullTests
         };
 
         var ch = new ConvexHull(pts);
+        // end-snippet
+
+        // begin-snippet: ConvexHull4
+        var a = new Point2(0, 0);
+        var c = new Point2(1, 0);
+        var b = new Point2(1, 1);
+        var d = new Point2(0, 1);
+
+        var convexHull4 = ConvexHull.ConvexHull4(a, b, c, d);
         // end-snippet
     }
 }
