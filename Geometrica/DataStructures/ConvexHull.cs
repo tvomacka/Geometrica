@@ -160,9 +160,9 @@ public class ConvexHull
         var leftMostPoint = points[0];
         foreach (var p in points)
         {
-            if (p.X < leftMostPoint.X)
+            if (p.X <= leftMostPoint.X)
             {
-                leftMostPoint = p;
+                leftMostPoint = p.Y < leftMostPoint.Y ? p : leftMostPoint;
             }
         }
         
