@@ -110,7 +110,12 @@ public class ConvexHull
 
     public static bool IsPointInside(Point2 p, List<Point2> convexHull)
     {
-        return Point2.OrientedCCW(p, convexHull[0], convexHull[1]);
+        for (int i = 0; i < convexHull.Count; i++)
+        {
+            if (!Point2.OrientedCCW(p, convexHull[i], convexHull[(i + 1) % convexHull.Count]))
+                return false;
+        }
+        return true;
     }
 
     public static Point2 GetPointInside(List<Point2> convexHull)
