@@ -57,6 +57,7 @@ public class ConvexHullTests
     [TestMethod]
     public void CreateSimpleHull_ThreePointsCW_IsCounterClockwise()
     {
+        // begin-snippet: SimpleConvexHull
         var pts = new List<Point2>()
         {
             new Point2(0, 0),
@@ -65,6 +66,7 @@ public class ConvexHullTests
         };
 
         var ch = ConvexHull.CreateSimpleHull(pts);
+        // end-snippet
         var points = string.Join(" ", ch);
         Assert.AreEqual("[0; 0] [1; 0] [0; 1]", points);
     }
