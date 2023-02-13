@@ -51,3 +51,4 @@ Which uses a divide and conquer algorightm. There are other algorithms you can u
 # Credits
 
 - [ ] Refactoring the code with [ReSharper](https://jb.gg/OpenSourceSupport).
+- [ ] Some of the algorithms implemented in this library were inspired by the materials published by Prof. Ivana Kolingerova from Universy of West Bohemia, if you are interested in this stuff and speak Czech, go [czech them out](http://afrodita.zcu.cz/~kolinger/vyukaZCU.html#VAM).
