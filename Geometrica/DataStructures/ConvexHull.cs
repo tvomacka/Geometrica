@@ -107,6 +107,27 @@ public class ConvexHull
         else
         {
             //p neni uvnitr ch2 - ch2 lezi vuci p v klinu s uhlem <= PI => 1. lze vyradit, 2. setridit vuci p spolu s convexHull
+            var angle = new double[ch2.Count];
+            var minAngleIndex = -1;
+            var maxAngleIndex = -1;
+            var minAngle = double.MaxValue;
+            var maxAngle = double.MinValue;
+            for (var i = 0; i < ch2.Count; i++)
+            {
+                angle[i] = GetPointAngle((ch2[i] - p).Normalize());
+                if (angle[i] < minAngle)
+                {
+                    minAngle = angle[i];
+                    minAngleIndex = i;
+                }
+
+                if (maxAngle < angle[i])
+                {
+                    maxAngle = angle[i];
+                    maxAngleIndex = i;
+                }
+            }
+
             sortedPts = new Point2[] { };
         }
 
