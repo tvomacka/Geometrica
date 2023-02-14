@@ -404,7 +404,27 @@ public class ConvexHullTests
 
         var s = string.Join(" ", ch);
         Assert.AreEqual("[0; 0] [4; 0] [5; 3] [5; 6] [1; 6] [0; 5]", s);
+    }
 
+    [TestMethod]
+    public void JoinHulls_PointInOneHullOnly()
+    {
+        var a = new Point2(0, 2);
+        var b = new Point2(0, 0);
+        var c = new Point2(2, 0);
+        var d = new Point2(2, 2);
+        var ch1 = new List<Point2>() { a, b, c, d };
+
+        var e = new Point2(1, 1);
+        var f = new Point2(4, 1);
+        var g = new Point2(4, 4);
+        var h = new Point2(1, 4);
+        var ch2 = new List<Point2>() { e, f, g, h };
+
+        var ch = ConvexHull.JoinHulls(ch1, ch2);
+
+        var s = string.Join(" ", ch);
+        Assert.AreEqual("", s);
     }
 
     public void Samples()
