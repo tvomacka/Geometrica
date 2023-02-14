@@ -147,7 +147,7 @@ public class ConvexHull
 
     public static bool IsPointInside(Point2 p, List<Point2> convexHull)
     {
-        for (int i = 0; i < convexHull.Count; i++)
+        for (var i = 0; i < convexHull.Count; i++)
         {
             if (!Point2.OrientedCCW(p, convexHull[i], convexHull[(i + 1) % convexHull.Count]))
                 return false;
