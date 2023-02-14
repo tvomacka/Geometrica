@@ -106,7 +106,6 @@ public class ConvexHull
         }
         else
         {
-            //p neni uvnitr ch2 - ch2 lezi vuci p v klinu s uhlem <= PI => 1. lze vyradit, 2. setridit vuci p spolu s convexHull
             var angle = new double[ch2.Count];
             var minAngleIndex = -1;
             var maxAngleIndex = -1;
