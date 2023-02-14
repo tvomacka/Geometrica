@@ -128,7 +128,19 @@ public class ConvexHull
                 }
             }
 
-            sortedPts = new Point2[] { };
+            var allPoints = new List<Point2>();
+            allPoints.AddRange(ch1);
+            if (minAngleIndex <= maxAngleIndex)
+            {
+                allPoints.AddRange(ch2.GetRange(minAngleIndex, maxAngleIndex - minAngleIndex + 1));
+            }
+            else
+            {
+                allPoints.AddRange(ch2.GetRange(minAngleIndex, ch2.Count - minAngleIndex));
+                allPoints.AddRange(ch2.GetRange(0, maxAngleIndex + 1));
+            }
+
+            sortedPts = SortPointsByAngle(p, allPoints.ToArray());
         }
 
         return GrahamScan(sortedPts);
