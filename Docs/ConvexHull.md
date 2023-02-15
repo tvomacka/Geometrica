@@ -58,6 +58,13 @@ var ch = ConvexHull.BruteForce(new[] { a, b, c, d, e });
 Note that the computational complexity of this algorithm is _O(n<sup>3</sup>)_.
 
 ## Graham Scan
+
+Graham Scan works in two steps - first the points are sorted and then scanned.
+
+When sorting the points, first an extreme point _p<sub>0</sub>_ is found that is sure to be positioned on the convex hull, in our case, that is the leftmost point with minimum y-coordinate. The other points in the set are then sorted according to the counterclockwise angle between positive x-axist and the the line defined by _p<sub>0</sub>_ and the point being sorted _p<sub>i</sub>_.
+
+Scanning step then traverses all of the points and only adds those points which create counterclockwise-oriented new edges on the convex hull.
+
 <!-- snippet: GrahamScanConvexHull -->
 ```cs
 var a = new Point2(0, 0);
