@@ -427,6 +427,22 @@ public class ConvexHullTests
         Assert.AreEqual("[0; 0] [2; 0] [4; 1] [4; 4] [1; 4] [0; 2]", s);
     }
 
+    [TestMethod]
+    public void Points_OnConvexHull_CanBeAccessedWithIndex()
+    {
+        var a = new Point2(0, 2);
+        var b = new Point2(0, 0);
+        var c = new Point2(2, 0);
+        var d = new Point2(2, 2);
+        var e = new Point2(1, 1);
+        var ch = new List<Point2>() { a, b, c, d, e };
+
+        Assert.AreEqual(a, ch[0]);
+        Assert.AreEqual(b, ch[1]);
+        Assert.AreEqual(c, ch[2]);
+        Assert.AreEqual(d, ch[3]);
+    }
+
     public void Samples()
     {
         // begin-snippet: CreateConvexHull

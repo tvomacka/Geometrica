@@ -9,6 +9,8 @@ public class ConvexHull
     private readonly List<Point2> points = new();
     public readonly List<Point2> Hull = new();
 
+    public Point2 this[int key] => Hull[key];
+
     public ConvexHull()
     {
     }
