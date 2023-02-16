@@ -1,10 +1,11 @@
-﻿using Geometrica.Primitives;
+﻿using System.Collections;
+using Geometrica.Primitives;
 using static System.Double;
 using static System.Math;
 
 namespace Geometrica.DataStructures;
 
-public class ConvexHull
+public class ConvexHull : IEnumerable<Point2>
 {
     private readonly List<Point2> _points = new();
     private readonly List<Point2> _hull = new();
@@ -337,8 +338,18 @@ public class ConvexHull
         return ch;
     }
 
+    public IEnumerator<Point2> GetEnumerator()
+    {
+        return _hull.GetEnumerator();
+    }
+
     public override string ToString()
     {
         return string.Join(" ", _hull);
+    }
+
+    IEnumerator IEnumerable.GetEnumerator()
+    {
+        return ((IEnumerable)_hull).GetEnumerator();
     }
 }
