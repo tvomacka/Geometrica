@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Security.Cryptography;
 using Geometrica.Primitives;
 using static System.Double;
 using static System.Math;
@@ -30,7 +31,14 @@ public class ConvexHull : IEnumerable<Point2>
         if (6 < pts?.Count)
         {
             var half = pts.Count / 2;
-            return JoinHulls(CreateConvexHull(pts.GetRange(0, half)), CreateConvexHull(pts.GetRange(half, pts.Count - half)));
+            var ch1 = new ConvexHull();
+            ch1._points.AddRange(pts.GetRange(0, half));
+            ch1._hull.AddRange(CreateConvexHull(ch1._points));
+
+            var ch2 = new ConvexHull();
+            ch2._points.AddRange(pts.GetRange(half, pts.Count - half));
+            ch2._hull.AddRange(ch2._points); 
+            return JoinHulls(ch1, ch2);
         }
         else
         {
