@@ -7,9 +7,9 @@ namespace Geometrica.DataStructures;
 public class ConvexHull
 {
     private readonly List<Point2> points = new();
-    public readonly List<Point2> Hull = new();
+    private readonly List<Point2> hull = new();
 
-    public Point2 this[int key] => Hull[key];
+    public Point2 this[int key] => hull[key];
 
     public ConvexHull()
     {
@@ -18,8 +18,10 @@ public class ConvexHull
     public ConvexHull(List<Point2> pts)
     {
         points = pts;
-        Hull = CreateConvexHull(pts);
+        hull = CreateConvexHull(pts);
     }
+
+    public int Length => hull.Count;
 
     public List<Point2> CreateConvexHull(List<Point2> pts)
     {
@@ -177,14 +179,14 @@ public class ConvexHull
         switch (points.Count)
         {
             case < 3:
-                Hull.Clear();
+                hull.Clear();
                 return;
             case 3:
-                Hull.AddRange(points);
+                hull.AddRange(points);
                 break;
             default:
                 {
-                    if (!points.Last().Inside(Hull))
+                    if (!points.Last().Inside(hull))
                     {
                         //reconstruct the hull
                     }
@@ -317,6 +319,6 @@ public class ConvexHull
 
     public override string ToString()
     {
-        return string.Join(" ", Hull);
+        return string.Join(" ", hull);
     }
 }
