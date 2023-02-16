@@ -165,11 +165,11 @@ public class ConvexHull
         return GrahamScan(sortedPts);
     }
 
-    public static bool IsPointInside(Point2 p, List<Point2> convexHull)
+    public static bool IsPointInside(Point2 p, ConvexHull convexHull)
     {
-        for (var i = 0; i < convexHull.Count; i++)
+        for (var i = 0; i < convexHull.Length; i++)
         {
-            if (!Point2.OrientedCcw(p, convexHull[i], convexHull[(i + 1) % convexHull.Count]))
+            if (!Point2.OrientedCcw(p, convexHull[i], convexHull[(i + 1) % convexHull.Length]))
                 return false;
         }
         return true;
