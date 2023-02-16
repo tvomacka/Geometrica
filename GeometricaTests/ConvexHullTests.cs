@@ -465,5 +465,10 @@ public class ConvexHullTests
 
         var convexHull4 = ConvexHull.ConvexHull4(a, b, c, d);
         // end-snippet
+
+        //begin-snippet: AddPoint
+        var convexHull = ConvexHull.ConvexHull4(a, b, c, d);
+        convexHull.Add(new Point2(5, 5));
+        //end-snippet
     }
 }
