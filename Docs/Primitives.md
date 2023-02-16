@@ -21,6 +21,6 @@ var p = new Point2(0, 0);
 var q = new Point2(1, 0);
 var r = new Point2(0, 1);
 
-Assert.IsTrue(Point2.OrientedCCW(p, q, r));
+Assert.IsTrue(Point2.OrientedCcw(p, q, r));
 ```
 <!-- endSnippet -->
