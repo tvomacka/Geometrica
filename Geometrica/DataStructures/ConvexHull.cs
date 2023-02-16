@@ -175,7 +175,7 @@ public class ConvexHull
         return true;
     }
 
-    public static Point2 GetPointInside(List<Point2> convexHull)
+    public static Point2 GetPointInside(ConvexHull convexHull)
     {
         return new Point2()
         {
