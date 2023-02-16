@@ -2,38 +2,38 @@
 
 public readonly struct Matrix3
 {
-    private readonly double[,] matrix;
+    private readonly double[,] _matrix;
 
     public Matrix3()
     {
-        matrix = new double[3, 3];
+        _matrix = new double[3, 3];
         for (int i = 0; i < 3; i++)
         {
             for (int j = 0; j < 3; j++)
             {
-                matrix[i, j] = 0;
+                _matrix[i, j] = 0;
             }
         }
     }
 
     public Matrix3(double m00, double m01, double m02, double m10, double m11, double m12, double m20, double m21, double m22)
     {
-        matrix = new double[3, 3];
-        matrix[0, 0] = m00;
-        matrix[0, 1] = m01;
-        matrix[0, 2] = m02;
-        matrix[1, 0] = m10;
-        matrix[1, 1] = m11;
-        matrix[1, 2] = m12;
-        matrix[2, 0] = m20;
-        matrix[2, 1] = m21;
-        matrix[2, 2] = m22;
+        _matrix = new double[3, 3];
+        _matrix[0, 0] = m00;
+        _matrix[0, 1] = m01;
+        _matrix[0, 2] = m02;
+        _matrix[1, 0] = m10;
+        _matrix[1, 1] = m11;
+        _matrix[1, 2] = m12;
+        _matrix[2, 0] = m20;
+        _matrix[2, 1] = m21;
+        _matrix[2, 2] = m22;
     }
 
     public double this[int row, int column]
     {
-        get => matrix[row, column];
-        set => matrix[row, column] = value;
+        get => _matrix[row, column];
+        set => _matrix[row, column] = value;
     }
 
     public static Matrix3 Identity
@@ -43,17 +43,17 @@ public readonly struct Matrix3
 
     public double Determinant()
     {
-        return matrix[0, 0] * matrix[1, 1] * matrix[2, 2] +
-            matrix[0, 1] * matrix[1, 2] * matrix[2, 0] +
-            matrix[0, 2] * matrix[1, 0] * matrix[2, 1] -
-            matrix[0, 2] * matrix[1, 1] * matrix[2, 0] -
-            matrix[0, 1] * matrix[1, 0] * matrix[2, 2] -
-            matrix[0, 0] * matrix[1, 2] * matrix[2, 1];
+        return _matrix[0, 0] * _matrix[1, 1] * _matrix[2, 2] +
+            _matrix[0, 1] * _matrix[1, 2] * _matrix[2, 0] +
+            _matrix[0, 2] * _matrix[1, 0] * _matrix[2, 1] -
+            _matrix[0, 2] * _matrix[1, 1] * _matrix[2, 0] -
+            _matrix[0, 1] * _matrix[1, 0] * _matrix[2, 2] -
+            _matrix[0, 0] * _matrix[1, 2] * _matrix[2, 1];
     }
 
     public override string ToString()
     {
-        return $"[{matrix[0, 0]};{matrix[0, 1]};{matrix[0, 2]}][{matrix[1, 0]};{matrix[1, 1]};{matrix[1, 2]}][{matrix[2, 0]};{matrix[2, 1]};{matrix[2, 2]}]";
+        return $"[{_matrix[0, 0]};{_matrix[0, 1]};{_matrix[0, 2]}][{_matrix[1, 0]};{_matrix[1, 1]};{_matrix[1, 2]}][{_matrix[2, 0]};{_matrix[2, 1]};{_matrix[2, 2]}]";
     }
 
     public Matrix3 Transpose()

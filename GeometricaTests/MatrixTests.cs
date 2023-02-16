@@ -5,7 +5,7 @@ namespace GeometricaTests;
 [TestClass]
 public class MatrixTests
 {
-    private readonly double delta = 1e-3;
+    private readonly double _delta = 1e-3;
 
     [TestMethod]
     public void Matrix3_IsZero_ByDefault()
@@ -21,7 +21,7 @@ public class MatrixTests
         var m = new Matrix3();
 
         m[0, 0] = 5;
-        Assert.AreEqual(5, m[0, 0], delta);
+        Assert.AreEqual(5, m[0, 0], _delta);
     }
 
     [TestMethod]
@@ -37,7 +37,7 @@ public class MatrixTests
     {
         var m = Matrix3.Identity;
 
-        Assert.AreEqual(1, m.Determinant(), delta);
+        Assert.AreEqual(1, m.Determinant(), _delta);
     }
 
     [TestMethod]
@@ -45,7 +45,7 @@ public class MatrixTests
     {
         var m = new Matrix3(9, 3, 5, -6, -9, 7, -1, -8, 1);
 
-        Assert.AreEqual(615, m.Determinant(), delta);
+        Assert.AreEqual(615, m.Determinant(), _delta);
     }
 
     [TestMethod]

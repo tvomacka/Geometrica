@@ -6,10 +6,10 @@ namespace Geometrica.DataStructures;
 
 public class ConvexHull
 {
-    private readonly List<Point2> points = new();
-    private readonly List<Point2> hull = new();
+    private readonly List<Point2> _points = new();
+    private readonly List<Point2> _hull = new();
 
-    public Point2 this[int key] => hull[key];
+    public Point2 this[int key] => _hull[key];
 
     public ConvexHull()
     {
@@ -17,11 +17,11 @@ public class ConvexHull
 
     public ConvexHull(List<Point2> pts)
     {
-        points = pts;
-        hull = CreateConvexHull(pts);
+        _points = pts;
+        _hull = CreateConvexHull(pts);
     }
 
-    public int Length => hull.Count;
+    public int Length => _hull.Count;
 
     public List<Point2> CreateConvexHull(List<Point2> pts)
     {
@@ -76,10 +76,10 @@ public class ConvexHull
     public static List<Point2> ConvexHull4(Point2 a, Point2 b, Point2 c, Point2 d)
     {
         //https://stackoverflow.com/questions/2122305/convex-hull-of-4-points
-        var abc = Point2.OrientedCCW(a, b, c);
-        var abd = Point2.OrientedCCW(a, b, d);
-        var bcd = Point2.OrientedCCW(b, c, d);
-        var cad = Point2.OrientedCCW(c, a, d);
+        var abc = Point2.OrientedCcw(a, b, c);
+        var abd = Point2.OrientedCcw(a, b, d);
+        var bcd = Point2.OrientedCcw(b, c, d);
+        var cad = Point2.OrientedCcw(c, a, d);
 
         abd = abd == abc;
         bcd = bcd == abc;
@@ -153,7 +153,7 @@ public class ConvexHull
     {
         for (var i = 0; i < convexHull.Count; i++)
         {
-            if (!Point2.OrientedCCW(p, convexHull[i], convexHull[(i + 1) % convexHull.Count]))
+            if (!Point2.OrientedCcw(p, convexHull[i], convexHull[(i + 1) % convexHull.Count]))
                 return false;
         }
         return true;
@@ -170,23 +170,23 @@ public class ConvexHull
 
     public void Add(Point2 point)
     {
-        points.Add(point);
+        _points.Add(point);
         UpdateConvexHull();
     }
 
     private void UpdateConvexHull()
     {
-        switch (points.Count)
+        switch (_points.Count)
         {
             case < 3:
-                hull.Clear();
+                _hull.Clear();
                 return;
             case 3:
-                hull.AddRange(points);
+                _hull.AddRange(_points);
                 break;
             default:
                 {
-                    if (!points.Last().Inside(hull))
+                    if (!_points.Last().Inside(_hull))
                     {
                         //reconstruct the hull
                     }
@@ -219,7 +219,7 @@ public class ConvexHull
 
             bool Ccw(Point2 q, Stack<Point2> s)
             {
-                return Point2.OrientedCCW(s.ElementAt(1), s.ElementAt(0), q);
+                return Point2.OrientedCcw(s.ElementAt(1), s.ElementAt(0), q);
             }
 
             stack.Push(p);
@@ -282,7 +282,7 @@ public class ConvexHull
                 {
                     if (k != i && k != j)
                     {
-                        orientations[oIndex++] = Point2.OrientedCCW(points[i], points[j], points[k]);
+                        orientations[oIndex++] = Point2.OrientedCcw(points[i], points[j], points[k]);
                     }
                 }
 
@@ -309,7 +309,7 @@ public class ConvexHull
             chLines.Remove(t);
         }
 
-        if (!Point2.OrientedCCW(cHull[0], cHull[1], cHull[2]))
+        if (!Point2.OrientedCcw(cHull[0], cHull[1], cHull[2]))
         {
             cHull.Reverse();
         }
@@ -319,6 +319,6 @@ public class ConvexHull
 
     public override string ToString()
     {
-        return string.Join(" ", hull);
+        return string.Join(" ", _hull);
     }
 }
