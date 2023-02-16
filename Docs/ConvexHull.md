@@ -2,10 +2,16 @@
 
 This module contains different algorithms for convex hull creation from a given point set.
 
+- [ ] Incremental Construction
 - [ ] Direct hull from 3 or 4 points
 - [ ] Brute force
 - [ ] Graham Scan
 - [ ] Divide and Conquer
+
+## Incremental Construction
+
+<!-- snippet: AddPoint -->
+<!-- endSnippet -->
 
 ## Directly Creating Small Convex Hulls
 
