@@ -33,11 +33,11 @@ public class ConvexHull
         }
         else
         {
-            return CreateSimpleHull(pts);
+            return CreateSimpleHull(pts)._hull;
         }
     }
 
-    public static List<Point2> CreateSimpleHull(List<Point2> pts)
+    public static ConvexHull CreateSimpleHull(List<Point2> pts)
     {
         if (pts == null)
         {
@@ -53,11 +53,19 @@ public class ConvexHull
         {
             if (Point2.Orientation(pts[0], pts[1], pts[2]) > 0)
             {
-                return new List<Point2>() { pts[0], pts[1], pts[2] };
+                return new ConvexHull()
+                {
+                    _hull = { pts[0], pts[1], pts[2] },
+                    _points = { pts[0], pts[1], pts[2] }
+                };
             }
             else
             {
-                return new List<Point2>() { pts[0], pts[2], pts[1] };
+                return new ConvexHull()
+                {
+                    _hull = { pts[0], pts[2], pts[1] },
+                    _points = { pts[0], pts[2], pts[1] }
+                };
             }
         }
         if (pts.Count == 4)
@@ -73,7 +81,7 @@ public class ConvexHull
         return null;
     }
 
-    public static List<Point2> ConvexHull4(Point2 a, Point2 b, Point2 c, Point2 d)
+    public static ConvexHull ConvexHull4(Point2 a, Point2 b, Point2 c, Point2 d)
     {
         //https://stackoverflow.com/questions/2122305/convex-hull-of-4-points
         var abc = Point2.OrientedCcw(a, b, c);
@@ -85,22 +93,30 @@ public class ConvexHull
         bcd = bcd == abc;
         cad = cad == abc;
 
-        if (abd && bcd && cad) return abc ? new List<Point2>() { a, b, c } : new List<Point2> { a, c, b };
-        if (abd && bcd && !cad) return abc ? new List<Point2>() { a, b, c, d } : new List<Point2>() { a, d, c, b };
-        if (abd && !bcd && cad) return abc ? new List<Point2>() { a, b, d, c } : new List<Point2>() { a, c, d, b };
-        if (abd && !bcd && !cad) return abc ? new List<Point2>() { a, b, d } : new List<Point2>() { a, d, b };
-        if (!abd && bcd && cad) return abc ? new List<Point2>() { a, d, b, c } : new List<Point2>() { a, c, b, d };
-        if (!abd && bcd && !cad) return abc ? new List<Point2>() { b, c, d } : new List<Point2>() { b, d, c };
-        if (!abd && !bcd && cad) return abc ? new List<Point2>() { c, a, d } : new List<Point2>() { c, d, a };
+        List<Point2> hull = null;
 
-        throw new Exception("The computation of convex hull of 4 points should not be able to reach this part of code. Check that the provided points are valid.");
+        if (abd && bcd && cad) hull = abc ? new List<Point2>() { a, b, c } : new List<Point2> { a, c, b };
+        if (abd && bcd && !cad) hull = abc ? new List<Point2>() { a, b, c, d } : new List<Point2>() { a, d, c, b };
+        if (abd && !bcd && cad) hull = abc ? new List<Point2>() { a, b, d, c } : new List<Point2>() { a, c, d, b };
+        if (abd && !bcd && !cad) hull = abc ? new List<Point2>() { a, b, d } : new List<Point2>() { a, d, b };
+        if (!abd && bcd && cad) hull = abc ? new List<Point2>() { a, d, b, c } : new List<Point2>() { a, c, b, d };
+        if (!abd && bcd && !cad) hull = abc ? new List<Point2>() { b, c, d } : new List<Point2>() { b, d, c };
+        if (!abd && !bcd && cad) hull = abc ? new List<Point2>() { c, a, d } : new List<Point2>() { c, d, a };
+
+        var ch = new ConvexHull()
+        {
+            _points = { a, b, c, d }
+        };
+        if (hull != null) ch._hull.AddRange(hull);
+
+        return ch;
     }
 
     public static List<Point2> JoinHulls(List<Point2> ch1, List<Point2> ch2)
     {
         var p = GetPointInside(ch1);
         Point2[] sortedPts;
-        
+
         if (IsPointInside(p, ch2))
         {
             var allPoints = new List<Point2>();
@@ -206,7 +222,7 @@ public class ConvexHull
                 leftMostPoint = p.Y < leftMostPoint.Y ? p : leftMostPoint;
             }
         }
-        
+
         var pts = SortPointsByAngle(leftMostPoint, points);
         var stack = new Stack<Point2>();
 
@@ -271,7 +287,7 @@ public class ConvexHull
     public static List<Point2> BruteForce(Point2[] points)
     {
         var chLines = new List<Tuple<int, int>>();
-        
+
         for (var i = 0; i < points.Length; i++)
         {
             for (var j = i + 1; j < points.Length; j++)
@@ -300,7 +316,7 @@ public class ConvexHull
         };
         var lastIndex = chLines[0].Item2;
         chLines.RemoveAt(0);
-        
+
         while (chLines.Count > 1)
         {
             var t = chLines.Single(l => l.Item1 == lastIndex || l.Item2 == lastIndex);
