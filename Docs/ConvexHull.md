@@ -11,6 +11,10 @@ This module contains different algorithms for convex hull creation from a given 
 ## Incremental Construction
 
 <!-- snippet: AddPoint -->
+```cs
+var convexHull = ConvexHull.ConvexHull4(a, b, c, d);
+convexHull.Add(new Point2(5, 5));
+```
 <!-- endSnippet -->
 
 ## Directly Creating Small Convex Hulls
