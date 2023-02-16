@@ -160,12 +160,12 @@ public class ConvexHull : IEnumerable<Point2>
             allPoints.AddRange(ch1);
             if (minAngleIndex <= maxAngleIndex)
             {
-                allPoints.AddRange(ch2.GetRange(minAngleIndex, maxAngleIndex - minAngleIndex + 1));
+                allPoints.AddRange(ch2._hull.GetRange(minAngleIndex, maxAngleIndex - minAngleIndex + 1));
             }
             else
             {
-                allPoints.AddRange(ch2.GetRange(minAngleIndex, ch2.Length - minAngleIndex));
-                allPoints.AddRange(ch2.GetRange(0, maxAngleIndex + 1));
+                allPoints.AddRange(ch2._hull.GetRange(minAngleIndex, ch2.Length - minAngleIndex));
+                allPoints.AddRange(ch2._hull.GetRange(0, maxAngleIndex + 1));
             }
 
             sortedPts = SortPointsByAngle(p, allPoints.ToArray());
