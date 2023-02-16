@@ -26,6 +26,10 @@ var ch = new ConvexHull(pts);
 
 Which uses a divide and conquer algorightm. There are other algorithms you can use, detailed in [Convex Hull Algorithms](Docs/ConvexHull.md).
 
+Once the convex hull is created, the points on the hull can either be accessed using an indexer or iterated through with IEnumerable.
+<!-- snippet: AccessingPointsOnCH -->
+<!-- endSnippet -->
+
 # Credits
 
 - [ ] Refactoring the code with [ReSharper](https://jb.gg/OpenSourceSupport).

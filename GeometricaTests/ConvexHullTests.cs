@@ -470,5 +470,13 @@ public class ConvexHullTests
         var convexHull = ConvexHull.ConvexHull4(a, b, c, d);
         convexHull.Add(new Point2(5, 5));
         //end-snippet
+
+        //begin-snippet: AccessingPointsOnCH
+        var pt = convexHull[0];
+        foreach (var point in convexHull)
+        {
+            //...
+        }
+        //end-snippet
     }
 }
