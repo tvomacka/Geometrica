@@ -284,7 +284,7 @@ public class ConvexHull
         return NaN;
     }
 
-    public static List<Point2> BruteForce(Point2[] points)
+    public static ConvexHull BruteForce(Point2[] points)
     {
         var chLines = new List<Tuple<int, int>>();
 
@@ -330,7 +330,11 @@ public class ConvexHull
             cHull.Reverse();
         }
 
-        return cHull;
+        var ch = new ConvexHull();
+        ch._points.AddRange(points);
+        ch._hull.AddRange(cHull);
+
+        return ch;
     }
 
     public override string ToString()
