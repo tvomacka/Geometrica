@@ -112,7 +112,7 @@ public class ConvexHull
         return ch;
     }
 
-    public static List<Point2> JoinHulls(List<Point2> ch1, List<Point2> ch2)
+    public static List<Point2> JoinHulls(ConvexHull ch1, ConvexHull ch2)
     {
         var p = GetPointInside(ch1);
         Point2[] sortedPts;
@@ -126,12 +126,12 @@ public class ConvexHull
         }
         else
         {
-            var angle = new double[ch2.Count];
+            var angle = new double[ch2.Length];
             var minAngleIndex = -1;
             var maxAngleIndex = -1;
             var minAngle = double.MaxValue;
             var maxAngle = double.MinValue;
-            for (var i = 0; i < ch2.Count; i++)
+            for (var i = 0; i < ch2.Length; i++)
             {
                 angle[i] = GetPointAngle((ch2[i] - p).Normalize());
                 if (angle[i] < minAngle)
@@ -155,7 +155,7 @@ public class ConvexHull
             }
             else
             {
-                allPoints.AddRange(ch2.GetRange(minAngleIndex, ch2.Count - minAngleIndex));
+                allPoints.AddRange(ch2.GetRange(minAngleIndex, ch2.Length - minAngleIndex));
                 allPoints.AddRange(ch2.GetRange(0, maxAngleIndex + 1));
             }
 
