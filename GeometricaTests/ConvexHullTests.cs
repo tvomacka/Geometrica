@@ -472,8 +472,8 @@ public class ConvexHullTests
         //end-snippet
 
         //begin-snippet: AccessingPointsOnCH
-        var pt = convexHull[0];
-        foreach (var point in convexHull)
+        var pt = ch[0]; //returns (0, 0)
+        foreach (var point in ch)
         {
             //...
         }
