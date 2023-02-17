@@ -29,8 +29,8 @@ Which uses a divide and conquer algorightm. There are other algorithms you can u
 Once the convex hull is created, the points on the hull can either be accessed using an indexer or iterated through with IEnumerable.
 <!-- snippet: AccessingPointsOnCH -->
 ```cs
-var pt = convexHull[0];
-foreach (var point in convexHull)
+var pt = ch[0]; //returns (0, 0)
+foreach (var point in ch)
 {
     //...
 }
