@@ -221,7 +221,7 @@ public class ConvexHull : IEnumerable<Point2>
         }
     }
 
-    public static List<Point2> GrahamScan(Point2[] points)
+    public static List<Point2> GrahamScan(Point2[] points, bool pointsSorted = false)
     {
         var leftMostPoint = points[0];
         foreach (var p in points)
