@@ -27,8 +27,12 @@ public class ConvexHull : IEnumerable<Point2>
 
     public List<Point2> CreateConvexHull(List<Point2> pts)
     {
-        //divide and conquer
-        if (6 < pts?.Count)
+        if (pts == null)
+        {
+            throw new ArgumentNullException($"The provided list of points cannot be null, please provide a non-null list with some points to create a convex hull. Argument name: ${nameof(pts)}");
+        }
+
+        if (6 < pts.Count)
         {
             return CreateSimpleHull(pts)._hull;
         }
