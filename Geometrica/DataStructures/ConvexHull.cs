@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Security.Cryptography;
 using Geometrica.Primitives;
 using static System.Double;
 using static System.Math;
