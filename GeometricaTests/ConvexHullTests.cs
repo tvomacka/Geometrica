@@ -13,7 +13,7 @@ public class ConvexHullTests
         ch.Add(new Point2());
         ch.Add(new Point2(10, 10));
 
-        Assert.AreEqual(0, ch.Length);
+        Assert.AreEqual(0, ch.Count);
     }
 
     [TestMethod]

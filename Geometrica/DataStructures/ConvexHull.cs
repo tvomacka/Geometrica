@@ -5,7 +5,7 @@ using static System.Math;
 
 namespace Geometrica.DataStructures;
 
-public class ConvexHull : IEnumerable<Point2>
+public class ConvexHull : IEnumerable<Point2>, IPolygon
 {
     private readonly List<Point2> _points = new();
     private readonly List<Point2> _hull = new();
@@ -22,7 +22,9 @@ public class ConvexHull : IEnumerable<Point2>
         _hull = CreateConvexHull(pts);
     }
 
-    public int Length => _hull.Count;
+    public int Count => _hull.Count;
+
+    public bool IsConvex => true;
 
     public List<Point2> CreateConvexHull(List<Point2> pts)
     {
@@ -136,12 +138,12 @@ public class ConvexHull : IEnumerable<Point2>
         }
         else
         {
-            var angle = new double[ch2.Length];
+            var angle = new double[ch2.Count];
             var minAngleIndex = -1;
             var maxAngleIndex = -1;
             var minAngle = double.MaxValue;
             var maxAngle = double.MinValue;
-            for (var i = 0; i < ch2.Length; i++)
+            for (var i = 0; i < ch2.Count; i++)
             {
                 angle[i] = GetPointAngle((ch2[i] - p).Normalize());
                 if (angle[i] < minAngle)
@@ -165,7 +167,7 @@ public class ConvexHull : IEnumerable<Point2>
             }
             else
             {
-                allPoints.AddRange(ch2._hull.GetRange(minAngleIndex, ch2.Length - minAngleIndex));
+                allPoints.AddRange(ch2._hull.GetRange(minAngleIndex, ch2.Count - minAngleIndex));
                 allPoints.AddRange(ch2._hull.GetRange(0, maxAngleIndex + 1));
             }
 
@@ -177,9 +179,9 @@ public class ConvexHull : IEnumerable<Point2>
 
     public static bool IsPointInside(Point2 p, ConvexHull convexHull)
     {
-        for (var i = 0; i < convexHull.Length; i++)
+        for (var i = 0; i < convexHull.Count; i++)
         {
-            if (!Point2.OrientedCcw(p, convexHull[i], convexHull[(i + 1) % convexHull.Length]))
+            if (!Point2.OrientedCcw(p, convexHull[i], convexHull[(i + 1) % convexHull.Count]))
                 return false;
         }
         return true;
