@@ -223,16 +223,8 @@ public class ConvexHull : IEnumerable<Point2>
 
     public static List<Point2> GrahamScan(Point2[] points, bool pointsSorted = false)
     {
-        var leftMostPoint = points[0];
-        foreach (var p in points)
-        {
-            if (p.X <= leftMostPoint.X)
-            {
-                leftMostPoint = p.Y < leftMostPoint.Y ? p : leftMostPoint;
-            }
-        }
+        var pts = !pointsSorted ? SortByAngleToLeftmostPoint(points) : points;
 
-        var pts = SortPointsByAngle(leftMostPoint, points);
         var stack = new Stack<Point2>();
 
         foreach (var p in pts)
@@ -254,6 +246,20 @@ public class ConvexHull : IEnumerable<Point2>
         cHull.Reverse();
 
         return cHull;
+    }
+
+    private static Point2[] SortByAngleToLeftmostPoint(Point2[] points)
+    {
+        var leftMostPoint = points[0];
+        foreach (var p in points)
+        {
+            if (p.X <= leftMostPoint.X)
+            {
+                leftMostPoint = p.Y < leftMostPoint.Y ? p : leftMostPoint;
+            }
+        }
+
+        return SortPointsByAngle(leftMostPoint, points);
     }
 
     public static Point2[] SortPointsByAngle(Point2 innerPoint, Point2[] points)
