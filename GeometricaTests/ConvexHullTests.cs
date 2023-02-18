@@ -403,7 +403,7 @@ public class ConvexHullTests
         var ch = ConvexHull.JoinHulls(ch1, ch2);
 
         var s = string.Join(" ", ch);
-        Assert.AreEqual("[0; 0] [4; 0] [5; 3] [5; 6] [1; 6] [0; 5]", s);
+        Assert.AreEqual("[5; 6] [1; 6] [0; 5] [0; 0] [4; 0] [5; 3]", s);
     }
 
     [TestMethod]
@@ -424,7 +424,7 @@ public class ConvexHullTests
         var ch = ConvexHull.JoinHulls(ch1, ch2);
 
         var s = string.Join(" ", ch);
-        Assert.AreEqual("[0; 0] [2; 0] [4; 1] [4; 4] [1; 4] [0; 2]", s);
+        Assert.AreEqual("[4; 1] [4; 4] [1; 4] [0; 2] [0; 0] [2; 0]", s);
     }
 
     [TestMethod]

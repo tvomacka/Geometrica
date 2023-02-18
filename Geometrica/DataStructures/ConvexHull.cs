@@ -171,7 +171,7 @@ public class ConvexHull : IEnumerable<Point2>
             sortedPts = SortPointsByAngle(p, allPoints.ToArray());
         }
 
-        return GrahamScan(sortedPts);
+        return GrahamScan(sortedPts, true);
     }
 
     public static bool IsPointInside(Point2 p, ConvexHull convexHull)
