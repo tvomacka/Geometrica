@@ -1,6 +1,6 @@
 ﻿namespace Geometrica.Primitives
 {
-    internal interface IPolygon
+    public interface IPolygon
     {
     }
 }
