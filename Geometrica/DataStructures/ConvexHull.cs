@@ -30,20 +30,18 @@ public class ConvexHull : IEnumerable<Point2>
         //divide and conquer
         if (6 < pts?.Count)
         {
-            var half = pts.Count / 2;
-            var ch1 = new ConvexHull();
-            ch1._points.AddRange(pts.GetRange(0, half));
-            ch1._hull.AddRange(CreateConvexHull(ch1._points));
-
-            var ch2 = new ConvexHull();
-            ch2._points.AddRange(pts.GetRange(half, pts.Count - half));
-            ch2._hull.AddRange(ch2._points); 
-            return JoinHulls(ch1, ch2);
-        }
-        else
-        {
             return CreateSimpleHull(pts)._hull;
         }
+
+        var half = pts.Count / 2;
+        var ch1 = new ConvexHull();
+        ch1._points.AddRange(pts.GetRange(0, half));
+        ch1._hull.AddRange(CreateConvexHull(ch1._points));
+
+        var ch2 = new ConvexHull();
+        ch2._points.AddRange(pts.GetRange(half, pts.Count - half));
+        ch2._hull.AddRange(ch2._points);
+        return JoinHulls(ch1, ch2);
     }
 
     public static ConvexHull CreateSimpleHull(List<Point2> pts)
