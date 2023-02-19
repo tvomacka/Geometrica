@@ -22,8 +22,7 @@ namespace GeometricaTests
 
             Assert.AreEqual("Triangle [0; 0] [1; 0] [0; 1]", s);
         }
-
-
+        
         [TestMethod]
         public void TrianglePoints_CanBeAccessed_WithIndex()
         {
@@ -36,6 +35,14 @@ namespace GeometricaTests
             Assert.AreEqual(a, t[0]);
             Assert.AreEqual(b, t[1]);
             Assert.AreEqual(c, t[2]);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void AccessingPoint_WithWrongIndex_ThrowsException()
+        {
+            var t = CreateSimpleTriangle();
+            _ = t[-1];
         }
 
         [TestMethod]
