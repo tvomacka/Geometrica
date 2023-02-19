@@ -33,7 +33,7 @@ public class ConvexHull : IEnumerable<Point2>, IPolygon
             throw new ArgumentNullException($"The provided list of points cannot be null, please provide a non-null list with some points to create a convex hull. Argument name: ${nameof(pts)}");
         }
 
-        if (6 < pts.Count)
+        if (pts.Count < 6)
         {
             return CreateSimpleHull(pts)._hull;
         }
