@@ -32,6 +32,25 @@ public class PointTests
     }
 
     [TestMethod]
+    public void Point_CanBeNormalized_ToUnitLength()
+    {
+        var p = new Point2(2, 1);
+
+        Assert.AreEqual("[0,8944271909999159; 0,4472135954999579]", p.Normalize().ToString());
+    }
+
+    [TestMethod]
+    public void TwoPoints_CanBeSubstracted()
+    {
+        var p = new Point2(10, 1);
+        var q = new Point2(1, 5);
+
+        var r = p - q;
+
+        Assert.AreEqual("[9; -4]", r.ToString());
+    }
+
+    [TestMethod]
     public void Point_OrientationTest_ReturnsCorrectValue()
     {
         // begin-snippet: OrientationTest
