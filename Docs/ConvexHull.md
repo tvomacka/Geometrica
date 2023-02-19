@@ -38,9 +38,9 @@ Or for a general case of sets of up to five points (inclusive) a more generic me
 ```cs
 var pts = new List<Point2>()
 {
-    new Point2(0, 0),
-    new Point2(0, 1),
-    new Point2(1, 0)
+    new(0, 0),
+    new(0, 1),
+    new(1, 0)
 };
 
 var ch = ConvexHull.CreateSimpleHull(pts);
