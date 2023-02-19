@@ -44,6 +44,36 @@ public class ConvexHullTests
     }
 
     [TestMethod]
+    [ExpectedException(typeof(ArgumentNullException))]
+    public void SimpleHull_ThrowsException_ForNullArgument()
+    {
+        ConvexHull.CreateSimpleHull(null);
+    }
+
+    [TestMethod]
+    [ExpectedException(typeof(ArgumentException))]
+    public void SimpleHull_ThrowsException_ForWrongNumberOfPoints()
+    {
+        ConvexHull.CreateSimpleHull(new List<Point2>());
+    }
+
+    [TestMethod]
+    public void ConvexHull_Is_Convex()
+    {
+        var pts = new List<Point2>
+        {
+            new Point2(),
+            new Point2(1, 0),
+            new Point2(0, 1),
+            new Point2(0.1, 0.1)
+        };
+
+        var ch = new ConvexHull(pts);
+
+        Assert.IsTrue(ch.IsConvex);
+    }
+
+    [TestMethod]
     public void Point_AddedInsideTriangle_DoesNotChangeConvexHull()
     {
         var ch = new ConvexHull();
