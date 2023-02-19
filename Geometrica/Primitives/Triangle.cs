@@ -28,7 +28,7 @@ public struct Triangle : IPolygon
         }
     }
 
-    public int Count { get; }
+    public int Count => 3;
     public bool IsConvex { get; }
 
     public override string ToString()
