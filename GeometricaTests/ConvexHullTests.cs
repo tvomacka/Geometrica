@@ -32,15 +32,40 @@ public class ConvexHullTests
     {
         var pts = new List<Point2>
         {
-            new Point2(),
-            new Point2(1, 0),
-            new Point2(0, 1),
-            new Point2(0.1, 0.1)
+            new(),
+            new(1, 0),
+            new(0, 1),
+            new(0.1, 0.1)
         };
 
         var ch = new ConvexHull(pts);
 
         Assert.AreEqual("[0; 0] [1; 0] [0; 1]", ch.ToString());
+    }
+
+    [TestMethod]
+    public void ConvexHull_CreatedWithManyPoints()
+    {
+        var pts = new List<Point2>
+        {
+            new(0, 0),
+            new(1, 0),
+            new(0, 1),
+            new(1, 1),
+            new(0.1, 0.1),
+            new(0.4, 0.5)
+        };
+
+        var ch = new ConvexHull(pts);
+
+        Assert.AreEqual("[1; 1] [0; 1] [0; 0] [1; 0]", ch.ToString());
+    }
+
+    [TestMethod]
+    [ExpectedException(typeof(ArgumentNullException))]
+    public void ConvexHull_ConstructorWithNull_ThrowsException()
+    {
+        var _ = new ConvexHull(null);
     }
 
     [TestMethod]
@@ -62,10 +87,10 @@ public class ConvexHullTests
     {
         var pts = new List<Point2>
         {
-            new Point2(),
-            new Point2(1, 0),
-            new Point2(0, 1),
-            new Point2(0.1, 0.1)
+            new(),
+            new(1, 0),
+            new(0, 1),
+            new(0.1, 0.1)
         };
 
         var ch = new ConvexHull(pts);
@@ -90,9 +115,9 @@ public class ConvexHullTests
     {
         var pts = new List<Point2>()
         {
-            new Point2(0, 0),
-            new Point2(1, 0),
-            new Point2(0, 1)
+            new(0, 0),
+            new(1, 0),
+            new(0, 1)
         };
 
         var ch = ConvexHull.CreateSimpleHull(pts);
@@ -106,9 +131,9 @@ public class ConvexHullTests
         // begin-snippet: SimpleConvexHull
         var pts = new List<Point2>()
         {
-            new Point2(0, 0),
-            new Point2(0, 1),
-            new Point2(1, 0)
+            new(0, 0),
+            new(0, 1),
+            new(1, 0)
         };
 
         var ch = ConvexHull.CreateSimpleHull(pts);
@@ -122,10 +147,10 @@ public class ConvexHullTests
     {
         var pts = new List<Point2>()
         {
-            new Point2(0, 0),
-            new Point2(0, 1),
-            new Point2(1, 0),
-            new Point2(0.1, 0.1)
+            new(0, 0),
+            new(0, 1),
+            new(1, 0),
+            new(0.1, 0.1)
         };
 
         var ch = ConvexHull.ConvexHull4(pts[0], pts[1], pts[2], pts[3]);
@@ -138,10 +163,10 @@ public class ConvexHullTests
     {
         var pts = new List<Point2>()
         {
-            new Point2(0, 0),
-            new Point2(1, 0),
-            new Point2(0, 1),
-            new Point2(0.1, 0.1)
+            new(0, 0),
+            new(1, 0),
+            new(0, 1),
+            new(0.1, 0.1)
         };
 
         var ch = ConvexHull.ConvexHull4(pts[0], pts[1], pts[2], pts[3]);
@@ -154,10 +179,10 @@ public class ConvexHullTests
     {
         var pts = new List<Point2>()
         {
-            new Point2(0, 0),
-            new Point2(1, 0),
-            new Point2(1, 1),
-            new Point2(0, 1)
+            new(0, 0),
+            new(1, 0),
+            new(1, 1),
+            new(0, 1)
         };
 
         var ch = ConvexHull.ConvexHull4(pts[0], pts[1], pts[2], pts[3]);
@@ -170,10 +195,10 @@ public class ConvexHullTests
     {
         var pts = new List<Point2>()
         {
-            new Point2(0, 0),
-            new Point2(0, 1),
-            new Point2(1, 1),
-            new Point2(1, 0)
+            new(0, 0),
+            new(0, 1),
+            new(1, 1),
+            new(1, 0)
         };
 
         var ch = ConvexHull.ConvexHull4(pts[0], pts[1], pts[2], pts[3]);
@@ -333,11 +358,11 @@ public class ConvexHullTests
     {
         var pts = new List<Point2>
         {
-            new Point2(0, 0),
-            new Point2(2, 0),
-            new Point2(2, 3),
-            new Point2(1, 3),
-            new Point2(0, 2)
+            new(0, 0),
+            new(2, 0),
+            new(2, 3),
+            new(1, 3),
+            new(0, 2)
         };
 
         var ch = ConvexHull.CreateSimpleHull(pts);
