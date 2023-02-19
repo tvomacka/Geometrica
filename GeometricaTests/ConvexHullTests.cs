@@ -329,6 +329,24 @@ public class ConvexHullTests
     }
 
     [TestMethod]
+    public void ConvexHull5_CreatedBy_CallingSimpleHull()
+    {
+        var pts = new List<Point2>
+        {
+            new Point2(0, 0),
+            new Point2(2, 0),
+            new Point2(2, 3),
+            new Point2(1, 3),
+            new Point2(0, 2)
+        };
+
+        var ch = ConvexHull.CreateSimpleHull(pts);
+
+        var points = string.Join(" ", ch);
+        Assert.AreEqual("[0; 0] [2; 0] [2; 3] [1; 3] [0; 2]", points);
+    }
+
+    [TestMethod]
     public void GrahamScan_FourCHPoints_ReturnsCH4()
     {
         // begin-snippet: GrahamScanConvexHull
