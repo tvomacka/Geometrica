@@ -2,15 +2,15 @@
 
 public struct Triangle : IPolygon
 {
-    private Point2 a;
-    private Point2 b;
-    private Point2 c;
+    private Point2 _a;
+    private Point2 _b;
+    private Point2 _c;
 
     public Triangle(Point2 a, Point2 b, Point2 c) : this()
     {
-        this.a = a;
-        this.b = b;
-        this.c = c;
+        _a = a;
+        _b = b;
+        _c = c;
     }
 
     public Point2 this[int key] => throw new NotImplementedException();
@@ -20,6 +20,6 @@ public struct Triangle : IPolygon
 
     public override string ToString()
     {
-        return $"Triangle {a} {b} {c}";
+        return $"Triangle {_a} {_b} {_c}";
     }
 }
