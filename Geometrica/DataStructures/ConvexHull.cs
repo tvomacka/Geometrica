@@ -56,41 +56,19 @@ public class ConvexHull : IEnumerable<Point2>, IPolygon
             throw new ArgumentNullException($"The argument {nameof(pts)} must not be null. Please provide a list points.");
         }
 
-        if (pts.Count < 3 || 6 < pts.Count)
+        return pts.Count switch
         {
-            throw new ArgumentException($"This method must only be used for 3 to 5 points. You provided a list of {pts.Count} points.");
-        }
-
-        if (pts.Count == 3)
-        {
-            if (Point2.Orientation(pts[0], pts[1], pts[2]) > 0)
+            < 3 or > 6 => throw new ArgumentException(
+                $"This method must only be used for 3 to 5 points. You provided a list of {pts.Count} points."),
+            3 when Point2.Orientation(pts[0], pts[1], pts[2]) > 0 => new ConvexHull()
             {
-                return new ConvexHull()
-                {
-                    _hull = { pts[0], pts[1], pts[2] },
-                    _points = { pts[0], pts[1], pts[2] }
-                };
-            }
-            else
-            {
-                return new ConvexHull()
-                {
-                    _hull = { pts[0], pts[2], pts[1] },
-                    _points = { pts[0], pts[2], pts[1] }
-                };
-            }
-        }
-        if (pts.Count == 4)
-        {
-            return ConvexHull4(pts[0], pts[1], pts[2], pts[3]);
-        }
-
-        if (pts.Count == 5)
-        {
-            return BruteForce(pts.ToArray());
-        }
-
-        return null;
+                _hull = { pts[0], pts[1], pts[2] }, _points = { pts[0], pts[1], pts[2] }
+            },
+            3 => new ConvexHull() { _hull = { pts[0], pts[2], pts[1] }, _points = { pts[0], pts[2], pts[1] } },
+            4 => ConvexHull4(pts[0], pts[1], pts[2], pts[3]),
+            5 => BruteForce(pts.ToArray()),
+            _ => null
+        };
     }
 
     public static ConvexHull ConvexHull4(Point2 a, Point2 b, Point2 c, Point2 d)
