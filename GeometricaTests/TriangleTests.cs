@@ -45,5 +45,13 @@ namespace GeometricaTests
 
             Assert.AreEqual(3, t.Count);
         }
+
+        [TestMethod]
+        public void Triangle_Is_Convex()
+        {
+            var t = CreateSimpleTriangle();
+
+            Assert.IsTrue(t.IsConvex);
+        }
     }
 }
