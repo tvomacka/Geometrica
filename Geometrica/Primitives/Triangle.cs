@@ -17,4 +17,9 @@ public struct Triangle : IPolygon
 
     public int Count { get; }
     public bool IsConvex { get; }
+
+    public override string ToString()
+    {
+        return $"Triangle {a} {b} {c}";
+    }
 }

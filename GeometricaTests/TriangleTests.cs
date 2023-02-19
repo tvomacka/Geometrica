@@ -15,7 +15,7 @@ namespace GeometricaTests
             var t = new Triangle(a, b, c);
             var s = t.ToString();
 
-            Assert.AreEqual("", s);
+            Assert.AreEqual("Triangle [0; 0] [1; 0] [0; 1]", s);
         }
     }
 }
