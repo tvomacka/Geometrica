@@ -13,7 +13,20 @@ public struct Triangle : IPolygon
         _c = c;
     }
 
-    public Point2 this[int key] => throw new NotImplementedException();
+    public Point2 this[int key]
+    {
+        get
+        {
+            return key switch
+            {
+                0 => _a,
+                1 => _b,
+                2 => _c,
+                _ => throw new ArgumentException(
+                    $"The provided index {key} was out of bounds, please use index values 0, 1, 2 for triangle point access.")
+            };
+        }
+    }
 
     public int Count { get; }
     public bool IsConvex { get; }
