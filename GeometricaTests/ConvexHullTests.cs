@@ -475,6 +475,34 @@ public class ConvexHullTests
     }
 
     [TestMethod]
+    public void PointInside_ConvexHull_TestReturnsTrue()
+    {
+        var a = new Point2(0, 0);
+        var c = new Point2(1, 0);
+        var b = new Point2(1, 1);
+        var d = new Point2(0, 1);
+
+        var ch = ConvexHull.ConvexHull4(a, b, c, d);
+        var pIn = new Point2(0.5, 0.4);
+
+        Assert.IsTrue(ch.IsInside(pIn));
+    }
+
+    [TestMethod]
+    public void PointInside_ConvexHull_TestReturnsFalse()
+    {
+        var a = new Point2(0, 0);
+        var c = new Point2(1, 0);
+        var b = new Point2(1, 1);
+        var d = new Point2(0, 1);
+
+        var ch = ConvexHull.ConvexHull4(a, b, c, d);
+        var pOut = new Point2(2.5, 0.4);
+
+        Assert.IsFalse(ch.IsInside(pOut));
+    }
+
+    [TestMethod]
     public void JoinHulls_PointInsideBothHulls()
     {
         var a = new Point2(1, 3);
