@@ -25,6 +25,10 @@ public class ConvexHull : IEnumerable<Point2>, IPolygon
     public int Count => _hull.Count;
 
     public bool IsConvex => true;
+    public bool IsInside(Point2 point)
+    {
+        return true;
+    }
 
     public List<Point2> CreateConvexHull(List<Point2> pts)
     {
