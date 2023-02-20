@@ -73,22 +73,4 @@ public class PointTests
         Assert.IsTrue(Point2.OrientedCcw(p, q, r));
         // end-snippet
     }
-
-    [TestMethod]
-    public void Point_InsidePolygon_ReturnsTrue()
-    {
-        var t = new Triangle(new Point2(0, 0), new Point2(1, 0), new Point2(0, 1));
-        var p = new Point2(0.1, 0.1);
-
-        Assert.IsTrue(p.Inside(t));
-    }
-
-    [TestMethod]
-    public void Point_OutsidePolygon_ReturnsFalse()
-    {
-        var t = new Triangle(new Point2(0, 0), new Point2(1, 0), new Point2(0, 1));
-        var p = new Point2(1, 1);
-
-        Assert.IsFalse(p.Inside(t));
-    }
 }

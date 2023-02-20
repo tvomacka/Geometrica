@@ -35,11 +35,6 @@ public struct Point2
         return $"[{X}; {Y}]";
     }
 
-    public bool Inside(IPolygon polygon)
-    {
-        return true;
-    }
-
     public Point2 Normalize()
     {
         var length = Math.Sqrt(X * X + Y * Y);

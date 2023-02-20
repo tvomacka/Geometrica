@@ -60,5 +60,23 @@ namespace GeometricaTests
 
             Assert.IsTrue(t.IsConvex);
         }
+
+        [TestMethod]
+        public void Point_InsidePolygon_ReturnsTrue()
+        {
+            var t = new Triangle(new Point2(0, 0), new Point2(1, 0), new Point2(0, 1));
+            var p = new Point2(0.1, 0.1);
+
+            Assert.IsTrue(t.IsInside(p));
+        }
+
+        [TestMethod]
+        public void Point_OutsidePolygon_ReturnsFalse()
+        {
+            var t = new Triangle(new Point2(0, 0), new Point2(1, 0), new Point2(0, 1));
+            var p = new Point2(1, 1);
+
+            Assert.IsFalse(t.IsInside(p));
+        }
     }
 }
