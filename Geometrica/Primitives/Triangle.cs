@@ -30,6 +30,10 @@ public struct Triangle : IPolygon
 
     public int Count => 3;
     public bool IsConvex => true;
+    public bool IsInside(Point2 point)
+    {
+        return true;
+    }
 
     public override string ToString()
     {
