@@ -27,6 +27,12 @@ public class ConvexHull : IEnumerable<Point2>, IPolygon
     public bool IsConvex => true;
     public bool IsInside(Point2 point)
     {
+        for (int i = 0; i < _hull.Count; i++)
+        {
+            if (!Point2.OrientedCcw(point, _hull[i], _hull[(i + 1) % _hull.Count]))
+                return false;
+        }
+
         return true;
     }
 
