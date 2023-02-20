@@ -192,7 +192,7 @@ public class ConvexHull : IEnumerable<Point2>, IPolygon
                 break;
             default:
                 {
-                    if (!_points.Last().Inside(_hull))
+                    if (!_points.Last().Inside(this))
                     {
                         //reconstruct the hull
                     }
