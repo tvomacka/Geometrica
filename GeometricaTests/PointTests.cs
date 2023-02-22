@@ -7,6 +7,15 @@ namespace GeometricaTests;
 public class PointTests
 {
     [TestMethod]
+    [ExpectedException(typeof(ArithmeticException))]
+    public void Point_OfZeroLength_CannotBeNormalized()
+    {
+        var p = new Point2();
+
+        p.Normalize();
+    }
+
+    [TestMethod]
     public void Point_Length_Default()
     {
         var p = new Point2();
