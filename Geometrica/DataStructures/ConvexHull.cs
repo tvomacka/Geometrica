@@ -258,7 +258,7 @@ public class ConvexHull : IEnumerable<Point2>, IPolygon
         var angle = new double[points.Length];
         for (var i = 0; i < points.Length; i++)
         {
-            angle[i] = GetPointAngle((points[i] - innerPoint).Normalize());
+            angle[i] = Equals(points[i], innerPoint) ? 0 : GetPointAngle((points[i] - innerPoint).Normalize());
         }
         Array.Sort(angle, points);
 
