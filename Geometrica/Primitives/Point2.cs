@@ -38,6 +38,10 @@ public struct Point2
     public Point2 Normalize()
     {
         var length = Length();
+        if (length < double.Epsilon)
+        {
+            throw new ArithmeticException($"The point {ToString()} cannot be normalized, because its length is {length}.");
+        }
         return new Point2(X / length, Y / length);
     }
 
