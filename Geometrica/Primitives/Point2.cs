@@ -37,7 +37,12 @@ public struct Point2
 
     public Point2 Normalize()
     {
-        var length = Math.Sqrt(X * X + Y * Y);
+        var length = Length();
         return new Point2(X / length, Y / length);
+    }
+
+    public double Length()
+    {
+        return Math.Sqrt(X * X + Y * Y);
     }
 }

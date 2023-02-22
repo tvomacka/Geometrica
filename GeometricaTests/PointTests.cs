@@ -7,6 +7,22 @@ namespace GeometricaTests;
 public class PointTests
 {
     [TestMethod]
+    public void Point_Length_Default()
+    {
+        var p = new Point2();
+
+        Assert.AreEqual(0, p.Length(), double.Epsilon);
+    }
+
+    [TestMethod]
+    public void Point_Length_UnitLength()
+    {
+        var p = new Point2(Math.Cos(Math.PI * 0.25), Math.Sin(Math.PI * 0.25));
+
+        Assert.AreEqual(1, p.Length(), double.Epsilon);
+    }
+
+    [TestMethod]
     public void Point_Default_IsZero()
     {
         var p = new Point2();
