@@ -34,7 +34,7 @@ namespace GeometricaTests
         {
             var m = Matrix4.Identity;
 
-            Assert.AreEqual(0, m.Determinant(), double.Epsilon);
+            Assert.AreEqual(1, m.Determinant(), double.Epsilon);
         }
     }
 }

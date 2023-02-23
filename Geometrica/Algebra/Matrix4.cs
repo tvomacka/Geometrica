@@ -50,7 +50,7 @@
         public static Matrix4 Identity =>
             new(1, 0, 0, 0,
                 0, 1, 0, 0,
-                0, 0, 0, 1,
+                0, 0, 1, 0,
                 0, 0, 0, 1);
 
         public override string ToString()
