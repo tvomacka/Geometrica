@@ -28,5 +28,13 @@ namespace GeometricaTests
             var m = new Matrix4();
             Assert.AreEqual(0, m.Determinant(), double.Epsilon);
         }
+
+        [TestMethod]
+        public void Matrix4_DeterminantOfIdentity_IsOne()
+        {
+            var m = Matrix4.Identity;
+
+            Assert.AreEqual(0, m.Determinant(), double.Epsilon);
+        }
     }
 }

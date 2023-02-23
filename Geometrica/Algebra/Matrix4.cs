@@ -47,6 +47,12 @@
             _matrix[3, 3] = m33;
         }
 
+        public static Matrix4 Identity =>
+            new(1, 0, 0, 0,
+                0, 1, 0, 0,
+                0, 0, 0, 1,
+                0, 0, 0, 1);
+
         public override string ToString()
         {
             var s = "";
