@@ -3,7 +3,7 @@ using Geometrica.Algebra;
 namespace GeometricaTests;
 
 [TestClass]
-public class MatrixTests
+public class Matrix3Tests
 {
     private readonly double _delta = 1e-3;
 
