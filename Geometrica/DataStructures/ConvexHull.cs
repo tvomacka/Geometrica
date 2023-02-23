@@ -25,7 +25,7 @@ public class ConvexHull : IEnumerable<Point2>, IPolygon
     public int Count => _hull.Count;
 
     public bool IsConvex => true;
-    public bool IsInside(Point2 point)
+    public bool Contains(Point2 point)
     {
         for (int i = 0; i < _hull.Count; i++)
         {
@@ -202,7 +202,7 @@ public class ConvexHull : IEnumerable<Point2>, IPolygon
                 break;
             default:
                 {
-                    if (!IsInside(_points.Last()))
+                    if (!Contains(_points.Last()))
                     {
                         //reconstruct the hull
                     }

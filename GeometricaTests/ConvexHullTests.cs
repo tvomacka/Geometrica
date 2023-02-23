@@ -485,7 +485,7 @@ public class ConvexHullTests
         var ch = ConvexHull.ConvexHull4(a, b, c, d);
         var pIn = new Point2(0.5, 0.4);
 
-        Assert.IsTrue(ch.IsInside(pIn));
+        Assert.IsTrue(ch.Contains(pIn));
     }
 
     [TestMethod]
@@ -499,7 +499,7 @@ public class ConvexHullTests
         var ch = ConvexHull.ConvexHull4(a, b, c, d);
         var pOut = new Point2(2.5, 0.4);
 
-        Assert.IsFalse(ch.IsInside(pOut));
+        Assert.IsFalse(ch.Contains(pOut));
     }
 
     [TestMethod]

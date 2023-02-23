@@ -32,7 +32,7 @@ public struct Triangle : IPolygon
 
     public int Count => 3;
     public bool IsConvex => true;
-    public bool IsInside(Point2 point)
+    public bool Contains(Point2 point)
     {
         return Point2.OrientedCcw(point, _a, _b) && Point2.OrientedCcw(point, _b, _c) && Point2.OrientedCcw(point, _c, _a);
     }
