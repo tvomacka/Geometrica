@@ -57,5 +57,17 @@
 
             return s;
         }
+
+        public double Determinant()
+        {
+            return _matrix[0, 0] * _matrix[1, 1] * _matrix[2, 2] * _matrix[3, 3] +
+                   _matrix[1, 0] * _matrix[2, 1] * _matrix[3, 2] * _matrix[0, 3] +
+                   _matrix[2, 0] * _matrix[3, 1] * _matrix[0, 2] * _matrix[1, 3] +
+                   _matrix[3, 0] * _matrix[0, 1] * _matrix[1, 2] * _matrix[2, 3] -
+                   _matrix[0, 3] * _matrix[1, 2] * _matrix[2, 1] * _matrix[3, 0] -
+                   _matrix[0, 2] * _matrix[1, 1] * _matrix[2, 0] * _matrix[3, 3] -
+                   _matrix[0, 1] * _matrix[1, 0] * _matrix[2, 3] * _matrix[3, 2] -
+                   _matrix[0, 0] * _matrix[1, 3] * _matrix[2, 2] * _matrix[3, 1];
+        }
     }
 }

@@ -21,5 +21,12 @@ namespace GeometricaTests
             Assert.AreEqual(0, m[0, 0]);
             Assert.AreEqual(15, m[3, 3]);
         }
+
+        [TestMethod]
+        public void Matrix4_DeterminantOfZero_IsZero()
+        {
+            var m = new Matrix4();
+            Assert.AreEqual(0, m.Determinant(), double.Epsilon);
+        }
     }
 }
