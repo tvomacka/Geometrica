@@ -10,7 +10,7 @@ namespace GeometricaTests
         {
             var m = new Matrix4();
 
-            Assert.AreEqual("", m.ToString());
+            Assert.AreEqual("[0;0;0;0][0;0;0;0][0;0;0;0][0;0;0;0]", m.ToString());
         }
     }
 }
