@@ -67,7 +67,7 @@ namespace GeometricaTests
             var t = new Triangle(new Point2(0, 0), new Point2(1, 0), new Point2(0, 1));
             var p = new Point2(0.1, 0.1);
 
-            Assert.IsTrue(t.IsInside(p));
+            Assert.IsTrue(t.Contains(p));
         }
 
         [TestMethod]
@@ -76,7 +76,7 @@ namespace GeometricaTests
             var t = new Triangle(new Point2(0, 0), new Point2(1, 0), new Point2(0, 1));
             var p = new Point2(1, 1);
 
-            Assert.IsFalse(t.IsInside(p));
+            Assert.IsFalse(t.Contains(p));
         }
     }
 }

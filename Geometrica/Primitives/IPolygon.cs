@@ -5,6 +5,6 @@
         public Point2 this[int key] { get; }
         int Count { get; }
         bool IsConvex { get; }
-        bool IsInside(Point2 point);
+        bool Contains(Point2 point);
     }
 }
