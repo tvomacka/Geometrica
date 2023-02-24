@@ -6,6 +6,16 @@ namespace GeometricaTests
     public class Matrix4Tests
     {
         [TestMethod]
+        public void Matrix4_Members_CanBeEditedWithIndexers()
+        {
+            var m = new Matrix4();
+
+            m[1, 2] = 10;
+
+            Assert.AreEqual(10, m[1, 2]);
+        }
+
+        [TestMethod]
         public void Matrix4_IsZero_ByDefault()
         {
             var m = new Matrix4();
