@@ -204,7 +204,8 @@ public class ConvexHull : IEnumerable<Point2>, IPolygon
                 {
                     if (!Contains(_points.Last()))
                     {
-                        //reconstruct the hull
+                        _hull.Clear();
+                        _hull.AddRange(GrahamScan(_points.ToArray()));
                     }
 
                     break;
