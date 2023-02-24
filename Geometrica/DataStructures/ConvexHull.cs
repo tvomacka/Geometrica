@@ -19,7 +19,8 @@ public class ConvexHull : IEnumerable<Point2>, IPolygon
     public ConvexHull(List<Point2> pts)
     {
         _points = pts;
-        _hull = CreateConvexHull(pts);
+        var ch = CreateConvexHull(pts);
+        _hull = ch._hull;
     }
 
     public int Count => _hull.Count;
@@ -36,7 +37,7 @@ public class ConvexHull : IEnumerable<Point2>, IPolygon
         return true;
     }
 
-    public List<Point2> CreateConvexHull(List<Point2> pts)
+    public ConvexHull CreateConvexHull(List<Point2> pts)
     {
         if (pts == null)
         {
@@ -45,7 +46,7 @@ public class ConvexHull : IEnumerable<Point2>, IPolygon
 
         if (pts.Count < 6)
         {
-            return CreateSimpleHull(pts)._hull;
+            return CreateSimpleHull(pts);
         }
 
         var half = pts.Count / 2;
@@ -112,7 +113,7 @@ public class ConvexHull : IEnumerable<Point2>, IPolygon
         return ch;
     }
 
-    public static List<Point2> JoinHulls(ConvexHull ch1, ConvexHull ch2)
+    public static ConvexHull JoinHulls(ConvexHull ch1, ConvexHull ch2)
     {
         var p = GetPointInside(ch1);
         Point2[] sortedPts;
@@ -213,7 +214,7 @@ public class ConvexHull : IEnumerable<Point2>, IPolygon
         }
     }
 
-    public static List<Point2> GrahamScan(Point2[] points, bool pointsSorted = false)
+    public static ConvexHull GrahamScan(Point2[] points, bool pointsSorted = false)
     {
         var pts = !pointsSorted ? SortByAngleToLeftmostPoint(points) : points;
 
@@ -234,8 +235,13 @@ public class ConvexHull : IEnumerable<Point2>, IPolygon
             stack.Push(p);
         }
 
-        var cHull = stack.ToList();
-        cHull.Reverse();
+
+        var cHull = new ConvexHull();
+        cHull._points.AddRange(points);
+
+        var hullPoints = stack.ToList();
+        hullPoints.Reverse();
+        cHull._hull.AddRange(hullPoints);
 
         return cHull;
     }
