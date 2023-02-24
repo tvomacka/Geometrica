@@ -7,6 +7,17 @@ namespace GeometricaTests;
 public class ConvexHullTests
 {
     [TestMethod]
+    public void ConvexHull_IsUpdated_AfterPointOutsideIsAdded()
+    {
+        var ch = ConvexHull.CreateSimpleHull(new List<Point2> { new(0, 0), new(0, 1), new(1, 0) });
+        ch.Add(new Point2(1, 1));
+
+        var s = ch.ToString();
+
+        Assert.AreEqual("[0; 0] [1; 0] [1; 1] [0; 1]", s);
+    }
+
+    [TestMethod]
     public void ConvexHull_OfTwoPoints_DoesNotExist()
     {
         var ch = new ConvexHull();
