@@ -24,5 +24,18 @@ namespace GeometricaTests
 
             Assert.AreEqual(p, dt.Points[0]);
         }
+
+        [TestMethod]
+        public void DT_CanBeCreated_WithThreeGivenPoints()
+        {
+            var p1 = new Point2(0, 0);
+            var p2 = new Point2(1, 0);
+            var p3 = new Point2(0, 1);
+
+            var dt = new DelaunayTriangulation(new Point2[] { p1, p2, p3 });
+
+            Assert.AreEqual(1, dt.Triangles.Length);
+            Assert.AreEqual("Triangle [0; 0] [1; 0] [0; 1]", dt.Triangles[0].ToString());
+        }
     }
 }
