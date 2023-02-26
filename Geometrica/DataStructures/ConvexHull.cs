@@ -326,17 +326,29 @@ public class ConvexHull : IEnumerable<Point2>, IPolygon
         {
             for (var j = i + 1; j < points.Length; j++)
             {
-                var orientations = new bool[3];
-                var oIndex = 0;
-                for (var k = 0; k < points.Length; k++)
+                var firstOrientation = false;
+                var firstOrientationAssigned = false;
+                var orientationsSame = true;
+                
+                for (var k = 0; k < points.Length && orientationsSame; k++)
                 {
-                    if (k != i && k != j)
+                    if (k == i || k == j)
                     {
-                        orientations[oIndex++] = Point2.OrientedCcw(points[i], points[j], points[k]);
+                        continue;
+                    }
+
+                    if (!firstOrientationAssigned)
+                    {
+                        firstOrientationAssigned = true;
+                        firstOrientation = Point2.OrientedCcw(points[i], points[j], points[k]);
+                    }
+                    else
+                    {
+                        orientationsSame = (firstOrientation == Point2.OrientedCcw(points[i], points[j], points[k]));
                     }
                 }
 
-                if (orientations[0] == orientations[1] && orientations[0] == orientations[2])
+                if (orientationsSame)
                 {
                     chLines.Add(new Tuple<int, int>(i, j));
                 }

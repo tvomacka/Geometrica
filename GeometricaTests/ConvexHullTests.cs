@@ -23,7 +23,7 @@ public class ConvexHullTests
         var l = ConvexHull.GetLinesOnConvexHull(pts);
         var s = string.Join(" ", l);
 
-        Assert.AreEqual("", s);
+        Assert.AreEqual("(0, 1) (0, 3) (1, 2) (2, 3)", s);
     }
 
     [TestMethod]
