@@ -69,8 +69,6 @@ public class ConvexHull : IEnumerable<Point2>, IPolygon
 
         return pts.Count switch
         {
-            < 3 or > 6 => throw new ArgumentException(
-                $"This method must only be used for 3 to 5 points. You provided a list of {pts.Count} points."),
             3 when Point2.Orientation(pts[0], pts[1], pts[2]) > 0 => new ConvexHull()
             {
                 _hull = { pts[0], pts[1], pts[2] }, _points = { pts[0], pts[1], pts[2] }
@@ -78,7 +76,8 @@ public class ConvexHull : IEnumerable<Point2>, IPolygon
             3 => new ConvexHull() { _hull = { pts[0], pts[2], pts[1] }, _points = { pts[0], pts[2], pts[1] } },
             4 => ConvexHull4(pts[0], pts[1], pts[2], pts[3]),
             5 => BruteForce(pts.ToArray()),
-            _ => null
+            _ => throw new ArgumentException(
+                $"This method must only be used for 3 to 5 points. You provided a list of {pts.Count} points."),
         };
     }
 
@@ -274,54 +273,24 @@ public class ConvexHull : IEnumerable<Point2>, IPolygon
 
     public static double GetPointAngle(Point2 p)
     {
-        if (p.X >= 0 && p.Y >= 0)
+        return p.X switch
         {
-            return Asin(p.Y);
-        }
-
-        if (p.X <= 0 && p.Y >= 0)
-        {
-            return PI - Asin(p.Y);
-        }
-
-        if (p.X <= 0 && p.Y <= 0)
-        {
-            return PI - Asin(p.Y);
-        }
-
-        if (p.X >= 0 && p.Y <= 0)
-        {
-            return 2 * PI + Asin(p.Y);
-        }
-
-        return NaN;
+            >= 0 when p.Y >= 0 => Asin(p.Y),
+            <= 0 when p.Y >= 0 => PI - Asin(p.Y),
+            <= 0 when p.Y <= 0 => PI - Asin(p.Y),
+            _ => 2 * PI + Asin(p.Y)
+        };
     }
 
     public static ConvexHull BruteForce(Point2[] points)
     {
-        var chLines = new List<Tuple<int, int>>();
+        var chLines = GetLinesOnConvexHull(points);
 
-        for (var i = 0; i < points.Length; i++)
-        {
-            for (var j = i + 1; j < points.Length; j++)
-            {
-                var orientations = new bool[3];
-                var oIndex = 0;
-                for (var k = 0; k < points.Length; k++)
-                {
-                    if (k != i && k != j)
-                    {
-                        orientations[oIndex++] = Point2.OrientedCcw(points[i], points[j], points[k]);
-                    }
-                }
+        return ConstructConvexHull(points, chLines);
+    }
 
-                if (orientations[0] == orientations[1] && orientations[0] == orientations[2])
-                {
-                    chLines.Add(new Tuple<int, int>(i, j));
-                }
-            }
-        }
-
+    public static ConvexHull ConstructConvexHull(Point2[] points, List<Tuple<int, int>> chLines)
+    {
         var cHull = new List<Point2>
         {
             points[chLines[0].Item1],
@@ -346,8 +315,47 @@ public class ConvexHull : IEnumerable<Point2>, IPolygon
         var ch = new ConvexHull();
         ch._points.AddRange(points);
         ch._hull.AddRange(cHull);
-
         return ch;
+    }
+
+    public static List<Tuple<int, int>> GetLinesOnConvexHull(Point2[] points)
+    {
+        var chLines = new List<Tuple<int, int>>();
+
+        for (var i = 0; i < points.Length; i++)
+        {
+            for (var j = i + 1; j < points.Length; j++)
+            {
+                var firstOrientation = false;
+                var firstOrientationAssigned = false;
+                var orientationsSame = true;
+                
+                for (var k = 0; k < points.Length && orientationsSame; k++)
+                {
+                    if (k == i || k == j)
+                    {
+                        continue;
+                    }
+
+                    if (!firstOrientationAssigned)
+                    {
+                        firstOrientationAssigned = true;
+                        firstOrientation = Point2.OrientedCcw(points[i], points[j], points[k]);
+                    }
+                    else
+                    {
+                        orientationsSame = (firstOrientation == Point2.OrientedCcw(points[i], points[j], points[k]));
+                    }
+                }
+
+                if (orientationsSame)
+                {
+                    chLines.Add(new Tuple<int, int>(i, j));
+                }
+            }
+        }
+
+        return chLines;
     }
 
     public IEnumerator<Point2> GetEnumerator()

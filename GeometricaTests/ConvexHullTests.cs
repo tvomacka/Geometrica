@@ -1,4 +1,5 @@
-﻿using Geometrica.DataStructures;
+﻿using System.Reflection.Metadata;
+using Geometrica.DataStructures;
 using Geometrica.Primitives;
 
 namespace GeometricaTests;
@@ -6,6 +7,25 @@ namespace GeometricaTests;
 [TestClass]
 public class ConvexHullTests
 {
+    [TestMethod]
+    public void GetLinesOnConvexHull_CanBeUsed_ForSixPoints()
+    {
+        var pts = new Point2[]
+        {
+            new(0, 0),
+            new(1, 0),
+            new(1, 1),
+            new(0, 1),
+            new(0.1, 0.3),
+            new(0.2, 0.9)
+        };
+
+        var l = ConvexHull.GetLinesOnConvexHull(pts);
+        var s = string.Join(" ", l);
+
+        Assert.AreEqual("(0, 1) (0, 3) (1, 2) (2, 3)", s);
+    }
+
     [TestMethod]
     public void ConvexHull_IsUpdated_AfterPointOutsideIsAdded()
     {
