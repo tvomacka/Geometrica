@@ -284,28 +284,7 @@ public class ConvexHull : IEnumerable<Point2>, IPolygon
 
     public static ConvexHull BruteForce(Point2[] points)
     {
-        var chLines = new List<Tuple<int, int>>();
-
-        for (var i = 0; i < points.Length; i++)
-        {
-            for (var j = i + 1; j < points.Length; j++)
-            {
-                var orientations = new bool[3];
-                var oIndex = 0;
-                for (var k = 0; k < points.Length; k++)
-                {
-                    if (k != i && k != j)
-                    {
-                        orientations[oIndex++] = Point2.OrientedCcw(points[i], points[j], points[k]);
-                    }
-                }
-
-                if (orientations[0] == orientations[1] && orientations[0] == orientations[2])
-                {
-                    chLines.Add(new Tuple<int, int>(i, j));
-                }
-            }
-        }
+        var chLines = GetLinesOnConvexHull(points);
 
         var cHull = new List<Point2>
         {
@@ -333,6 +312,34 @@ public class ConvexHull : IEnumerable<Point2>, IPolygon
         ch._hull.AddRange(cHull);
 
         return ch;
+    }
+
+    public static List<Tuple<int, int>> GetLinesOnConvexHull(Point2[] points)
+    {
+        var chLines = new List<Tuple<int, int>>();
+
+        for (var i = 0; i < points.Length; i++)
+        {
+            for (var j = i + 1; j < points.Length; j++)
+            {
+                var orientations = new bool[3];
+                var oIndex = 0;
+                for (var k = 0; k < points.Length; k++)
+                {
+                    if (k != i && k != j)
+                    {
+                        orientations[oIndex++] = Point2.OrientedCcw(points[i], points[j], points[k]);
+                    }
+                }
+
+                if (orientations[0] == orientations[1] && orientations[0] == orientations[2])
+                {
+                    chLines.Add(new Tuple<int, int>(i, j));
+                }
+            }
+        }
+
+        return chLines;
     }
 
     public IEnumerator<Point2> GetEnumerator()
