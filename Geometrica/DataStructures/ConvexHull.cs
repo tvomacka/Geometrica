@@ -274,27 +274,13 @@ public class ConvexHull : IEnumerable<Point2>, IPolygon
 
     public static double GetPointAngle(Point2 p)
     {
-        if (p.X >= 0 && p.Y >= 0)
+        return p.X switch
         {
-            return Asin(p.Y);
-        }
-
-        if (p.X <= 0 && p.Y >= 0)
-        {
-            return PI - Asin(p.Y);
-        }
-
-        if (p.X <= 0 && p.Y <= 0)
-        {
-            return PI - Asin(p.Y);
-        }
-
-        if (p.X >= 0 && p.Y <= 0)
-        {
-            return 2 * PI + Asin(p.Y);
-        }
-
-        return NaN;
+            >= 0 when p.Y >= 0 => Asin(p.Y),
+            <= 0 when p.Y >= 0 => PI - Asin(p.Y),
+            <= 0 when p.Y <= 0 => PI - Asin(p.Y),
+            _ => 2 * PI + Asin(p.Y)
+        };
     }
 
     public static ConvexHull BruteForce(Point2[] points)
