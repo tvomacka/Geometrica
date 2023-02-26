@@ -286,6 +286,11 @@ public class ConvexHull : IEnumerable<Point2>, IPolygon
     {
         var chLines = GetLinesOnConvexHull(points);
 
+        return ConstructConvexHull(points, chLines);
+    }
+
+    public static ConvexHull ConstructConvexHull(Point2[] points, List<Tuple<int, int>> chLines)
+    {
         var cHull = new List<Point2>
         {
             points[chLines[0].Item1],
@@ -310,7 +315,6 @@ public class ConvexHull : IEnumerable<Point2>, IPolygon
         var ch = new ConvexHull();
         ch._points.AddRange(points);
         ch._hull.AddRange(cHull);
-
         return ch;
     }
 
