@@ -37,5 +37,20 @@ namespace GeometricaTests
             Assert.AreEqual(1, dt.Triangles.Length);
             Assert.AreEqual("Triangle [0; 0] [1; 0] [0; 1]", dt.Triangles[0].ToString());
         }
+
+        [TestMethod]
+        public void FourthAddedPoint_Splits_OneTriangleInThree()
+        {
+            var p1 = new Point2(0, 0);
+            var p2 = new Point2(1, 0);
+            var p3 = new Point2(0, 1);
+
+            var dt = new DelaunayTriangulation(new Point2[] { p1, p2, p3 });
+            dt.Add(new Point2(0.1, 0.1));
+
+            var t = string.Join(" ", dt.Triangles);
+
+            Assert.AreEqual("Triangle [0,1; 0,1] [0; 0] [1; 0] Triangle [0,1; 0,1] [1; 0] [0; 1] Triangle [0,1; 0,1] [0; 1] [0; 0]", t);
+        }
     }
 }
