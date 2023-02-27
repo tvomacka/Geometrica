@@ -7,7 +7,7 @@ namespace GeometricaTests
     public class DelaunayTriangulationTests
     {
         [TestMethod]
-        public void DT_HasNotriangles_AfterInitialization()
+        public void DT_HasNoTriangles_AfterInitialization()
         {
             var dt = new DelaunayTriangulation();
 
