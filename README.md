@@ -37,6 +37,19 @@ foreach (var point in ch)
 ```
 <!-- endSnippet -->
 
+## Delaunay Triangulation
+
+Delaunay triangulation of set of points can be created using the constructor:
+
+<!-- snippet: DelaunayTriangulationConstructor -->
+<!-- endSnippet -->
+
+If you provide an empty set of points, or create the class instance using a parameterless constructor, the resulting Delaunay triangulation will be empty.
+Points can be added to a pre-existing Delaunay triangulation using a dedicated method. For adding a new point into a triangulation, it does not matter how it was created or if it contains any other points.
+
+<!-- snippet: DelaunayTriangulationAddPoint -->
+<!-- endSnippet -->
+
 # Credits
 
 - [ ] Refactoring the code with [ReSharper](https://jb.gg/OpenSourceSupport).
