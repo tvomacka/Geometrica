@@ -8,6 +8,8 @@ Basic information about the different types of primitives used by the algorithms
 
 ## Convex Hull
 
+> Detailed description in [Convex Hull Algorithms](Docs/ConvexHull.md).
+
 Convex hull of a set of point can be created using the constructor like this:
 
 <!-- snippet: CreateConvexHull -->
@@ -24,7 +26,7 @@ var ch = new ConvexHull(pts);
 ```
 <!-- endSnippet -->
 
-Which uses a divide and conquer algorightm. There are other algorithms you can use, detailed in [Convex Hull Algorithms](Docs/ConvexHull.md).
+Which uses a divide and conquer algorightm.
 
 Once the convex hull is created, the points on the hull can either be accessed using an indexer or iterated through with IEnumerable.
 <!-- snippet: AccessingPointsOnCH -->
@@ -38,6 +40,8 @@ foreach (var point in ch)
 <!-- endSnippet -->
 
 ## Delaunay Triangulation
+
+> Detailed description in [Delaunay Triangulation](Docs/DelaunayTriangulation.md).
 
 Delaunay triangulation of set of points can be created using the constructor:
 
