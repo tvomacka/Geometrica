@@ -46,12 +46,22 @@ foreach (var point in ch)
 Delaunay triangulation of set of points can be created using the constructor:
 
 <!-- snippet: DelaunayTriangulationConstructor -->
+```cs
+var p1 = new Point2(0, 0);
+var p2 = new Point2(1, 0);
+var p3 = new Point2(0, 1);
+
+var dt = new DelaunayTriangulation(new Point2[] { p1, p2, p3 });
+```
 <!-- endSnippet -->
 
 If you provide an empty set of points, or create the class instance using a parameterless constructor, the resulting Delaunay triangulation will be empty.
 Points can be added to a pre-existing Delaunay triangulation using a dedicated method. For adding a new point into a triangulation, it does not matter how it was created or if it contains any other points.
 
 <!-- snippet: DelaunayTriangulationAddPoint -->
+```cs
+dt.Add(new Point2(0.1, 0.1));
+```
 <!-- endSnippet -->
 
 # Credits
