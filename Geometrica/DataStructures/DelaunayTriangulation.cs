@@ -26,7 +26,7 @@ public class DelaunayTriangulation
     {
         if (ConvexHull?.Contains(p) ?? false)
         {
-            var t = FindTriangleContainingPoint(p);
+            var t = FindTriangleContainingPoint(Triangles, p);
             Triangles = SplitTriangle(Triangles, t, p);
         }
         else
@@ -45,7 +45,7 @@ public class DelaunayTriangulation
 
         if (Triangles.Length > 0)
         {
-            var t = FindTriangleContainingPoint(p);
+            var t = FindTriangleContainingPoint(Triangles, p);
             Triangles = SplitTriangle(Triangles, t, p);
         }
     }
@@ -60,8 +60,8 @@ public class DelaunayTriangulation
         };
     }
 
-    public Triangle FindTriangleContainingPoint(Point2 p)
+    public Triangle FindTriangleContainingPoint(Triangle[] triangles, Point2 p)
     {
-        return Triangles[0];
+        return triangles[0];
     }
 }
