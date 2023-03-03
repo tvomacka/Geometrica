@@ -7,6 +7,8 @@ public class DelaunayTriangulation
     public Triangle[] Triangles { get; set; }
     public List<Point2> Points { get; }
 
+    public ConvexHull ConvexHull { get; set; }
+
     public DelaunayTriangulation()
     {
         Points = new List<Point2>();
@@ -22,8 +24,15 @@ public class DelaunayTriangulation
 
     public void Add(Point2 p)
     {
-        Points.Add(p);
-
+        if (ConvexHull?.Contains(p) ?? false)
+        {
+            var t = FindTriangleContainingPoint(p);
+            Triangles = SplitTriangle(Triangles, t, p);
+        }
+        else
+        {
+            
+        }
         //if the newly added point lies inside CH(p) find the triangle containing it
         //split this triangle
         //if the new point lies outside CH(p), reconstruct CH(p)
@@ -31,6 +40,8 @@ public class DelaunayTriangulation
         //check every new triangle and its neighbors for the delaunay condition
         //swap the diagonals if the condition is not met
         //repeat until no new triangle remains unchecked
+
+        Points.Add(p);
 
         if (Triangles.Length > 0)
         {
