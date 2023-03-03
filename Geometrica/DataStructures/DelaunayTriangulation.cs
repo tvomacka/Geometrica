@@ -27,28 +27,21 @@ public class DelaunayTriangulation
     {
         if (ConvexHull?.Contains(p) ?? false)
         {
+            //if the newly added point lies inside CH(p) find the triangle containing it
+            //split this triangle
             var t = FindTriangleContainingPoint(Triangles, p);
             Triangles = SplitTriangle(Triangles, t, p);
         }
         else
         {
-            
+            //if the new point lies outside CH(p), reconstruct CH(p)
+            //create new triangles by connecting the new point to the point that were removed from CH(p)
         }
-        //if the newly added point lies inside CH(p) find the triangle containing it
-        //split this triangle
-        //if the new point lies outside CH(p), reconstruct CH(p)
-        //create new triangles by connecting the new point to the point that were removed from CH(p)
         //check every new triangle and its neighbors for the delaunay condition
         //swap the diagonals if the condition is not met
         //repeat until no new triangle remains unchecked
 
         Points.Add(p);
-
-        if (Triangles.Length > 0)
-        {
-            var t = FindTriangleContainingPoint(Triangles, p);
-            Triangles = SplitTriangle(Triangles, t, p);
-        }
     }
 
     public Triangle[] SplitTriangle(Triangle[] triangles, Triangle target, Point2 innerPoint)
