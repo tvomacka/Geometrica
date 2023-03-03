@@ -35,17 +35,17 @@ public class DelaunayTriangulation
         if (Triangles.Length > 0)
         {
             var t = FindTriangleContainingPoint(p);
-            Triangles = SplitTriangle(t, p);
+            Triangles = SplitTriangle(Triangles, t, p);
         }
     }
 
-    public Triangle[] SplitTriangle(Triangle original, Point2 innerPoint)
+    public Triangle[] SplitTriangle(Triangle[] triangles, Triangle target, Point2 innerPoint)
     {
         return new Triangle[]
         {
-            new(innerPoint, original[0], original[1]),
-            new(innerPoint, original[1], original[2]),
-            new(innerPoint, original[2], original[0])
+            new(innerPoint, target[0], target[1]),
+            new(innerPoint, target[1], target[2]),
+            new(innerPoint, target[2], target[0])
         };
     }
 
