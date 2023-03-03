@@ -24,6 +24,14 @@ public class DelaunayTriangulation
     {
         Points.Add(p);
 
+        //if the newly added point lies inside CH(p) find the triangle containing it
+        //split this triangle
+        //if the new point lies outside CH(p), reconstruct CH(p)
+        //create new triangles by connecting the new point to the point that were removed from CH(p)
+        //check every new triangle and its neighbors for the delaunay condition
+        //swap the diagonals if the condition is not met
+        //repeat until no new triangle remains unchecked
+
         if (Triangles.Length > 0)
         {
             var t = FindTriangleContainingPoint(p);
