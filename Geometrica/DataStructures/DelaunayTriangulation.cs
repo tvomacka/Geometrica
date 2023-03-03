@@ -20,6 +20,7 @@ public class DelaunayTriangulation
         Points = new List<Point2>(pts);
         Triangles = new Triangle[1];
         Triangles[0] = new Triangle(pts[0], pts[1], pts[2]);
+        ConvexHull = new ConvexHull(Points);
     }
 
     public void Add(Point2 p)
