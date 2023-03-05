@@ -82,7 +82,7 @@ public class DelaunayTriangulation
         {
             var tIndex = r.Next(triangles.Length);
             var vertex = triangles[tIndex][0];
-            double distance = vertex.SquareDistanceTo(p);
+            var distance = vertex.SquareDistanceTo(p);
             if (!(distance < minDistance)) continue;
             nearest = triangles[tIndex];
             minDistance = distance;
