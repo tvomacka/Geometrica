@@ -85,6 +85,19 @@ namespace GeometricaTests
             Assert.AreEqual(t2, t.GetNeighbor(0));
         }
 
+        [TestMethod]
+        [ExpectedException(typeof(IndexOutOfRangeException))]
+        public void AccessingTriangleNeighbor_WithNegativeIndex_ThrowsException()
+        {
+            var p1 = new Point2(0, 0);
+            var p2 = new Point2(1, 0);
+            var p3 = new Point2(0, 1);
+
+            var t = new Triangle(p1, p2, p3);
+
+            t.GetNeighbor(-1);
+        }
+
         public void Samples()
         {
             // begin-snippet: DelaunayTriangulationConstructor
