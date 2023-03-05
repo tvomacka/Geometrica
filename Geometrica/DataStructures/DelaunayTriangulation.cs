@@ -1,4 +1,5 @@
-﻿using Geometrica.Primitives;
+﻿using System.Runtime.CompilerServices;
+using Geometrica.Primitives;
 
 namespace Geometrica.DataStructures;
 
@@ -62,13 +63,29 @@ public class DelaunayTriangulation
 
 public static class TriangleExtensions
 {
+    private static ConditionalWeakTable<object, Triangle?[]> _neighbors = new();
+
     public static Triangle? GetNeighbor(this Triangle t, int index)
     {
-        return null;
+        var n = _neighbors.GetValue(t, CreateNeighbors);
+        return n?[index];
     }
 
     public static void SetNeighbor(this Triangle t, int index, Triangle neighbor)
     {
+        var n = _neighbors.GetValue(t, CreateNeighbors);
+        if (n != null)
+        {
+            n[index] = neighbor;
+        }
+        else
+        {
+            throw new NullReferenceException($"Cannot assign neighbor to triangle {t}.");
+        }
+    }
 
+    public static Triangle?[] CreateNeighbors(object _)
+    {
+        return new Triangle?[3] { null, null, null };
     }
 }
