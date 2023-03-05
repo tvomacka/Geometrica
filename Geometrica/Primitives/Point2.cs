@@ -29,6 +29,10 @@ public struct Point2
     {
         return Math.Sqrt((p.X - X) * (p.X - X) + (p.Y - Y) * (p.Y - Y));
     }
+    public double SquareDistanceTo(Point2 p)
+    {
+        return (p.X - X) * (p.X - X) + (p.Y - Y) * (p.Y - Y);
+    }
 
     public override string ToString()
     {
