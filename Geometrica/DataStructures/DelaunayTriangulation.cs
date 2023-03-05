@@ -1,4 +1,5 @@
 ﻿using System.Runtime.CompilerServices;
+using System.Xml.Linq;
 using Geometrica.Primitives;
 
 namespace Geometrica.DataStructures;
@@ -57,10 +58,37 @@ public class DelaunayTriangulation
 
     public Triangle FindTriangleContainingPoint(Triangle[] triangles, Point2 p)
     {
-        return triangles[0];
+        if(triangles.Length == 1)
+        {
+            return triangles[0].Contains(p) ? triangles[0] : null;
+        }
+
+        var startTriangle = EstimateNearestTriangle(triangles, p);
+
+        return startTriangle;
+
+        //walk to near triangle using orthogonal walk, then use remembering stochastic walk to find the target triangle
+    }
+
+    private Triangle EstimateNearestTriangle(Triangle[] triangles, Point2 p)
+    {
+        var r = new Random();
+        var minDistance = double.MaxValue;
+        Triangle nearest = null;
 
         //search n^(1/3.5) triangles first and start the walk from the one, which is nearest to the point p
-        //walk to near triangle using orthogonal walk, then use remembering stochastic walk to find the target triangle
+        var searched = (int)(Math.Pow(triangles.Length, 0.28571) + 1);
+        for (var i = 0; i < searched; i++)
+        {
+            var tIndex = r.Next(triangles.Length);
+            var vertex = triangles[tIndex][0];
+            double distance = vertex.SquareDistanceTo(p);
+            if (!(distance < minDistance)) continue;
+            nearest = triangles[tIndex];
+            minDistance = distance;
+        }
+
+        return nearest;
     }
 }
 
