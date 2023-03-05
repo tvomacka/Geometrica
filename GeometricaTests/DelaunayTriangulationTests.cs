@@ -69,6 +69,22 @@ namespace GeometricaTests
             Assert.IsNull(t.GetNeighbor(2));
         }
 
+        [TestMethod]
+        public void Triangle_Neighbor_CanBeAssigned()
+        {
+            var p1 = new Point2(0, 0);
+            var p2 = new Point2(1, 0);
+            var p3 = new Point2(0, 1);
+            var p4 = new Point2(1, 1);
+
+            var t = new Triangle(p1, p2, p3);
+            var t2 = new Triangle(p3, p2, p4);
+
+            t.SetNeighbor(0, t2);
+
+            Assert.AreEqual(t.GetNeighbor(0), t2);
+        }
+
         public void Samples()
         {
             // begin-snippet: DelaunayTriangulationConstructor

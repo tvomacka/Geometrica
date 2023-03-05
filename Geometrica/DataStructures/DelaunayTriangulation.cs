@@ -66,4 +66,9 @@ public static class TriangleExtensions
     {
         return null;
     }
+
+    public static void SetNeighbor(this Triangle t, int index, Triangle neighbor)
+    {
+
+    }
 }
