@@ -111,6 +111,25 @@ namespace GeometricaTests
             t.GetNeighbor(4);
         }
 
+        [TestMethod]
+        public void Estimating_NearestTriangle()
+        {
+            var t = new Triangle[1000];
+            for (var i = 0; i < t.Length; i++)
+            {
+                t[i] = new Triangle(
+                    new Point2(i, 0),
+                    new Point2(i + 1, 0),
+                    new Point2(i + 0.5, 1));
+            }
+
+            var p = new Point2(0.5, 0.1);
+
+            var nearest = DelaunayTriangulation.EstimateNearestTriangle(t, p, new Random(0));
+
+            Assert.AreEqual("Triangle [206; 0] [207; 0] [206,5; 1]", nearest.ToString());
+        }
+
         public void Samples()
         {
             // begin-snippet: DelaunayTriangulationConstructor
