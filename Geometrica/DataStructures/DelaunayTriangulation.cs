@@ -76,8 +76,8 @@ public class DelaunayTriangulation
         Triangle nearest = null;
 
         //search n^(1/3.5) triangles first and start the walk from the one, which is nearest to the point p
-        var searched = (int)(Math.Pow(triangles.Length, 0.28571) + 1);
-        for (var i = 0; i < searched; i++)
+        var totalSteps = (int)(Math.Pow(triangles.Length, 0.28571) + 1);
+        for (var i = 0; i < totalSteps; i++)
         {
             var tIndex = random.Next(triangles.Length);
             var vertex = triangles[tIndex][0];
