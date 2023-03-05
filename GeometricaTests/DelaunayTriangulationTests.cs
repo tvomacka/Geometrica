@@ -48,7 +48,7 @@ namespace GeometricaTests
             var dt = new DelaunayTriangulation(new Point2[] { p1, p2, p3 });
             dt.Add(new Point2(0.1, 0.1));
 
-            var t = string.Join(" ", dt.Triangles);
+            var t = string.Join<Triangle>(" ", dt.Triangles);
 
             Assert.AreEqual("Triangle [0,1; 0,1] [0; 0] [1; 0] Triangle [0,1; 0,1] [1; 0] [0; 1] Triangle [0,1; 0,1] [0; 1] [0; 0]", t);
         }
@@ -82,7 +82,7 @@ namespace GeometricaTests
 
             t.SetNeighbor(0, t2);
 
-            Assert.AreEqual(t.GetNeighbor(0), t2);
+            Assert.AreEqual(t2, t.GetNeighbor(0));
         }
 
         public void Samples()
