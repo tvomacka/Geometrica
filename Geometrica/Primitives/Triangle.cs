@@ -2,13 +2,13 @@
 
 namespace Geometrica.Primitives;
 
-public struct Triangle : IPolygon
+public class Triangle : IPolygon
 {
     private Point2 _a;
     private Point2 _b;
     private Point2 _c;
 
-    public Triangle(Point2 a, Point2 b, Point2 c) : this()
+    public Triangle(Point2 a, Point2 b, Point2 c)
     {
         _a = a;
         _b = b;
