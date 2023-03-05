@@ -66,17 +66,17 @@ public class DelaunayTriangulation
 
 public static class TriangleExtensions
 {
-    private static ConditionalWeakTable<object, Triangle?[]> _neighbors = new();
+    private static ConditionalWeakTable<object, Triangle[]> _neighbors = new();
 
-    public static Triangle? GetNeighbor(this Triangle t, int index)
+    public static Triangle GetNeighbor(this Triangle t, int index)
     {
-        var n = _neighbors.GetValue(t, CreateNeighbors);
+        var n = _neighbors.GetValue(t, unknown => CreateNeighbors(unknown));
         return n?[index];
     }
 
     public static void SetNeighbor(this Triangle t, int index, Triangle neighbor)
     {
-        var n = _neighbors.GetValue(t, CreateNeighbors);
+        var n = _neighbors.GetValue(t, unknown => CreateNeighbors(unknown));
         if (n != null)
         {
             n[index] = neighbor;
@@ -87,8 +87,8 @@ public static class TriangleExtensions
         }
     }
 
-    public static Triangle?[] CreateNeighbors(object _)
+    public static Triangle[] CreateNeighbors(object _)
     {
-        return new Triangle?[3] { null, null, null };
+        return new Triangle[3] { null, null, null };
     }
 }
