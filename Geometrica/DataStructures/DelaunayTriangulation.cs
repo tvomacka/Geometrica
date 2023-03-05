@@ -59,3 +59,11 @@ public class DelaunayTriangulation
         return triangles[0];
     }
 }
+
+public static class TriangleExtensions
+{
+    public static Triangle? GetNeighbor(this Triangle t, int index)
+    {
+        return null;
+    }
+}

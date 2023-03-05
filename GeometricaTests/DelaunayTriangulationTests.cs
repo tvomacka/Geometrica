@@ -53,6 +53,22 @@ namespace GeometricaTests
             Assert.AreEqual("Triangle [0,1; 0,1] [0; 0] [1; 0] Triangle [0,1; 0,1] [1; 0] [0; 1] Triangle [0,1; 0,1] [0; 1] [0; 0]", t);
         }
 
+        [TestMethod]
+        public void SingleTriangle_InTriangulation_HasNoNeighbors()
+        {
+            var p1 = new Point2(0, 0);
+            var p2 = new Point2(1, 0);
+            var p3 = new Point2(0, 1);
+
+            var dt = new DelaunayTriangulation(new Point2[] { p1, p2, p3 });
+
+            var t = dt.Triangles[0];
+
+            Assert.IsNull(t.GetNeighbor(0));
+            Assert.IsNull(t.GetNeighbor(1));
+            Assert.IsNull(t.GetNeighbor(2));
+        }
+
         public void Samples()
         {
             // begin-snippet: DelaunayTriangulationConstructor
