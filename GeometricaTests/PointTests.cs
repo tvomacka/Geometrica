@@ -57,6 +57,15 @@ public class PointTests
     }
 
     [TestMethod]
+    public void Point_SquareDistanceTo_ReturnsCorrectValue()
+    {
+        var p = new Point2();
+        var q = new Point2(5, 0);
+
+        Assert.AreEqual(25, p.SquareDistanceTo(q), 3);
+    }
+
+    [TestMethod]
     public void Point_CanBeNormalized_ToUnitLength()
     {
         var p = new Point2(2, 1);
@@ -65,7 +74,7 @@ public class PointTests
     }
 
     [TestMethod]
-    public void TwoPoints_CanBeSubstracted()
+    public void TwoPoints_CanBeSubtracted()
     {
         var p = new Point2(10, 1);
         var q = new Point2(1, 5);

@@ -1,4 +1,6 @@
-﻿using Geometrica.Primitives;
+﻿using System.Runtime.CompilerServices;
+using System.Xml.Linq;
+using Geometrica.Primitives;
 
 namespace Geometrica.DataStructures;
 
@@ -54,8 +56,66 @@ public class DelaunayTriangulation
         };
     }
 
-    public Triangle FindTriangleContainingPoint(Triangle[] triangles, Point2 p)
+    public static Triangle FindTriangleContainingPoint(Triangle[] triangles, Point2 p)
     {
-        return triangles[0];
+        if(triangles.Length == 1)
+        {
+            return triangles[0].Contains(p) ? triangles[0] : null;
+        }
+
+        var startTriangle = EstimateNearestTriangle(triangles, p, new Random());
+
+        return startTriangle;
+
+        //walk to near triangle using orthogonal walk, then use remembering stochastic walk to find the target triangle
+    }
+
+    public static Triangle EstimateNearestTriangle(Triangle[] triangles, Point2 p, Random random)
+    {
+        var minDistance = double.MaxValue;
+        Triangle nearest = null;
+
+        //search n^(1/3.5) triangles first and start the walk from the one, which is nearest to the point p
+        var totalSteps = (int)(Math.Pow(triangles.Length, 0.28571) + 1);
+        for (var i = 0; i < totalSteps; i++)
+        {
+            var tIndex = random.Next(triangles.Length);
+            var vertex = triangles[tIndex][0];
+            var distance = vertex.SquareDistanceTo(p);
+            if (!(distance < minDistance)) continue;
+            nearest = triangles[tIndex];
+            minDistance = distance;
+        }
+
+        return nearest;
+    }
+}
+
+public static class TriangleExtensions
+{
+    private static ConditionalWeakTable<object, Triangle[]> _neighbors = new();
+
+    public static Triangle GetNeighbor(this Triangle t, int index)
+    {
+        var n = _neighbors.GetValue(t, unknown => CreateNeighbors(unknown));
+        return n?[index];
+    }
+
+    public static void SetNeighbor(this Triangle t, int index, Triangle neighbor)
+    {
+        var n = _neighbors.GetValue(t, unknown => CreateNeighbors(unknown));
+        if (n != null)
+        {
+            n[index] = neighbor;
+        }
+        else
+        {
+            throw new NullReferenceException($"Cannot assign neighbor to triangle {t}.");
+        }
+    }
+
+    public static Triangle[] CreateNeighbors(object _)
+    {
+        return new Triangle[3] { null, null, null };
     }
 }
