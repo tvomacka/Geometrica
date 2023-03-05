@@ -56,23 +56,22 @@ public class DelaunayTriangulation
         };
     }
 
-    public Triangle FindTriangleContainingPoint(Triangle[] triangles, Point2 p)
+    public static Triangle FindTriangleContainingPoint(Triangle[] triangles, Point2 p)
     {
         if(triangles.Length == 1)
         {
             return triangles[0].Contains(p) ? triangles[0] : null;
         }
 
-        var startTriangle = EstimateNearestTriangle(triangles, p);
+        var startTriangle = EstimateNearestTriangle(triangles, p, new Random());
 
         return startTriangle;
 
         //walk to near triangle using orthogonal walk, then use remembering stochastic walk to find the target triangle
     }
 
-    private Triangle EstimateNearestTriangle(Triangle[] triangles, Point2 p)
+    public static Triangle EstimateNearestTriangle(Triangle[] triangles, Point2 p, Random random)
     {
-        var r = new Random();
         var minDistance = double.MaxValue;
         Triangle nearest = null;
 
@@ -80,7 +79,7 @@ public class DelaunayTriangulation
         var searched = (int)(Math.Pow(triangles.Length, 0.28571) + 1);
         for (var i = 0; i < searched; i++)
         {
-            var tIndex = r.Next(triangles.Length);
+            var tIndex = random.Next(triangles.Length);
             var vertex = triangles[tIndex][0];
             var distance = vertex.SquareDistanceTo(p);
             if (!(distance < minDistance)) continue;
