@@ -74,7 +74,7 @@ public class PointTests
     }
 
     [TestMethod]
-    public void TwoPoints_CanBeSubstracted()
+    public void TwoPoints_CanBeSubtracted()
     {
         var p = new Point2(10, 1);
         var q = new Point2(1, 5);
