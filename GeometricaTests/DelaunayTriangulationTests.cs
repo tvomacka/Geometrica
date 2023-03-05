@@ -98,6 +98,19 @@ namespace GeometricaTests
             t.GetNeighbor(-1);
         }
 
+        [TestMethod]
+        [ExpectedException(typeof(IndexOutOfRangeException))]
+        public void AccessingTriangleNeighbor_WithIndex_4ThrowsException()
+        {
+            var p1 = new Point2(0, 0);
+            var p2 = new Point2(1, 0);
+            var p3 = new Point2(0, 1);
+
+            var t = new Triangle(p1, p2, p3);
+
+            t.GetNeighbor(4);
+        }
+
         public void Samples()
         {
             // begin-snippet: DelaunayTriangulationConstructor
