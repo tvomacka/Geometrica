@@ -58,6 +58,9 @@ public class DelaunayTriangulation
     public Triangle FindTriangleContainingPoint(Triangle[] triangles, Point2 p)
     {
         return triangles[0];
+
+        //search n^(1/3.5) triangles first and start the walk from the one, which is nearest to the point p
+        //walk to near triangle using orthogonal walk, then use remembering stochastic walk to find the target triangle
     }
 }
 
