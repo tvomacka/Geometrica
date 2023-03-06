@@ -130,6 +130,26 @@ namespace GeometricaTests
             Assert.AreEqual("Triangle [206; 0] [207; 0] [206,5; 1]", nearest.ToString());
         }
 
+        [TestMethod]
+        public void SplitTriangle_SplitsSingleTriangle_IntoThree()
+        {
+            var p1 = new Point2(0, 0);
+            var p2 = new Point2(1, 0);
+            var p3 = new Point2(0, 1);
+            var p4 = new Point2(0.1, 0.2);
+
+            var triangles = new Triangle[]
+            {
+                new(p1, p2, p3)
+            };
+
+            triangles = DelaunayTriangulation.SplitTriangle(triangles, triangles[0], p4);
+
+            var s = string.Join<Triangle>(" ", triangles);
+
+            Assert.AreEqual("Triangle [0,1; 0,2] [0; 0] [1; 0] Triangle [0,1; 0,2] [1; 0] [0; 1] Triangle [0,1; 0,2] [0; 1] [0; 0]", s);
+        }
+
         public void Samples()
         {
             // begin-snippet: DelaunayTriangulationConstructor
