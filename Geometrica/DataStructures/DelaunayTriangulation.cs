@@ -1,5 +1,4 @@
 ﻿using System.Runtime.CompilerServices;
-using System.Xml.Linq;
 using Geometrica.Primitives;
 
 namespace Geometrica.DataStructures;
