@@ -170,7 +170,7 @@ namespace GeometricaTests
             var s = string.Join<Triangle>(" ", triangles);
 
             Assert.AreEqual(4, triangles.Length);
-            Assert.AreEqual("", s);
+            Assert.AreEqual("Triangle [0,1; 0,2] [0; 0] [1; 0] Triangle [0,1; 0,2] [1; 0] [0; 1] Triangle [0,1; 0,2] [0; 1] [0; 0] Triangle [1; 0] [4; 4] [0; 1]", s);
         }
 
         public void Samples()
