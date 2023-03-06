@@ -170,7 +170,44 @@ namespace GeometricaTests
             var s = string.Join<Triangle>(" ", triangles);
 
             Assert.AreEqual(4, triangles.Length);
-            Assert.AreEqual("Triangle [0,1; 0,2] [0; 0] [1; 0] Triangle [0,1; 0,2] [1; 0] [0; 1] Triangle [0,1; 0,2] [0; 1] [0; 0] Triangle [1; 0] [4; 4] [0; 1]", s);
+            Assert.AreEqual(
+                "Triangle [0,1; 0,2] [0; 0] [1; 0] Triangle [0,1; 0,2] [1; 0] [0; 1] Triangle [0,1; 0,2] [0; 1] [0; 0] Triangle [1; 0] [4; 4] [0; 1]",
+                s);
+        }
+
+        [TestMethod]
+        public void SplitTriangle_ConservesNeighbors_AfterSplit()
+        {
+            var p1 = new Point2(0, 0);
+            var p2 = new Point2(3, 0);
+            var p3 = new Point2(0, 3);
+            var p4 = new Point2(4, 4);
+            var p5 = new Point2(-4, 1);
+            var p6 = new Point2(2, -4);
+
+            var innerPoint = new Point2(0.1, 0.2);
+
+            var t1 = new Triangle(p1, p2, p3);
+            var t2 = new Triangle(p4, p3, p2);
+            var t3 = new Triangle(p5, p1, p3);
+            var t4 = new Triangle(p6, p2, p1);
+
+            t1.SetNeighbor(0, t2);
+            t1.SetNeighbor(1, t3);
+            t1.SetNeighbor(2, t4);
+
+            t2.SetNeighbor(0, t1);
+            t3.SetNeighbor(0, t1);
+            t4.SetNeighbor(0, t1);
+
+            var triangles = new Triangle[] { t1, t2, t3, t4 };
+            triangles = DelaunayTriangulation.SplitTriangle(triangles, triangles[0], innerPoint);
+
+            Assert.AreEqual(6, triangles.Length);
+
+            Assert.AreEqual(t4, triangles[0].GetNeighbor(0));
+            Assert.AreEqual(t2, triangles[1].GetNeighbor(0));
+            Assert.AreEqual(t3, triangles[2].GetNeighbor(0));
         }
 
         public void Samples()
