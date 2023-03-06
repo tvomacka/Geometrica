@@ -45,7 +45,7 @@ public class DelaunayTriangulation
         Points.Add(p);
     }
 
-    public Triangle[] SplitTriangle(Triangle[] triangles, Triangle target, Point2 innerPoint)
+    public static Triangle[] SplitTriangle(Triangle[] triangles, Triangle target, Point2 innerPoint)
     {
         return new Triangle[]
         {
