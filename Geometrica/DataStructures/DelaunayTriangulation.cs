@@ -58,9 +58,9 @@ public class DelaunayTriangulation
             }
             else
             {
-                newTriangles[index++] = new(innerPoint, target[0], target[1]);
-                newTriangles[index++] = new(innerPoint, target[1], target[2]);
-                newTriangles[index++] = new(innerPoint, target[2], target[0]);
+                newTriangles[index++] = new Triangle(innerPoint, target[0], target[1]);
+                newTriangles[index++] = new Triangle(innerPoint, target[1], target[2]);
+                newTriangles[index++] = new Triangle(innerPoint, target[2], target[0]);
             }
         }
 
@@ -127,6 +127,6 @@ public static class TriangleExtensions
 
     public static Triangle[] CreateNeighbors(object _)
     {
-        return new Triangle[3] { null, null, null };
+        return new Triangle[] { null, null, null };
     }
 }
