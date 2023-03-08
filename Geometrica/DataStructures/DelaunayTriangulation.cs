@@ -62,19 +62,9 @@ public class DelaunayTriangulation
                 var t1 = new Triangle(innerPoint, target[1], target[2]);
                 var t2 = new Triangle(innerPoint, target[2], target[0]);
 
-                var targetNeighbor0 = target.GetNeighbor(0);
-                var targetNeighbor1 = target.GetNeighbor(1);
-                var targetNeighbor2 = target.GetNeighbor(2);
-
-                TriangleExtensions.SetNeighbors(t0, targetNeighbor2, t1, t2);
-
-                t1.SetNeighbor(0, targetNeighbor0);
-                t1.SetNeighbor(1, t2);
-                t1.SetNeighbor(2, t0);
-
-                t2.SetNeighbor(0, targetNeighbor1);
-                t2.SetNeighbor(1, t0);
-                t2.SetNeighbor(2, t1);
+                t0.SetNeighbors(target.GetNeighbor(2), t1, t2);
+                t1.SetNeighbors(target.GetNeighbor(0),t2,t0);
+                t2.SetNeighbors(target.GetNeighbor(1), t0, t1);
 
                 newTriangles[index++] = t0;
                 newTriangles[index++] = t1;
