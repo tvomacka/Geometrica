@@ -58,9 +58,12 @@ public class DelaunayTriangulation
             }
             else
             {
-                newTriangles[index++] = new Triangle(innerPoint, target[0], target[1]);
-                newTriangles[index++] = new Triangle(innerPoint, target[1], target[2]);
-                newTriangles[index++] = new Triangle(innerPoint, target[2], target[0]);
+                var t0 = new Triangle(innerPoint, target[0], target[1]);
+                newTriangles[index++] = t0;
+                var t1 = new Triangle(innerPoint, target[1], target[2]);
+                newTriangles[index++] = t1;
+                var t2 = new Triangle(innerPoint, target[2], target[0]);
+                newTriangles[index++] = t2;
             }
         }
 
