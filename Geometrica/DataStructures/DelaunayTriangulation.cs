@@ -62,15 +62,17 @@ public class DelaunayTriangulation
                 var t1 = new Triangle(innerPoint, target[1], target[2]);
                 var t2 = new Triangle(innerPoint, target[2], target[0]);
 
-                t0.SetNeighbor(0, target.GetNeighbor(2));
-                t0.SetNeighbor(1, t1);
-                t0.SetNeighbor(2, t2);
+                var targetNeighbor0 = target.GetNeighbor(0);
+                var targetNeighbor1 = target.GetNeighbor(1);
+                var targetNeighbor2 = target.GetNeighbor(2);
 
-                t1.SetNeighbor(0, target.GetNeighbor(0));
+                TriangleExtensions.SetNeighbors(t0, targetNeighbor2, t1, t2);
+
+                t1.SetNeighbor(0, targetNeighbor0);
                 t1.SetNeighbor(1, t2);
                 t1.SetNeighbor(2, t0);
 
-                t2.SetNeighbor(0, target.GetNeighbor(1));
+                t2.SetNeighbor(0, targetNeighbor1);
                 t2.SetNeighbor(1, t0);
                 t2.SetNeighbor(2, t1);
 
@@ -144,5 +146,12 @@ public static class TriangleExtensions
     public static Triangle[] CreateNeighbors(object _)
     {
         return new Triangle[] { null, null, null };
+    }
+
+    public static void SetNeighbors(this Triangle t, Triangle neighbor0, Triangle neighbor1, Triangle neighbor2)
+    {
+        t.SetNeighbor(0, neighbor0);
+        t.SetNeighbor(1, neighbor1);
+        t.SetNeighbor(2, neighbor2);
     }
 }
