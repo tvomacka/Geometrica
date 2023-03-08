@@ -1,4 +1,5 @@
 ﻿using System.Runtime.CompilerServices;
+using System.Xml.Linq;
 using Geometrica.Primitives;
 
 namespace Geometrica.DataStructures;
@@ -107,6 +108,15 @@ public class DelaunayTriangulation
         }
 
         return nearest;
+    }
+
+    public Triangle OrthogonalWalk(Triangle start, Point2 p)
+    {
+        //determine if the starting triangle is left or right of the queried point p
+        //traverse triangles to the determined direction of x-axis until the queried point's x-coordinate is reached
+        //repeat in the y-direction
+        
+        return null;
     }
 }
 
