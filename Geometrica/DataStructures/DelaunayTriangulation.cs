@@ -49,7 +49,7 @@ public class DelaunayTriangulation
     {
         var newTriangles = new Triangle[triangles.Length + 2];
 
-        int index = 0;
+        var index = 0;
         foreach (var t in triangles)
         {
             if (t != target)
