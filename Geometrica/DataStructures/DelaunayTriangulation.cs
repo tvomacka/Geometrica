@@ -120,7 +120,7 @@ public class DelaunayTriangulation
         var controlPoint = start[controlPointIndex]; //the point of the current node nearest to the tested point
 
         //Edge oppositeEdge = startingNode.T.GetOppositeEdge(controlPoint);   //opposite edge to the control point
-        var startingTriangle = start;
+        var currentTriangle = start;
         var previousTriangle = start.GetNeighbor(controlPointIndex);
         var middleX = (start[(controlPointIndex + 1) % 3].X + start[(controlPointIndex + 2) % 3].X) * 0.5;
         var middleY = (start[(controlPointIndex + 1) % 3].Y + start[(controlPointIndex + 2) % 3].Y) * 0.5;
@@ -129,22 +129,22 @@ public class DelaunayTriangulation
         {
             while (controlPoint.X < p.X)
             {
-                previousTriangle = startingTriangle;
+                previousTriangle = currentTriangle;
 
                 if (controlPoint.Y > middleY)
-                    startingTriangle = startingTriangle.GetNeighbor((controlPointIndex + 1) % 3);
+                    currentTriangle = currentTriangle.GetNeighbor((controlPointIndex + 1) % 3);
                 else
-                    startingTriangle = startingTriangle.GetNeighbor((controlPointIndex + 2) % 3);
+                    currentTriangle = currentTriangle.GetNeighbor((controlPointIndex + 2) % 3);
 
-                if (startingTriangle == null)
+                if (currentTriangle == null)
                 {
-                    startingTriangle = previousTriangle;
+                    currentTriangle = previousTriangle;
                     break;
                 }
                 else
                 {
-                    controlPointIndex = startingTriangle.GetNeighborIndex(previousTriangle);
-                    controlPoint = startingTriangle[controlPointIndex];
+                    controlPointIndex = currentTriangle.GetNeighborIndex(previousTriangle);
+                    controlPoint = currentTriangle[controlPointIndex];
                 }
             }
         }
