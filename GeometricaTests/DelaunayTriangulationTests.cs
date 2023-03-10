@@ -256,6 +256,20 @@ namespace GeometricaTests
             Assert.AreEqual(0, i);
         }
 
+        [TestMethod]
+        public void GetNearestVertexIndex_ReturnsCorrectIndex()
+        {
+            var p1 = new Point2(0, 0);
+            var p2 = new Point2(3, 0);
+            var p3 = new Point2(1, 3);
+
+            var t = new Triangle(p1, p2, p3);
+
+            Assert.AreEqual(0, DelaunayTriangulation.GetNearestVertexIndexX(t, new Point2(-1, 0)));
+            Assert.AreEqual(1, DelaunayTriangulation.GetNearestVertexIndexX(t, new Point2(4, 0)));
+            Assert.AreEqual(2, DelaunayTriangulation.GetNearestVertexIndexX(t, new Point2(0.9, 0)));
+        }
+
         public void Samples()
         {
             // begin-snippet: DelaunayTriangulationConstructor
