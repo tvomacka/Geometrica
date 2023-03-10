@@ -115,7 +115,56 @@ public class DelaunayTriangulation
         //determine if the starting triangle is left or right of the queried point p
         //traverse triangles to the determined direction of x-axis until the queried point's x-coordinate is reached
         //repeat in the y-direction
-        
+
+        var distX1 = Math.Abs(start[0].X - p.X);
+        var distX2 = Math.Abs(start[1].X - p.X);
+        var distX3 = Math.Abs(start[2].X - p.X);
+
+        Point2 controlPoint;   //the point of the current node nearest to the tested point
+        int controlPointIndex = 0;
+        if (distX1 < distX2 && distX1 < distX3)
+            controlPoint = start[0];
+        else if (distX2 < distX3)
+        {
+            controlPoint = start[1];
+            controlPointIndex = 1;
+        }
+        else
+        {
+            controlPoint = start[2];
+            controlPointIndex = 2;
+        }
+
+        //Edge oppositeEdge = startingNode.T.GetOppositeEdge(controlPoint);   //opposite edge to the control point
+        var startingTriangle = start;
+        var previousTriangle = start.GetNeighbor(controlPointIndex);
+        var middleX = (start[(controlPointIndex + 1) % 3].X + start[(controlPointIndex + 2) % 3].X) * 0.5;
+        var middleY = (start[(controlPointIndex + 1) % 3].Y + start[(controlPointIndex + 2) % 3].Y) * 0.5;
+
+        if (middleX < p.X)  //approach the point from lower x values
+        {
+            while (controlPoint.X < p.X)
+            {
+                previousTriangle = startingTriangle;
+
+                if (controlPoint.Y > middleY)
+                    startingTriangle = startingTriangle.GetNeighbor((controlPointIndex + 1) % 3);
+                else
+                    startingTriangle = startingTriangle.GetNeighbor((controlPointIndex + 2) % 3);
+
+                if (startingTriangle == null)
+                {
+                    startingTriangle = previousTriangle;
+                    break;
+                }
+                else
+                {
+                    controlPointIndex = startingTriangle.GetNeighborIndex(previousTriangle);
+                    controlPoint = startingTriangle[controlPointIndex];
+                }
+            }
+        }
+
         return null;
     }
 }
@@ -153,5 +202,21 @@ public static class TriangleExtensions
         t.SetNeighbor(0, neighbor0);
         t.SetNeighbor(1, neighbor1);
         t.SetNeighbor(2, neighbor2);
+    }
+
+    public static int GetNeighborIndex(this Triangle t, Triangle neighbor)
+    {
+        if (neighbor == null)
+        {
+            throw new ArgumentNullException(nameof(neighbor), "Attempting to search a null neighbor. Please provide a valid triangle.");
+        }
+        for (var i = 0; i < 3; i++)
+        {
+            if (t.GetNeighbor(i) == neighbor) return i;
+        }
+
+        throw new ArgumentException($"Cannot determine the neighbor index.\n"
+        + $"Target triangle: {t}\n"
+        + $"Neighbor triangle: {neighbor}");
     }
 }
