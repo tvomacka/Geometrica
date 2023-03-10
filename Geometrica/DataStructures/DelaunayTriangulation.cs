@@ -154,7 +154,6 @@ public class DelaunayTriangulation
 
     public static int GetNearestVertexIndex(Triangle triangle, Point2 p)
     {
-        var controlPointIndex = 0;
 
         var distX1 = Math.Abs(triangle[0].X - p.X);
         var distX2 = Math.Abs(triangle[1].X - p.X);
@@ -162,17 +161,10 @@ public class DelaunayTriangulation
 
         if (distX1 < distX2 && distX1 < distX3)
         {
-        }
-        else if (distX2 < distX3)
-        {
-            controlPointIndex = 1;
-        }
-        else
-        {
-            controlPointIndex = 2;
+            return 0;
         }
 
-        return controlPointIndex;
+        return distX2 < distX3 ? 1 : 2;
     }
 }
 
