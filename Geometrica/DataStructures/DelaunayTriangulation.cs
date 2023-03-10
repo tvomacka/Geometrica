@@ -116,7 +116,7 @@ public class DelaunayTriangulation
         //traverse triangles to the determined direction of x-axis until the queried point's x-coordinate is reached
         //repeat in the y-direction
 
-        var controlPointIndex = GetNearestVertexIndex(start, p);
+        var controlPointIndex = GetNearestVertexIndexX(start, p);
         var controlPoint = start[controlPointIndex]; //the point of the current node nearest to the tested point
 
         //Edge oppositeEdge = startingNode.T.GetOppositeEdge(controlPoint);   //opposite edge to the control point
@@ -152,7 +152,7 @@ public class DelaunayTriangulation
         return null;
     }
 
-    public static int GetNearestVertexIndex(Triangle triangle, Point2 p)
+    public static int GetNearestVertexIndexX(Triangle triangle, Point2 p)
     {
 
         var distX1 = Math.Abs(triangle[0].X - p.X);
