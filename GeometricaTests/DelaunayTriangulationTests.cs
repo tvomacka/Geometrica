@@ -210,6 +210,53 @@ namespace GeometricaTests
             Assert.AreEqual(t3, triangles[2].GetNeighbor(0));
         }
 
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void SearchForNullNeighbor_ThrowsException()
+        {
+            var p1 = new Point2(0, 0);
+            var p2 = new Point2(3, 0);
+            var p3 = new Point2(0, 3);
+
+            var t = new Triangle(p1, p2, p3);
+
+            t.GetNeighborIndex(null);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void SearchForNeighbor_ThrowsException_IfNoSuchNeighborIsConnected()
+        {
+            var p1 = new Point2(0, 0);
+            var p2 = new Point2(3, 0);
+            var p3 = new Point2(0, 3);
+            var p4 = new Point2(3, 3);
+
+            var t = new Triangle(p1, p2, p3);
+            var n = new Triangle(p3, p4, p2);
+
+            t.GetNeighborIndex(n);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void SearchForNeighbor_ReturnsCorrectIndex_IfNeighborsAreConnected()
+        {
+            var p1 = new Point2(0, 0);
+            var p2 = new Point2(3, 0);
+            var p3 = new Point2(0, 3);
+            var p4 = new Point2(3, 3);
+
+            var t = new Triangle(p1, p2, p3);
+            var n = new Triangle(p3, p4, p2);
+
+            t.SetNeighbor(0, n);
+
+            var i = t.GetNeighborIndex(n);
+
+            Assert.AreEqual(0, i);
+        }
+
         public void Samples()
         {
             // begin-snippet: DelaunayTriangulationConstructor
