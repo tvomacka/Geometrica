@@ -121,7 +121,7 @@ public class DelaunayTriangulation
         var distX3 = Math.Abs(start[2].X - p.X);
 
         Point2 controlPoint;   //the point of the current node nearest to the tested point
-        int controlPointIndex = 0;
+        var controlPointIndex = 0;
         if (distX1 < distX2 && distX1 < distX3)
             controlPoint = start[0];
         else if (distX2 < distX3)
