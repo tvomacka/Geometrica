@@ -239,7 +239,6 @@ namespace GeometricaTests
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
         public void SearchForNeighbor_ReturnsCorrectIndex_IfNeighborsAreConnected()
         {
             var p1 = new Point2(0, 0);
