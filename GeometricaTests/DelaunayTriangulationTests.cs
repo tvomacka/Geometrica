@@ -292,7 +292,7 @@ namespace GeometricaTests
                 }
             }
 
-            var triangles = new Triangle[resolutionX * resolutionY * 4];
+            var triangles = new Triangle[2 * (resolutionX - 1) * (resolutionY - 1)];
             var triangleIndex = 0;
 
             for (var i = 0; i < pts.GetLength(0) - 1; i++)
