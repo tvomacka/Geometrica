@@ -7,7 +7,7 @@ namespace Geometrica.DataStructures;
 public class DelaunayTriangulation
 {
     public Triangle[] Triangles { get; set; }
-    public List<Point2> Points { get; }
+    public List<Point2> Points { get; set; }
 
     public ConvexHull ConvexHull { get; set; }
 
