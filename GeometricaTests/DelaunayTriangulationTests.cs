@@ -273,7 +273,11 @@ namespace GeometricaTests
         [TestMethod]
         public void OrthogonalWalk_InRegularGrid_TraversesToTarget()
         {
-            var t = PrepareRegularGrid(10, 10);
+            var t = PrepareRegularGrid(3, 3);
+            var q = new Point2(2.5, 0.2);
+            var result = t.OrthogonalWalk(t.Triangles[0], q);
+
+            Assert.AreEqual("", t.ToString());
         }
 
         private static DelaunayTriangulation PrepareRegularGrid(int resolutionX, int resolutionY)
