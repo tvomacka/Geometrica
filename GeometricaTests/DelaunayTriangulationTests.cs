@@ -324,6 +324,16 @@ namespace GeometricaTests
             Assert.AreEqual("Triangle [0; 0] [0; 1] [1; 1]", result.ToString());
         }
 
+        [TestMethod]
+        public void OrthogonalWalk_InRegularGrid_Complete()
+        {
+            var t = PrepareRegularGrid(3, 3);
+            var q = new Point2(1.3, 1.9);
+            var result = t.OrthogonalWalk(t.Triangles[0], q);
+
+            Assert.AreEqual("Triangle [1; 0] [1; 1] [2; 1]", result.ToString());
+        }
+
         private static DelaunayTriangulation PrepareRegularGrid(int resolutionX, int resolutionY)
         {
             var pts = new Point2[resolutionX, resolutionY];

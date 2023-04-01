@@ -112,9 +112,7 @@ public class DelaunayTriangulation
 
     public Triangle OrthogonalWalk(Triangle start, Point2 p)
     {
-        var currentTriangle = OrthogonalWalkX(start, p);
-
-        return currentTriangle;
+        return OrthogonalWalkY(OrthogonalWalkX(start, p), p);
     }
 
     public Triangle OrthogonalWalkY(Triangle start, Point2 p)
