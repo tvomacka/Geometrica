@@ -110,6 +110,78 @@ public class DelaunayTriangulation
         return nearest;
     }
 
+    private Triangle RememberingWalk(Triangle start, Point2 q)
+    {
+        //    Node previous = startingNode;
+        //    bool found = false;
+        //    double detP = 1.0, detQ = 1.0;
+
+        //    while (!found)
+        //    {
+        //        Edge e = GetRandomEdge(startingNode.T); //random edge from startingNode
+        //        Point2D p = startingNode.T.GetOppositePoint(e); //point opposit to e
+        //        Node neigh = startingNode.GetNeighbour(e); //neighbour to t over e
+
+        //        if (neigh != null && neigh != previous)
+        //        {
+        //            //the edge is not oriented, but we only want to know if p and q are on opposite sides of the edge
+        //            //or not
+        //            detP = ShewLib.Orient2D(e.V1, e.V2, p);
+        //            detQ = ShewLib.Orient2D(e.V1, e.V2, q);
+        //        }
+        //        else
+        //            detP = detQ = 1.0;
+        //        if (detP * detQ < 0)
+        //        {
+        //            previous = startingNode;
+        //            startingNode = neigh;
+        //        }
+        //        else
+        //        {
+        //            //p = e.V1;   //vertex not contained in next edge
+        //            e = GetNextEdge(startingNode.T, e);   //get next edge of t
+        //            p = startingNode.T.GetOppositePoint(e); //vertex not contained in next edge
+        //            neigh = startingNode.GetNeighbour(e);  //neighbour (t over e)
+
+        //            if (neigh != null && neigh != previous)
+        //            {
+        //                detP = ShewLib.Orient2D(e.V1, e.V2, p);
+        //                detQ = ShewLib.Orient2D(e.V1, e.V2, q);
+        //            }
+        //            else
+        //                detP = detQ = 1.0;
+        //            if (detP * detQ < 0)
+        //            {
+        //                previous = startingNode;
+        //                startingNode = neigh;
+        //            }
+        //            else
+        //            {
+        //                //p = e.V1;   //vertex not contained in next edge
+        //                e = GetNextEdge(startingNode.T, e);     //get next edge of t
+        //                p = startingNode.T.GetOppositePoint(e); //vertex not contained in next edge
+        //                neigh = startingNode.GetNeighbour(e);   //neighbour (t over e)
+
+        //                if (neigh != null && neigh != previous)
+        //                {
+        //                    detP = ShewLib.Orient2D(e.V1, e.V2, p);
+        //                    detQ = ShewLib.Orient2D(e.V1, e.V2, q);
+        //                }
+        //                else
+        //                    detP = detQ = 1.0;
+        //                if (detP * detQ < 0)
+        //                {
+        //                    previous = startingNode;
+        //                    startingNode = neigh;
+        //                }
+        //                else
+        //                    found = true;
+        //            }
+        //        }
+        //    }
+        //    return (startingNode);
+    }
+
     public Triangle OrthogonalWalk(Triangle start, Point2 p)
     {
         return OrthogonalWalkY(OrthogonalWalkX(start, p), p);
