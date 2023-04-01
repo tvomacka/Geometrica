@@ -257,7 +257,7 @@ namespace GeometricaTests
         }
 
         [TestMethod]
-        public void GetNearestVertexIndex_ReturnsCorrectIndex()
+        public void GetNearestVertexIndexX_ReturnsCorrectIndex()
         {
             var p1 = new Point2(0, 0);
             var p2 = new Point2(3, 0);
@@ -268,6 +268,20 @@ namespace GeometricaTests
             Assert.AreEqual(0, DelaunayTriangulation.GetNearestVertexIndexX(t, new Point2(-1, 0)));
             Assert.AreEqual(1, DelaunayTriangulation.GetNearestVertexIndexX(t, new Point2(4, 0)));
             Assert.AreEqual(2, DelaunayTriangulation.GetNearestVertexIndexX(t, new Point2(0.9, 0)));
+        }
+
+        [TestMethod]
+        public void GetNearestVertexIndexY_ReturnsCorrectIndex()
+        {
+            var p1 = new Point2(0, 0);
+            var p2 = new Point2(3, 1);
+            var p3 = new Point2(0, 3);
+
+            var t = new Triangle(p1, p2, p3);
+
+            Assert.AreEqual(0, DelaunayTriangulation.GetNearestVertexIndexY(t, new Point2(0, -1)));
+            Assert.AreEqual(1, DelaunayTriangulation.GetNearestVertexIndexY(t, new Point2(4, 0.9)));
+            Assert.AreEqual(2, DelaunayTriangulation.GetNearestVertexIndexY(t, new Point2(0.9, 6)));
         }
 
         [TestMethod]
@@ -297,7 +311,7 @@ namespace GeometricaTests
             var q = new Point2(0.2, 1.5);
             var result = t.OrthogonalWalkY(t.Triangles[0], q);
 
-            Assert.AreEqual("", result.ToString());
+            Assert.AreEqual("Triangle [0; 1] [1; 2] [1; 1]", result.ToString());
         }
 
         [TestMethod]
@@ -305,9 +319,9 @@ namespace GeometricaTests
         {
             var t = PrepareRegularGrid(3, 3);
             var q = new Point2(0.2, 0);
-            var result = t.OrthogonalWalkY(t.Triangles[3], q);
+            var result = t.OrthogonalWalkY(t.Triangles[4], q);
 
-            Assert.AreEqual("", result.ToString());
+            Assert.AreEqual("Triangle [0; 0] [0; 1] [1; 1]", result.ToString());
         }
 
         private static DelaunayTriangulation PrepareRegularGrid(int resolutionX, int resolutionY)
