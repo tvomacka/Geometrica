@@ -408,6 +408,9 @@ namespace GeometricaTests
             dt.Add(new Point2(0.1, 0.1));
             // end-snippet
 
+            var p5 = new Point2();
+            var p6 = new Point2();
+
             // begin-snippet: TriangleNeighbors
             var t1 = new Triangle(p1, p2, p3);
             var t2 = new Triangle(p4, p3, p2);
