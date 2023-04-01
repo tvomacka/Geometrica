@@ -353,38 +353,38 @@ namespace GeometricaTests
             {
                 for (var i = 0; i < pts.GetLength(0) - 1; i++)
                 {
-                    triangles[triangleIndex++] = new Triangle(pts[i, j], pts[i, j + 1], pts[i + 1, j + 1]);
-                    triangles[triangleIndex++] = new Triangle(pts[i, j], pts[i + 1, j + 1], pts[i + 1, j]);
+                    triangles[triangleIndex++] = new Triangle(pts[i, j], pts[i + 1, j + 1], pts[i, j + 1]);
+                    triangles[triangleIndex++] = new Triangle(pts[i, j], pts[i + 1, j], pts[i + 1, j + 1]);
                 }
             }
 
             for (var i = 0; i < triangles.Length; i++)
             {
                 if (i % 2 != 0) continue;
-                if (i + resolutionX * 2 < triangles.Length)
+                if (i + resolutionX * 2 - 1 < triangles.Length)
                 {
                     triangles[i].SetNeighbor(0, triangles[i + resolutionX * 2 - 1]);
-                    triangles[i + resolutionX * 2 - 1].SetNeighbor(1, triangles[i]);
+                    triangles[i + resolutionX * 2 - 1].SetNeighbor(2, triangles[i]);
                 }
 
-                triangles[i].SetNeighbor(1, triangles[i + 1]);
-                triangles[i + 1].SetNeighbor(2, triangles[i]);
-
-                if(i % (resolutionX * 2) != 0)
+                if (i % (resolutionX + 1) != 0)
                 {
-                    triangles[i].SetNeighbor(2, triangles[i - 1]);
+                    triangles[i].SetNeighbor(1, triangles[i - 1]);
                     triangles[i - 1].SetNeighbor(0, triangles[i]);
                 }
+
+                triangles[i].SetNeighbor(2, triangles[i + 1]);
+                triangles[i + 1].SetNeighbor(1, triangles[i]);
             }
 
             var points = new List<Point2>();
             for (var i = 0; i < pts.GetLength(0); i++)
-            for (var j = 0; j < pts.GetLength(1); j++)
-            {
+                for (var j = 0; j < pts.GetLength(1); j++)
                 {
-                    points.Add(pts[i, j]);
+                    {
+                        points.Add(pts[i, j]);
+                    }
                 }
-            }
 
             return new DelaunayTriangulation()
             {
