@@ -112,74 +112,82 @@ public class DelaunayTriangulation
 
     private Triangle RememberingWalk(Triangle start, Point2 q)
     {
-        //    Node previous = startingNode;
-        //    bool found = false;
-        //    double detP = 1.0, detQ = 1.0;
+        return RememberingWalk(start, q, new Random());
+    }
 
-        //    while (!found)
-        //    {
-        //        Edge e = GetRandomEdge(startingNode.T); //random edge from startingNode
-        //        Point2D p = startingNode.T.GetOppositePoint(e); //point opposit to e
-        //        Node neigh = startingNode.GetNeighbour(e); //neighbour to t over e
+    private Triangle RememberingWalk(Triangle start, Point2 q, Random r)
+    {
+        var previous = start;
+        var found = false;
+        var detP = 1.0;
+        var detQ = 1.0;
 
-        //        if (neigh != null && neigh != previous)
-        //        {
-        //            //the edge is not oriented, but we only want to know if p and q are on opposite sides of the edge
-        //            //or not
-        //            detP = ShewLib.Orient2D(e.V1, e.V2, p);
-        //            detQ = ShewLib.Orient2D(e.V1, e.V2, q);
-        //        }
-        //        else
-        //            detP = detQ = 1.0;
-        //        if (detP * detQ < 0)
-        //        {
-        //            previous = startingNode;
-        //            startingNode = neigh;
-        //        }
-        //        else
-        //        {
-        //            //p = e.V1;   //vertex not contained in next edge
-        //            e = GetNextEdge(startingNode.T, e);   //get next edge of t
-        //            p = startingNode.T.GetOppositePoint(e); //vertex not contained in next edge
-        //            neigh = startingNode.GetNeighbour(e);  //neighbour (t over e)
+        while (!found)
+        {
+            var randomPointIndex = r.Next(3);
+            var randomPoint = start[randomPointIndex];
+            var neigh = start.GetNeighbor(randomPointIndex);
 
-        //            if (neigh != null && neigh != previous)
-        //            {
-        //                detP = ShewLib.Orient2D(e.V1, e.V2, p);
-        //                detQ = ShewLib.Orient2D(e.V1, e.V2, q);
-        //            }
-        //            else
-        //                detP = detQ = 1.0;
-        //            if (detP * detQ < 0)
-        //            {
-        //                previous = startingNode;
-        //                startingNode = neigh;
-        //            }
-        //            else
-        //            {
-        //                //p = e.V1;   //vertex not contained in next edge
-        //                e = GetNextEdge(startingNode.T, e);     //get next edge of t
-        //                p = startingNode.T.GetOppositePoint(e); //vertex not contained in next edge
-        //                neigh = startingNode.GetNeighbour(e);   //neighbour (t over e)
+            if (neigh != null && neigh != previous)
+            {
+                //the edge is not oriented, but we only want to know if p and q are on opposite sides of the edge
+                //or not
+                detP = Point2.Orientation(start[(randomPointIndex + 1) % 3], start[(randomPointIndex + 2) % 3], randomPoint);
+                detQ = Point2.Orientation(start[(randomPointIndex + 1) % 3], start[(randomPointIndex + 2) % 3], q);
+            }
+            else
+                detP = detQ = 1.0;
+            if (detP * detQ < 0)
+            {
+                previous = start;
+                start = neigh;
+            }
+            else
+            {
+                randomPointIndex++;
+                randomPoint = start[randomPointIndex];
+                neigh = start.GetNeighbor(randomPointIndex);
 
-        //                if (neigh != null && neigh != previous)
-        //                {
-        //                    detP = ShewLib.Orient2D(e.V1, e.V2, p);
-        //                    detQ = ShewLib.Orient2D(e.V1, e.V2, q);
-        //                }
-        //                else
-        //                    detP = detQ = 1.0;
-        //                if (detP * detQ < 0)
-        //                {
-        //                    previous = startingNode;
-        //                    startingNode = neigh;
-        //                }
-        //                else
-        //                    found = true;
-        //            }
-        //        }
-        //    }
-        //    return (startingNode);
+                if (neigh != null && neigh != previous)
+                {
+                    //the edge is not oriented, but we only want to know if p and q are on opposite sides of the edge
+                    //or not
+                    detP = Point2.Orientation(start[(randomPointIndex + 1) % 3], start[(randomPointIndex + 2) % 3], randomPoint);
+                    detQ = Point2.Orientation(start[(randomPointIndex + 1) % 3], start[(randomPointIndex + 2) % 3], q);
+                }
+                else
+                    detP = detQ = 1.0;
+                if (detP * detQ < 0)
+                {
+                    previous = start;
+                    start = neigh;
+                }
+                else
+                {
+                    randomPointIndex++;
+                    randomPoint = start[randomPointIndex];
+                    neigh = start.GetNeighbor(randomPointIndex);
+
+                    if (neigh != null && neigh != previous)
+                    {
+                        //the edge is not oriented, but we only want to know if p and q are on opposite sides of the edge
+                        //or not
+                        detP = Point2.Orientation(start[(randomPointIndex + 1) % 3], start[(randomPointIndex + 2) % 3], randomPoint);
+                        detQ = Point2.Orientation(start[(randomPointIndex + 1) % 3], start[(randomPointIndex + 2) % 3], q);
+                    }
+                    else
+                        detP = detQ = 1.0;
+                    if (detP * detQ < 0)
+                    {
+                        previous = start;
+                        start = neigh;
+                    }
+                    else
+                        found = true;
+                }
+            }
+        }
+        return (start);
     }
 
     public Triangle OrthogonalWalk(Triangle start, Point2 p)
