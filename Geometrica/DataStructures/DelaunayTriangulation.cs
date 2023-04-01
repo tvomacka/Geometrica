@@ -131,7 +131,7 @@ public class DelaunayTriangulation
             {
                 previousTriangle = currentTriangle;
 
-                if (controlPoint.Y > middleY)
+                if (controlPoint.Y < middleY)
                     currentTriangle = currentTriangle.GetNeighbor((controlPointIndex + 1) % 3);
                 else
                     currentTriangle = currentTriangle.GetNeighbor((controlPointIndex + 2) % 3);
@@ -148,8 +148,31 @@ public class DelaunayTriangulation
                 }
             }
         }
+        else
+        {
+            while (controlPoint.X > p.X)
+            {
+                previousTriangle = currentTriangle;
 
-        return null;
+                if (controlPoint.Y < middleY)
+                    currentTriangle = currentTriangle.GetNeighbor((controlPointIndex + 2) % 3);
+                else
+                    currentTriangle = currentTriangle.GetNeighbor((controlPointIndex + 1) % 3);
+
+                if (currentTriangle == null)
+                {
+                    currentTriangle = previousTriangle;
+                    break;
+                }
+                else
+                {
+                    controlPointIndex = currentTriangle.GetNeighborIndex(previousTriangle);
+                    controlPoint = currentTriangle[controlPointIndex];
+                }
+            }
+        }
+
+        return currentTriangle;
     }
 
     public static int GetNearestVertexIndexX(Triangle triangle, Point2 p)

@@ -271,13 +271,23 @@ namespace GeometricaTests
         }
 
         [TestMethod]
-        public void OrthogonalWalk_InRegularGrid_TraversesToTarget()
+        public void OrthogonalWalk_InRegularGrid_TraversesPositiveXDirectionToTarget()
         {
             var t = PrepareRegularGrid(3, 3);
             var q = new Point2(1.5, 0.2);
             var result = t.OrthogonalWalk(t.Triangles[0], q);
 
-            Assert.AreEqual("", result.ToString());
+            Assert.AreEqual("Triangle [1; 0] [1; 1] [2; 1]", result.ToString());
+        }
+
+        [TestMethod]
+        public void OrthogonalWalk_InRegularGrid_TraversesNegativeXDirectionToTarget()
+        {
+            var t = PrepareRegularGrid(3, 3);
+            var q = new Point2(0, 0.2);
+            var result = t.OrthogonalWalk(t.Triangles[3], q);
+
+            Assert.AreEqual("Triangle [0; 0] [1; 1] [1; 0]", result.ToString());
         }
 
         private static DelaunayTriangulation PrepareRegularGrid(int resolutionX, int resolutionY)
