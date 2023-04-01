@@ -295,9 +295,9 @@ namespace GeometricaTests
             var triangles = new Triangle[2 * (resolutionX - 1) * (resolutionY - 1)];
             var triangleIndex = 0;
 
-            for (var i = 0; i < pts.GetLength(0) - 1; i++)
+            for (var j = 0; j < pts.GetLength(1) - 1; j++)
             {
-                for (var j = 0; j < pts.GetLength(1) - 1; j++)
+                for (var i = 0; i < pts.GetLength(0) - 1; i++)
                 {
                     triangles[triangleIndex++] = new Triangle(pts[i, j], pts[i, j + 1], pts[i + 1, j + 1]);
                     triangles[triangleIndex++] = new Triangle(pts[i, j], pts[i + 1, j + 1], pts[i + 1, j]);
