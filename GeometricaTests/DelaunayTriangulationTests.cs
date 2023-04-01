@@ -311,7 +311,7 @@ namespace GeometricaTests
             var q = new Point2(0.2, 1.5);
             var result = t.OrthogonalWalkY(t.Triangles[0], q);
 
-            Assert.AreEqual("Triangle [0; 1] [1; 2] [1; 1]", result.ToString());
+            Assert.AreEqual("Triangle [0; 1] [1; 1] [1; 2]", result.ToString());
         }
 
         [TestMethod]

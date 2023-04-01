@@ -137,9 +137,9 @@ public class DelaunayTriangulation
                 previousTriangle = currentTriangle;
 
                 if (controlPoint.X < middleX)
-                    currentTriangle = currentTriangle.GetNeighbor((controlPointIndex + 2) % 3);
-                else
                     currentTriangle = currentTriangle.GetNeighbor((controlPointIndex + 1) % 3);
+                else
+                    currentTriangle = currentTriangle.GetNeighbor((controlPointIndex + 2) % 3);
 
                 if (currentTriangle == null)
                 {
