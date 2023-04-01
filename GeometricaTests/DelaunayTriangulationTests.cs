@@ -295,9 +295,9 @@ namespace GeometricaTests
         {
             var t = PrepareRegularGrid(3, 3);
             var q = new Point2(0.2, 1.5);
-            var result = t.OrthogonalWalkX(t.Triangles[0], q);
+            var result = t.OrthogonalWalkY(t.Triangles[0], q);
 
-            Assert.AreEqual("Triangle [1; 0] [1; 1] [2; 1]", result.ToString());
+            Assert.AreEqual("", result.ToString());
         }
 
         [TestMethod]
@@ -305,9 +305,9 @@ namespace GeometricaTests
         {
             var t = PrepareRegularGrid(3, 3);
             var q = new Point2(0.2, 0);
-            var result = t.OrthogonalWalkX(t.Triangles[3], q);
+            var result = t.OrthogonalWalkY(t.Triangles[3], q);
 
-            Assert.AreEqual("Triangle [0; 0] [1; 1] [1; 0]", result.ToString());
+            Assert.AreEqual("", result.ToString());
         }
 
         private static DelaunayTriangulation PrepareRegularGrid(int resolutionX, int resolutionY)
