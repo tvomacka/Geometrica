@@ -274,10 +274,10 @@ namespace GeometricaTests
         public void OrthogonalWalk_InRegularGrid_TraversesToTarget()
         {
             var t = PrepareRegularGrid(3, 3);
-            var q = new Point2(2.5, 0.2);
+            var q = new Point2(1.5, 0.2);
             var result = t.OrthogonalWalk(t.Triangles[0], q);
 
-            Assert.AreEqual("", t.ToString());
+            Assert.AreEqual("", result.ToString());
         }
 
         private static DelaunayTriangulation PrepareRegularGrid(int resolutionX, int resolutionY)
@@ -306,26 +306,20 @@ namespace GeometricaTests
 
             for (var i = 0; i < triangles.Length; i++)
             {
-                if (i % 2 == 0)
+                if (i % 2 != 0) continue;
+                if (i + resolutionX * 2 < triangles.Length)
                 {
-                    if (i + resolutionX * 2 < triangles.Length)
-                    {
-                        triangles[i].SetNeighbor(0, triangles[i + resolutionX * 2]);
-                        triangles[i + resolutionX * 2].SetNeighbor(1, triangles[i]);
-                    }
-
-                    triangles[i].SetNeighbor(1, triangles[i + 1]);
-                    triangles[i + 1].SetNeighbor(2, triangles[i]);
-
-                    if(i % (resolutionX * 2) != 0)
-                    {
-                        triangles[i].SetNeighbor(2, triangles[i - 1]);
-                        triangles[i - 1].SetNeighbor(0, triangles[i]);
-                    }
+                    triangles[i].SetNeighbor(0, triangles[i + resolutionX * 2 - 1]);
+                    triangles[i + resolutionX * 2 - 1].SetNeighbor(1, triangles[i]);
                 }
-                else
+
+                triangles[i].SetNeighbor(1, triangles[i + 1]);
+                triangles[i + 1].SetNeighbor(2, triangles[i]);
+
+                if(i % (resolutionX * 2) != 0)
                 {
-                    triangles[i].SetNeighbors(triangles[0], triangles[1], triangles[2]);
+                    triangles[i].SetNeighbor(2, triangles[i - 1]);
+                    triangles[i - 1].SetNeighbor(0, triangles[i]);
                 }
             }
 
