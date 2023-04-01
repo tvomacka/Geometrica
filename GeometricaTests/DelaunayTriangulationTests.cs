@@ -275,7 +275,7 @@ namespace GeometricaTests
         {
             var t = PrepareRegularGrid(3, 3);
             var q = new Point2(1.5, 0.2);
-            var result = t.OrthogonalWalk(t.Triangles[0], q);
+            var result = t.OrthogonalWalkX(t.Triangles[0], q);
 
             Assert.AreEqual("Triangle [1; 0] [1; 1] [2; 1]", result.ToString());
         }
@@ -285,7 +285,7 @@ namespace GeometricaTests
         {
             var t = PrepareRegularGrid(3, 3);
             var q = new Point2(0, 0.2);
-            var result = t.OrthogonalWalk(t.Triangles[3], q);
+            var result = t.OrthogonalWalkX(t.Triangles[3], q);
 
             Assert.AreEqual("Triangle [0; 0] [1; 1] [1; 0]", result.ToString());
         }

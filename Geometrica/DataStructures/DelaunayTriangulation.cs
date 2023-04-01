@@ -112,6 +112,13 @@ public class DelaunayTriangulation
 
     public Triangle OrthogonalWalk(Triangle start, Point2 p)
     {
+        var currentTriangle = OrthogonalWalkX(start, p);
+
+        return currentTriangle;
+    }
+
+    public Triangle OrthogonalWalkX(Triangle start, Point2 p)
+    {
         //determine if the starting triangle is left or right of the queried point p
         //traverse triangles to the determined direction of x-axis until the queried point's x-coordinate is reached
         //repeat in the y-direction
@@ -125,7 +132,7 @@ public class DelaunayTriangulation
         var middleX = (start[(controlPointIndex + 1) % 3].X + start[(controlPointIndex + 2) % 3].X) * 0.5;
         var middleY = (start[(controlPointIndex + 1) % 3].Y + start[(controlPointIndex + 2) % 3].Y) * 0.5;
 
-        if (middleX < p.X)  //approach the point from lower x values
+        if (middleX < p.X) //approach the point from lower x values
         {
             while (controlPoint.X < p.X)
             {
@@ -148,7 +155,7 @@ public class DelaunayTriangulation
                 }
             }
         }
-        else
+        else //approach from higher x-values
         {
             while (controlPoint.X > p.X)
             {
