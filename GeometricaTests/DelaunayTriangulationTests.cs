@@ -210,6 +210,189 @@ namespace GeometricaTests
             Assert.AreEqual(t3, triangles[2].GetNeighbor(0));
         }
 
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void SearchForNullNeighbor_ThrowsException()
+        {
+            var p1 = new Point2(0, 0);
+            var p2 = new Point2(3, 0);
+            var p3 = new Point2(0, 3);
+
+            var t = new Triangle(p1, p2, p3);
+
+            t.GetNeighborIndex(null);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void SearchForNeighbor_ThrowsException_IfNoSuchNeighborIsConnected()
+        {
+            var p1 = new Point2(0, 0);
+            var p2 = new Point2(3, 0);
+            var p3 = new Point2(0, 3);
+            var p4 = new Point2(3, 3);
+
+            var t = new Triangle(p1, p2, p3);
+            var n = new Triangle(p3, p4, p2);
+
+            t.GetNeighborIndex(n);
+        }
+
+        [TestMethod]
+        public void SearchForNeighbor_ReturnsCorrectIndex_IfNeighborsAreConnected()
+        {
+            var p1 = new Point2(0, 0);
+            var p2 = new Point2(3, 0);
+            var p3 = new Point2(0, 3);
+            var p4 = new Point2(3, 3);
+
+            var t = new Triangle(p1, p2, p3);
+            var n = new Triangle(p3, p4, p2);
+
+            t.SetNeighbor(0, n);
+
+            var i = t.GetNeighborIndex(n);
+
+            Assert.AreEqual(0, i);
+        }
+
+        [TestMethod]
+        public void GetNearestVertexIndexX_ReturnsCorrectIndex()
+        {
+            var p1 = new Point2(0, 0);
+            var p2 = new Point2(3, 0);
+            var p3 = new Point2(1, 3);
+
+            var t = new Triangle(p1, p2, p3);
+
+            Assert.AreEqual(0, DelaunayTriangulation.GetNearestVertexIndexX(t, new Point2(-1, 0)));
+            Assert.AreEqual(1, DelaunayTriangulation.GetNearestVertexIndexX(t, new Point2(4, 0)));
+            Assert.AreEqual(2, DelaunayTriangulation.GetNearestVertexIndexX(t, new Point2(0.9, 0)));
+        }
+
+        [TestMethod]
+        public void GetNearestVertexIndexY_ReturnsCorrectIndex()
+        {
+            var p1 = new Point2(0, 0);
+            var p2 = new Point2(3, 1);
+            var p3 = new Point2(0, 3);
+
+            var t = new Triangle(p1, p2, p3);
+
+            Assert.AreEqual(0, DelaunayTriangulation.GetNearestVertexIndexY(t, new Point2(0, -1)));
+            Assert.AreEqual(1, DelaunayTriangulation.GetNearestVertexIndexY(t, new Point2(4, 0.9)));
+            Assert.AreEqual(2, DelaunayTriangulation.GetNearestVertexIndexY(t, new Point2(0.9, 6)));
+        }
+
+        [TestMethod]
+        public void OrthogonalWalk_InRegularGrid_TraversesPositiveXDirectionToTarget()
+        {
+            var t = PrepareRegularGrid(3, 3);
+            var q = new Point2(1.5, 0.2);
+            var result = t.OrthogonalWalkX(t.Triangles[0], q);
+
+            Assert.AreEqual("Triangle [1; 0] [2; 1] [1; 1]", result.ToString());
+        }
+
+        [TestMethod]
+        public void OrthogonalWalk_InRegularGrid_TraversesNegativeXDirectionToTarget()
+        {
+            var t = PrepareRegularGrid(3, 3);
+            var q = new Point2(0, 0.2);
+            var result = t.OrthogonalWalkX(t.Triangles[3], q);
+
+            Assert.AreEqual("Triangle [0; 0] [1; 0] [1; 1]", result.ToString());
+        }
+
+        [TestMethod]
+        public void OrthogonalWalk_InRegularGrid_TraversesPositiveYDirectionToTarget()
+        {
+            var t = PrepareRegularGrid(3, 3);
+            var q = new Point2(0.2, 1.5);
+            var result = t.OrthogonalWalkY(t.Triangles[0], q);
+
+            Assert.AreEqual("Triangle [0; 1] [1; 1] [1; 2]", result.ToString());
+        }
+
+        [TestMethod]
+        public void OrthogonalWalk_InRegularGrid_TraversesNegativeYDirectionToTarget()
+        {
+            var t = PrepareRegularGrid(3, 3);
+            var q = new Point2(0.2, 0);
+            var result = t.OrthogonalWalkY(t.Triangles[4], q);
+
+            Assert.AreEqual("Triangle [0; 0] [1; 1] [0; 1]", result.ToString());
+        }
+
+        [TestMethod]
+        public void OrthogonalWalk_InRegularGrid_Complete()
+        {
+            var t = PrepareRegularGrid(3, 3);
+            var q = new Point2(1.3, 1.9);
+            var result = t.OrthogonalWalk(t.Triangles[0], q);
+
+            Assert.AreEqual("Triangle [1; 1] [2; 1] [2; 2]", result.ToString());
+        }
+
+        private static DelaunayTriangulation PrepareRegularGrid(int resolutionX, int resolutionY)
+        {
+            var pts = new Point2[resolutionX, resolutionY];
+
+            for (var i = 0; i < pts.GetLength(0); i++)
+            {
+                for (var j = 0; j < pts.GetLength(1); j++)
+                {
+                    pts[i, j] = new Point2(i, j);
+                }
+            }
+
+            var triangles = new Triangle[2 * (resolutionX - 1) * (resolutionY - 1)];
+            var triangleIndex = 0;
+
+            for (var j = 0; j < pts.GetLength(1) - 1; j++)
+            {
+                for (var i = 0; i < pts.GetLength(0) - 1; i++)
+                {
+                    triangles[triangleIndex++] = new Triangle(pts[i, j], pts[i + 1, j + 1], pts[i, j + 1]);
+                    triangles[triangleIndex++] = new Triangle(pts[i, j], pts[i + 1, j], pts[i + 1, j + 1]);
+                }
+            }
+
+            for (var i = 0; i < triangles.Length; i++)
+            {
+                if (i % 2 != 0) continue;
+                if (i + resolutionX * 2 - 1 < triangles.Length)
+                {
+                    triangles[i].SetNeighbor(0, triangles[i + resolutionX * 2 - 1]);
+                    triangles[i + resolutionX * 2 - 1].SetNeighbor(2, triangles[i]);
+                }
+
+                if (i % (resolutionX + 1) != 0)
+                {
+                    triangles[i].SetNeighbor(1, triangles[i - 1]);
+                    triangles[i - 1].SetNeighbor(0, triangles[i]);
+                }
+
+                triangles[i].SetNeighbor(2, triangles[i + 1]);
+                triangles[i + 1].SetNeighbor(1, triangles[i]);
+            }
+
+            var points = new List<Point2>();
+            for (var i = 0; i < pts.GetLength(0); i++)
+                for (var j = 0; j < pts.GetLength(1); j++)
+                {
+                    {
+                        points.Add(pts[i, j]);
+                    }
+                }
+
+            return new DelaunayTriangulation()
+            {
+                Points = new List<Point2>(points),
+                Triangles = triangles
+            };
+        }
+
         public void Samples()
         {
             // begin-snippet: DelaunayTriangulationConstructor

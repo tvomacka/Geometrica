@@ -1,4 +1,5 @@
 ﻿using System.Runtime.CompilerServices;
+using System.Xml.Linq;
 using Geometrica.Primitives;
 
 namespace Geometrica.DataStructures;
@@ -6,7 +7,7 @@ namespace Geometrica.DataStructures;
 public class DelaunayTriangulation
 {
     public Triangle[] Triangles { get; set; }
-    public List<Point2> Points { get; }
+    public List<Point2> Points { get; set; }
 
     public ConvexHull ConvexHull { get; set; }
 
@@ -108,6 +109,171 @@ public class DelaunayTriangulation
 
         return nearest;
     }
+
+    public Triangle OrthogonalWalk(Triangle start, Point2 p)
+    {
+        return OrthogonalWalkY(OrthogonalWalkX(start, p), p);
+    }
+
+    public Triangle OrthogonalWalkY(Triangle start, Point2 p)
+    {
+        //determine if the starting triangle is left or right of the queried point p
+        //traverse triangles to the determined direction of x-axis until the queried point's x-coordinate is reached
+        //repeat in the y-direction
+
+        var controlPointIndex = GetNearestVertexIndexY(start, p);
+        var controlPoint = start[controlPointIndex]; //the point of the current node nearest to the tested point
+
+        //Edge oppositeEdge = startingNode.T.GetOppositeEdge(controlPoint);   //opposite edge to the control point
+        var currentTriangle = start;
+        var previousTriangle = start.GetNeighbor(controlPointIndex);
+        var middleX = (start[(controlPointIndex + 1) % 3].X + start[(controlPointIndex + 2) % 3].X) * 0.5;
+        var middleY = (start[(controlPointIndex + 1) % 3].Y + start[(controlPointIndex + 2) % 3].Y) * 0.5;
+
+        if (middleY < p.Y) //approach the point from lower y values
+        {
+            while (controlPoint.Y < p.Y)
+            {
+                previousTriangle = currentTriangle;
+
+                if (controlPoint.X < middleX)
+                    currentTriangle = currentTriangle.GetNeighbor((controlPointIndex + 1) % 3);
+                else
+                    currentTriangle = currentTriangle.GetNeighbor((controlPointIndex + 2) % 3);
+
+                if (currentTriangle == null)
+                {
+                    currentTriangle = previousTriangle;
+                    break;
+                }
+                else
+                {
+                    controlPointIndex = currentTriangle.GetNeighborIndex(previousTriangle);
+                    controlPoint = currentTriangle[controlPointIndex];
+                }
+            }
+        }
+        else //approach from higher x-values
+        {
+            while (p.Y < controlPoint.Y)
+            {
+                previousTriangle = currentTriangle;
+
+                if (controlPoint.X < middleX)
+                    currentTriangle = currentTriangle.GetNeighbor((controlPointIndex + 2) % 3);
+                else
+                    currentTriangle = currentTriangle.GetNeighbor((controlPointIndex + 1) % 3);
+
+                if (currentTriangle == null)
+                {
+                    currentTriangle = previousTriangle;
+                    break;
+                }
+                else
+                {
+                    controlPointIndex = currentTriangle.GetNeighborIndex(previousTriangle);
+                    controlPoint = currentTriangle[controlPointIndex];
+                }
+            }
+        }
+
+        return currentTriangle;
+    }
+
+    public Triangle OrthogonalWalkX(Triangle start, Point2 p)
+    {
+        //determine if the starting triangle is left or right of the queried point p
+        //traverse triangles to the determined direction of x-axis until the queried point's x-coordinate is reached
+        //repeat in the y-direction
+
+        var controlPointIndex = GetNearestVertexIndexX(start, p);
+        var controlPoint = start[controlPointIndex]; //the point of the current node nearest to the tested point
+
+        //Edge oppositeEdge = startingNode.T.GetOppositeEdge(controlPoint);   //opposite edge to the control point
+        var currentTriangle = start;
+        var previousTriangle = start.GetNeighbor(controlPointIndex);
+        var middleX = (start[(controlPointIndex + 1) % 3].X + start[(controlPointIndex + 2) % 3].X) * 0.5;
+        var middleY = (start[(controlPointIndex + 1) % 3].Y + start[(controlPointIndex + 2) % 3].Y) * 0.5;
+
+        if (middleX < p.X) //approach the point from lower x values
+        {
+            while (controlPoint.X < p.X)
+            {
+                previousTriangle = currentTriangle;
+
+                if (controlPoint.Y < middleY)
+                    currentTriangle = currentTriangle.GetNeighbor((controlPointIndex + 2) % 3);
+                else
+                    currentTriangle = currentTriangle.GetNeighbor((controlPointIndex + 1) % 3);
+
+                if (currentTriangle == null)
+                {
+                    currentTriangle = previousTriangle;
+                    break;
+                }
+                else
+                {
+                    controlPointIndex = currentTriangle.GetNeighborIndex(previousTriangle);
+                    controlPoint = currentTriangle[controlPointIndex];
+                }
+            }
+        }
+        else //approach from higher x-values
+        {
+            while (p.X < controlPoint.X)
+            {
+                previousTriangle = currentTriangle;
+
+                if (controlPoint.Y < middleY)
+                    currentTriangle = currentTriangle.GetNeighbor((controlPointIndex + 1) % 3);
+                else
+                    currentTriangle = currentTriangle.GetNeighbor((controlPointIndex + 2) % 3);
+
+                if (currentTriangle == null)
+                {
+                    currentTriangle = previousTriangle;
+                    break;
+                }
+                else
+                {
+                    controlPointIndex = currentTriangle.GetNeighborIndex(previousTriangle);
+                    controlPoint = currentTriangle[controlPointIndex];
+                }
+            }
+        }
+
+        return currentTriangle;
+    }
+
+    public static int GetNearestVertexIndexX(Triangle triangle, Point2 p)
+    {
+
+        var distX1 = Math.Abs(triangle[0].X - p.X);
+        var distX2 = Math.Abs(triangle[1].X - p.X);
+        var distX3 = Math.Abs(triangle[2].X - p.X);
+
+        if (distX1 < distX2 && distX1 < distX3)
+        {
+            return 0;
+        }
+
+        return distX2 < distX3 ? 1 : 2;
+    }
+
+    public static int GetNearestVertexIndexY(Triangle triangle, Point2 p)
+    {
+
+        var distY1 = Math.Abs(triangle[0].Y - p.Y);
+        var distY2 = Math.Abs(triangle[1].Y - p.Y);
+        var distY3 = Math.Abs(triangle[2].Y - p.Y);
+
+        if (distY1 < distY2 && distY1 < distY3)
+        {
+            return 0;
+        }
+
+        return distY2 < distY3 ? 1 : 2;
+    }
 }
 
 public static class TriangleExtensions
@@ -143,5 +309,21 @@ public static class TriangleExtensions
         t.SetNeighbor(0, neighbor0);
         t.SetNeighbor(1, neighbor1);
         t.SetNeighbor(2, neighbor2);
+    }
+
+    public static int GetNeighborIndex(this Triangle t, Triangle neighbor)
+    {
+        if (neighbor == null)
+        {
+            throw new ArgumentNullException(nameof(neighbor), "Attempting to search a null neighbor. Please provide a valid triangle.");
+        }
+        for (var i = 0; i < 3; i++)
+        {
+            if (t.GetNeighbor(i) == neighbor) return i;
+        }
+
+        throw new ArgumentException($"Cannot determine the neighbor index.\n"
+        + $"Target triangle: {t}\n"
+        + $"Neighbor triangle: {neighbor}");
     }
 }
