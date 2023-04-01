@@ -220,14 +220,14 @@ public class DelaunayTriangulation
         }
         else //approach from higher x-values
         {
-            while (controlPoint.X > p.X)
+            while (p.X < controlPoint.X)
             {
                 previousTriangle = currentTriangle;
 
                 if (controlPoint.Y < middleY)
-                    currentTriangle = currentTriangle.GetNeighbor((controlPointIndex + 2) % 3);
-                else
                     currentTriangle = currentTriangle.GetNeighbor((controlPointIndex + 1) % 3);
+                else
+                    currentTriangle = currentTriangle.GetNeighbor((controlPointIndex + 2) % 3);
 
                 if (currentTriangle == null)
                 {
