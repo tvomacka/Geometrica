@@ -117,6 +117,71 @@ public class DelaunayTriangulation
         return currentTriangle;
     }
 
+    public Triangle OrthogonalWalkY(Triangle start, Point2 p)
+    {
+        //determine if the starting triangle is left or right of the queried point p
+        //traverse triangles to the determined direction of x-axis until the queried point's x-coordinate is reached
+        //repeat in the y-direction
+
+        var controlPointIndex = GetNearestVertexIndexX(start, p);
+        var controlPoint = start[controlPointIndex]; //the point of the current node nearest to the tested point
+
+        //Edge oppositeEdge = startingNode.T.GetOppositeEdge(controlPoint);   //opposite edge to the control point
+        var currentTriangle = start;
+        var previousTriangle = start.GetNeighbor(controlPointIndex);
+        var middleX = (start[(controlPointIndex + 1) % 3].X + start[(controlPointIndex + 2) % 3].X) * 0.5;
+        var middleY = (start[(controlPointIndex + 1) % 3].Y + start[(controlPointIndex + 2) % 3].Y) * 0.5;
+
+        if (middleX < p.X) //approach the point from lower x values
+        {
+            while (controlPoint.X < p.X)
+            {
+                previousTriangle = currentTriangle;
+
+                if (controlPoint.Y < middleY)
+                    currentTriangle = currentTriangle.GetNeighbor((controlPointIndex + 1) % 3);
+                else
+                    currentTriangle = currentTriangle.GetNeighbor((controlPointIndex + 2) % 3);
+
+                if (currentTriangle == null)
+                {
+                    currentTriangle = previousTriangle;
+                    break;
+                }
+                else
+                {
+                    controlPointIndex = currentTriangle.GetNeighborIndex(previousTriangle);
+                    controlPoint = currentTriangle[controlPointIndex];
+                }
+            }
+        }
+        else //approach from higher x-values
+        {
+            while (controlPoint.X > p.X)
+            {
+                previousTriangle = currentTriangle;
+
+                if (controlPoint.Y < middleY)
+                    currentTriangle = currentTriangle.GetNeighbor((controlPointIndex + 2) % 3);
+                else
+                    currentTriangle = currentTriangle.GetNeighbor((controlPointIndex + 1) % 3);
+
+                if (currentTriangle == null)
+                {
+                    currentTriangle = previousTriangle;
+                    break;
+                }
+                else
+                {
+                    controlPointIndex = currentTriangle.GetNeighborIndex(previousTriangle);
+                    controlPoint = currentTriangle[controlPointIndex];
+                }
+            }
+        }
+
+        return currentTriangle;
+    }
+
     public Triangle OrthogonalWalkX(Triangle start, Point2 p)
     {
         //determine if the starting triangle is left or right of the queried point p
