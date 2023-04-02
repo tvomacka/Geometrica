@@ -144,7 +144,7 @@ public class DelaunayTriangulation
             }
             else
             {
-                randomPointIndex++;
+                randomPointIndex = (randomPointIndex + 1) % 3;
                 randomPoint = start[randomPointIndex];
                 neigh = start.GetNeighbor(randomPointIndex);
 
@@ -164,7 +164,7 @@ public class DelaunayTriangulation
                 }
                 else
                 {
-                    randomPointIndex++;
+                    randomPointIndex = (randomPointIndex + 1) % 3;
                     randomPoint = start[randomPointIndex];
                     neigh = start.GetNeighbor(randomPointIndex);
 
