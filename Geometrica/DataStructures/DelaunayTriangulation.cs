@@ -110,12 +110,12 @@ public class DelaunayTriangulation
         return nearest;
     }
 
-    private Triangle RememberingWalk(Triangle start, Point2 q)
+    public Triangle RememberingWalk(Triangle start, Point2 q)
     {
         return RememberingWalk(start, q, new Random());
     }
 
-    private Triangle RememberingWalk(Triangle start, Point2 q, Random r)
+    public Triangle RememberingWalk(Triangle start, Point2 q, Random r)
     {
         var previous = start;
         var found = false;
