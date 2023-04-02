@@ -1,5 +1,6 @@
 ﻿using Geometrica.DataStructures;
 using Geometrica.Primitives;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GeometricaTests
 {
@@ -332,6 +333,16 @@ namespace GeometricaTests
             var result = t.OrthogonalWalk(t.Triangles[0], q);
 
             Assert.AreEqual("Triangle [1; 1] [2; 1] [2; 2]", result.ToString());
+        }
+
+        [TestMethod]
+        public void RememberingWalk_InRegularGrid_FindsTargetTriangle()
+        {
+            var t = PrepareRegularGrid(3, 3);
+            var q = new Point2(1.3, 1.9);
+            var result = t.RememberingWalk(t.Triangles[0], q);
+
+            Assert.AreEqual("", result.ToString());
         }
 
         private static DelaunayTriangulation PrepareRegularGrid(int resolutionX, int resolutionY)
