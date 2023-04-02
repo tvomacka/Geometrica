@@ -110,6 +110,86 @@ public class DelaunayTriangulation
         return nearest;
     }
 
+    public Triangle RememberingWalk(Triangle start, Point2 q)
+    {
+        return RememberingWalk(start, q, new Random());
+    }
+
+    public Triangle RememberingWalk(Triangle start, Point2 q, Random r)
+    {
+        var previous = start;
+        var found = false;
+        var detP = 1.0;
+        var detQ = 1.0;
+
+        while (!found)
+        {
+            var randomPointIndex = r.Next(3);
+            var randomPoint = start[randomPointIndex];
+            var neigh = start.GetNeighbor(randomPointIndex);
+
+            if (neigh != null && neigh != previous)
+            {
+                //the edge is not oriented, but we only want to know if p and q are on opposite sides of the edge
+                //or not
+                detP = Point2.Orientation(start[(randomPointIndex + 1) % 3], start[(randomPointIndex + 2) % 3], randomPoint);
+                detQ = Point2.Orientation(start[(randomPointIndex + 1) % 3], start[(randomPointIndex + 2) % 3], q);
+            }
+            else
+                detP = detQ = 1.0;
+            if (detP * detQ < 0)
+            {
+                previous = start;
+                start = neigh;
+            }
+            else
+            {
+                randomPointIndex = (randomPointIndex + 1) % 3;
+                randomPoint = start[randomPointIndex];
+                neigh = start.GetNeighbor(randomPointIndex);
+
+                if (neigh != null && neigh != previous)
+                {
+                    //the edge is not oriented, but we only want to know if p and q are on opposite sides of the edge
+                    //or not
+                    detP = Point2.Orientation(start[(randomPointIndex + 1) % 3], start[(randomPointIndex + 2) % 3], randomPoint);
+                    detQ = Point2.Orientation(start[(randomPointIndex + 1) % 3], start[(randomPointIndex + 2) % 3], q);
+                }
+                else
+                    detP = detQ = 1.0;
+                if (detP * detQ < 0)
+                {
+                    previous = start;
+                    start = neigh;
+                }
+                else
+                {
+                    randomPointIndex = (randomPointIndex + 1) % 3;
+                    randomPoint = start[randomPointIndex];
+                    neigh = start.GetNeighbor(randomPointIndex);
+
+                    if (neigh != null && neigh != previous)
+                    {
+                        //the edge is not oriented, but we only want to know if p and q are on opposite sides of the edge
+                        //or not
+                        detP = Point2.Orientation(start[(randomPointIndex + 1) % 3], start[(randomPointIndex + 2) % 3], randomPoint);
+                        detQ = Point2.Orientation(start[(randomPointIndex + 1) % 3], start[(randomPointIndex + 2) % 3], q);
+                    }
+                    else
+                        detP = detQ = 1.0;
+                    if (detP * detQ < 0)
+                    {
+                        previous = start;
+                        start = neigh;
+                    }
+                    else
+                        found = true;
+                }
+            }
+        }
+        return (start);
+    }
+
     public Triangle OrthogonalWalk(Triangle start, Point2 p)
     {
         return OrthogonalWalkY(OrthogonalWalkX(start, p), p);
