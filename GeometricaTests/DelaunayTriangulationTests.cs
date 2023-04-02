@@ -290,7 +290,7 @@ namespace GeometricaTests
         {
             var t = PrepareRegularGrid(3, 3);
             var q = new Point2(1.5, 0.2);
-            var result = t.OrthogonalWalkX(t.Triangles[0], q);
+            var result = DelaunayTriangulation.OrthogonalWalkX(t[0], q);
 
             Assert.AreEqual("Triangle [1; 0] [2; 1] [1; 1]", result.ToString());
         }
@@ -300,7 +300,7 @@ namespace GeometricaTests
         {
             var t = PrepareRegularGrid(3, 3);
             var q = new Point2(0, 0.2);
-            var result = t.OrthogonalWalkX(t.Triangles[3], q);
+            var result = DelaunayTriangulation.OrthogonalWalkX(t[3], q);
 
             Assert.AreEqual("Triangle [0; 0] [1; 0] [1; 1]", result.ToString());
         }
@@ -310,7 +310,7 @@ namespace GeometricaTests
         {
             var t = PrepareRegularGrid(3, 3);
             var q = new Point2(0.2, 1.5);
-            var result = t.OrthogonalWalkY(t.Triangles[0], q);
+            var result = DelaunayTriangulation.OrthogonalWalkY(t[0], q);
 
             Assert.AreEqual("Triangle [0; 1] [1; 1] [1; 2]", result.ToString());
         }
@@ -320,7 +320,7 @@ namespace GeometricaTests
         {
             var t = PrepareRegularGrid(3, 3);
             var q = new Point2(0.2, 0);
-            var result = t.OrthogonalWalkY(t.Triangles[4], q);
+            var result = DelaunayTriangulation.OrthogonalWalkY(t[4], q);
 
             Assert.AreEqual("Triangle [0; 0] [1; 1] [0; 1]", result.ToString());
         }
@@ -330,7 +330,7 @@ namespace GeometricaTests
         {
             var t = PrepareRegularGrid(3, 3);
             var q = new Point2(1.3, 1.9);
-            var result = t.OrthogonalWalk(t.Triangles[0], q);
+            var result = DelaunayTriangulation.OrthogonalWalk(t[0], q);
 
             Assert.AreEqual("Triangle [1; 1] [2; 1] [2; 2]", result.ToString());
         }
@@ -342,12 +342,12 @@ namespace GeometricaTests
             //seed = 2 will cause it to get lost
             var t = PrepareRegularGrid(3, 3);
             var q = new Point2(1.3, 1.9);
-            var result = t.RememberingWalk(t.Triangles[0], q, new Random(0));
+            var result = DelaunayTriangulation.RememberingWalk(t[0], q, new Random(0));
 
             Assert.AreEqual("Triangle [1; 1] [2; 2] [1; 2]", result.ToString());
         }
 
-        private static DelaunayTriangulation PrepareRegularGrid(int resolutionX, int resolutionY)
+        private static Triangle[] PrepareRegularGrid(int resolutionX, int resolutionY)
         {
             var pts = new Point2[resolutionX, resolutionY];
 
@@ -399,11 +399,7 @@ namespace GeometricaTests
                     }
                 }
 
-            return new DelaunayTriangulation()
-            {
-                Points = new List<Point2>(points),
-                Triangles = triangles
-            };
+            return triangles;
         }
 
         public void Samples()

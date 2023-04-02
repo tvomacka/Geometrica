@@ -85,7 +85,7 @@ public class DelaunayTriangulation
 
         var startTriangle = EstimateNearestTriangle(triangles, p, new Random());
 
-        return startTriangle;
+        return RememberingWalk(OrthogonalWalk(startTriangle, p), p); return startTriangle;
 
         //walk to near triangle using orthogonal walk, then use remembering stochastic walk to find the target triangle
     }
@@ -110,12 +110,12 @@ public class DelaunayTriangulation
         return nearest;
     }
 
-    public Triangle RememberingWalk(Triangle start, Point2 q)
+    public static Triangle RememberingWalk(Triangle start, Point2 q)
     {
         return RememberingWalk(start, q, new Random());
     }
 
-    public Triangle RememberingWalk(Triangle start, Point2 q, Random r)
+    public static Triangle RememberingWalk(Triangle start, Point2 q, Random r)
     {
         var current = start;
         var previous = start;
@@ -153,12 +153,12 @@ public class DelaunayTriangulation
         return current;
     }
 
-    public Triangle OrthogonalWalk(Triangle start, Point2 p)
+    public static Triangle OrthogonalWalk(Triangle start, Point2 p)
     {
         return OrthogonalWalkY(OrthogonalWalkX(start, p), p);
     }
 
-    public Triangle OrthogonalWalkY(Triangle start, Point2 p)
+    public static Triangle OrthogonalWalkY(Triangle start, Point2 p)
     {
         //determine if the starting triangle is left or right of the queried point p
         //traverse triangles to the determined direction of x-axis until the queried point's x-coordinate is reached
@@ -213,7 +213,7 @@ public class DelaunayTriangulation
         return currentTriangle;
     }
 
-    public Triangle OrthogonalWalkX(Triangle start, Point2 p)
+    public static Triangle OrthogonalWalkX(Triangle start, Point2 p)
     {
         //determine if the starting triangle is left or right of the queried point p
         //traverse triangles to the determined direction of x-axis until the queried point's x-coordinate is reached
