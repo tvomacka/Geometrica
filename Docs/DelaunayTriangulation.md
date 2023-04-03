@@ -14,6 +14,8 @@ Delaunay triangulation over a set of points _S_ is such a triangulation which sa
 
 ### Orthogonal Walk
 
+This is a very simple walking algorithm that traverses the triangulation first in the x-direction and then in the y-direction, each time stopping when a vertex of the current triangle is located beyond the query point in the respective axis and direction. Note that the final triangle of this walking algorithm is not necessarily the triangle containing the query point. After this algorithm has stopped, it is therefore necessary to perform another type of walk to traverse into the correct triangle.
+
 ### Remembering Stochastic Walk
 
 # Triangle Operators
