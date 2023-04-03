@@ -1,6 +1,7 @@
 # Geometrica: A Library for Various Geometry-Related Tasks
 
 [![on-push-do-docs](https://github.com/tvomacka/Geometrica/actions/workflows/on-push-do-docs.yml/badge.svg)](https://github.com/tvomacka/Geometrica/actions/workflows/on-push-do-docs.yml)
+[![Build and Run Unit Tests](https://github.com/tvomacka/Geometrica/actions/workflows/build-and-test.yml/badge.svg)](https://github.com/tvomacka/Geometrica/actions/workflows/build-and-test.yml)
 
 ## Primitives
 
