@@ -1,4 +1,5 @@
 ﻿using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices.ComTypes;
 using System.Xml.Linq;
 using Geometrica.Primitives;
 
@@ -49,6 +50,9 @@ public class DelaunayTriangulation
     public static Triangle[] SplitTriangle(Triangle[] triangles, Triangle target, Point2 innerPoint)
     {
         var newTriangles = new Triangle[triangles.Length + 2];
+        Triangle t0 = null;
+        Triangle t1 = null;
+        Triangle t2 = null;
 
         var index = 0;
         foreach (var t in triangles)
@@ -59,9 +63,9 @@ public class DelaunayTriangulation
             }
             else
             {
-                var t0 = new Triangle(innerPoint, target[0], target[1]);
-                var t1 = new Triangle(innerPoint, target[1], target[2]);
-                var t2 = new Triangle(innerPoint, target[2], target[0]);
+                t0 = new Triangle(innerPoint, target[0], target[1]);
+                t1 = new Triangle(innerPoint, target[1], target[2]);
+                t2 = new Triangle(innerPoint, target[2], target[0]);
 
                 t0.SetNeighbors(target.GetNeighbor(2), t1, t2);
                 t1.SetNeighbors(target.GetNeighbor(0), t2, t0);
@@ -73,7 +77,16 @@ public class DelaunayTriangulation
             }
         }
 
+        newTriangles = LegalizeTriangle(triangles, t0, 0);
+        newTriangles = LegalizeTriangle(triangles, t1, 0);
+        newTriangles = LegalizeTriangle(triangles, t2, 0);
+
         return newTriangles;
+    }
+
+    private static Triangle[] LegalizeTriangle(Triangle[] triangles, Triangle targetTriangle, int pointIndex)
+    {
+        return triangles;
     }
 
     public static Triangle FindTriangleContainingPoint(Triangle[] triangles, Point2 p)
