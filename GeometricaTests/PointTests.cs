@@ -70,7 +70,7 @@ public class PointTests
     {
         var p = new Point2(2, 1);
 
-        Assert.AreEqual("[0,8944271909999159; 0,4472135954999579]", p.Normalize().ToString());
+        Assert.AreEqual("[0.8944271909999159; 0.4472135954999579]", p.Normalize().ToString());
     }
 
     [TestMethod]

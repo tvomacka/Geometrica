@@ -51,7 +51,7 @@ namespace GeometricaTests
 
             var t = string.Join<Triangle>(" ", dt.Triangles);
 
-            Assert.AreEqual("Triangle [0,1; 0,1] [0; 0] [1; 0] Triangle [0,1; 0,1] [1; 0] [0; 1] Triangle [0,1; 0,1] [0; 1] [0; 0]", t);
+            Assert.AreEqual("Triangle [0.1; 0.1] [0; 0] [1; 0] Triangle [0.1; 0.1] [1; 0] [0; 1] Triangle [0.1; 0.1] [0; 1] [0; 0]", t);
         }
 
         [TestMethod]
@@ -128,7 +128,7 @@ namespace GeometricaTests
 
             var nearest = DelaunayTriangulation.EstimateNearestTriangle(t, p, new Random(0));
 
-            Assert.AreEqual("Triangle [206; 0] [207; 0] [206,5; 1]", nearest.ToString());
+            Assert.AreEqual("Triangle [206; 0] [207; 0] [206.5; 1]", nearest.ToString());
         }
 
         [TestMethod]
@@ -148,7 +148,7 @@ namespace GeometricaTests
 
             var s = string.Join<Triangle>(" ", triangles);
 
-            Assert.AreEqual("Triangle [0,1; 0,2] [0; 0] [1; 0] Triangle [0,1; 0,2] [1; 0] [0; 1] Triangle [0,1; 0,2] [0; 1] [0; 0]", s);
+            Assert.AreEqual("Triangle [0.1; 0.2] [0; 0] [1; 0] Triangle [0.1; 0.2] [1; 0] [0; 1] Triangle [0.1; 0.2] [0; 1] [0; 0]", s);
         }
 
         [TestMethod]
@@ -172,7 +172,7 @@ namespace GeometricaTests
 
             Assert.AreEqual(4, triangles.Length);
             Assert.AreEqual(
-                "Triangle [0,1; 0,2] [0; 0] [1; 0] Triangle [0,1; 0,2] [1; 0] [0; 1] Triangle [0,1; 0,2] [0; 1] [0; 0] Triangle [1; 0] [4; 4] [0; 1]",
+                "Triangle [0.1; 0.2] [0; 0] [1; 0] Triangle [0.1; 0.2] [1; 0] [0; 1] Triangle [0.1; 0.2] [0; 1] [0; 0] Triangle [1; 0] [4; 4] [0; 1]",
                 s);
         }
 

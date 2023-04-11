@@ -1,4 +1,5 @@
-﻿using Geometrica.Algebra;
+﻿using System.Globalization;
+using Geometrica.Algebra;
 
 namespace Geometrica.Primitives;
 
@@ -36,7 +37,7 @@ public struct Point2
 
     public override string ToString()
     {
-        return $"[{X}; {Y}]";
+        return $"[{X.ToString(CultureInfo.InvariantCulture)}; {Y.ToString(CultureInfo.InvariantCulture)}]";
     }
 
     public Point2 Normalize()
