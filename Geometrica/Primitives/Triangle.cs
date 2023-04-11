@@ -1,6 +1,4 @@
-﻿using System.Reflection.Metadata.Ecma335;
-
-namespace Geometrica.Primitives;
+﻿namespace Geometrica.Primitives;
 
 public class Triangle : IPolygon
 {
