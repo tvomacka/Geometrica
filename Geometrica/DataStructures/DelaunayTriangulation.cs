@@ -77,9 +77,9 @@ public class DelaunayTriangulation
             }
         }
 
-        newTriangles = LegalizeTriangle(triangles, t0, 0);
-        newTriangles = LegalizeTriangle(triangles, t1, 0);
-        newTriangles = LegalizeTriangle(triangles, t2, 0);
+        newTriangles = LegalizeTriangle(newTriangles, t0, 0);
+        newTriangles = LegalizeTriangle(newTriangles, t1, 0);
+        newTriangles = LegalizeTriangle(newTriangles, t2, 0);
 
         return newTriangles;
     }
