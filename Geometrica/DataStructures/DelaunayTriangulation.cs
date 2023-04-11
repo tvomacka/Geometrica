@@ -84,7 +84,7 @@ public class DelaunayTriangulation
         return newTriangles;
     }
 
-    private static Triangle[] LegalizeTriangle(Triangle[] triangles, Triangle targetTriangle, int pointIndex)
+    public static Triangle[] LegalizeTriangle(Triangle[] triangles, Triangle targetTriangle, int neighborIndex)
     {
         return triangles;
     }
