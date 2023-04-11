@@ -368,6 +368,27 @@ namespace GeometricaTests
             Assert.AreEqual("Triangle [0; 0] [1; 0] [0; 1] Triangle [2; 2] [0; 1] [1; 0]", actual);
         }
 
+        [TestMethod]
+        public void LegalizeTriangle_SwapsEdge_ForNonDelaunayPair()
+        {
+            var p1 = new Point2(0, 0);
+            var p2 = new Point2(1, 0);
+            var p3 = new Point2(0, 1);
+            var p4 = new Point2(0.9, 0.9);
+
+            var t1 = new Triangle(p1, p2, p3);
+            var t2 = new Triangle(p4, p3, p2);
+            t1.SetNeighbor(0, t2);
+            t2.SetNeighbor(0, t1);
+
+            var triangles = new Triangle[] { t1, t2 };
+
+            triangles = DelaunayTriangulation.LegalizeTriangle(triangles, t1, 0);
+
+            var actual = string.Join<Triangle>(" ", triangles);
+            Assert.AreEqual("", actual);
+        }
+
         private static Triangle[] PrepareRegularGrid(int resolutionX, int resolutionY)
         {
             var pts = new Point2[resolutionX, resolutionY];
