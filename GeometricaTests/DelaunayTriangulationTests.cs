@@ -494,6 +494,10 @@ namespace GeometricaTests
             t1.GetNeighbor(0);  //returns t2
             t1.SetNeighbors(t2, t3, t4);
             // end-snippet
+
+            // begin-snippet: IncircleTest
+            DelaunayTriangulation.InCircle(p1, p2, p3, p4);
+            // end-snippet
         }
     }
 }
