@@ -275,10 +275,10 @@ public class ConvexHull : IEnumerable<Point2>, IPolygon
     {
         return p.X switch
         {
-            >= 0 when p.Y >= 0 => Asin(p.Y),
-            <= 0 when p.Y >= 0 => PI - Asin(p.Y),
-            <= 0 when p.Y <= 0 => PI - Asin(p.Y),
-            _ => 2 * PI + Asin(p.Y)
+            >= 0 when p.Y >= 0 => Math.Asin(p.Y),
+            <= 0 when p.Y >= 0 => PI - Math.Asin(p.Y),
+            <= 0 when p.Y <= 0 => PI - Math.Asin(p.Y),
+            _ => 2 * PI + Math.Asin(p.Y)
         };
     }
 
