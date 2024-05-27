@@ -9,6 +9,9 @@ Delaunay criterium or an In-Circle test is perhaps the most essential test of an
 If you need to determine if a point _p4_ lies inside the triangle _p1, p2, p3_, you can do so by calling this method. Note that the triangle needs to be oriented counter-clockwise to get the expected result.
 
 <!-- snippet: IncircleTest -->
+```cs
+DelaunayTriangulation.InCircle(p1, p2, p3, p4);
+```
 <!-- endSnippet -->
 
 This method returns _true_ if the point lies outside the circumcircle and the Delaunay criterium is therefore satisfied.
