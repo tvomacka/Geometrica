@@ -98,9 +98,7 @@ public class DelaunayTriangulation
 
         var startTriangle = EstimateNearestTriangle(triangles, p, new Random());
 
-        return RememberingWalk(OrthogonalWalk(startTriangle, p), p); return startTriangle;
-
-        //walk to near triangle using orthogonal walk, then use remembering stochastic walk to find the target triangle
+        return RememberingWalk(OrthogonalWalk(startTriangle, p), p); 
     }
 
     public static Triangle EstimateNearestTriangle(Triangle[] triangles, Point2 p, Random random)
