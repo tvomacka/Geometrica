@@ -1,4 +1,5 @@
-﻿namespace Geometrica.Algebra
+﻿
+namespace Geometrica.Algebra
 {
     public class Matrix4
     {
@@ -23,8 +24,8 @@
         }
 
         public Matrix4(
-            double m00, double m01, double m02, double m03, 
-            double m10, double m11, double m12, double m13, 
+            double m00, double m01, double m02, double m03,
+            double m10, double m11, double m12, double m13,
             double m20, double m21, double m22, double m23,
             double m30, double m31, double m32, double m33)
         {
@@ -66,14 +67,32 @@
 
         public double Determinant()
         {
-            return _matrix[0, 0] * _matrix[1, 1] * _matrix[2, 2] * _matrix[3, 3] +
-                   _matrix[1, 0] * _matrix[2, 1] * _matrix[3, 2] * _matrix[0, 3] +
-                   _matrix[2, 0] * _matrix[3, 1] * _matrix[0, 2] * _matrix[1, 3] +
-                   _matrix[3, 0] * _matrix[0, 1] * _matrix[1, 2] * _matrix[2, 3] -
-                   _matrix[0, 3] * _matrix[1, 2] * _matrix[2, 1] * _matrix[3, 0] -
-                   _matrix[0, 2] * _matrix[1, 1] * _matrix[2, 0] * _matrix[3, 3] -
-                   _matrix[0, 1] * _matrix[1, 0] * _matrix[2, 3] * _matrix[3, 2] -
-                   _matrix[0, 0] * _matrix[1, 3] * _matrix[2, 2] * _matrix[3, 1];
+            return _matrix[0, 0] * SubMatrix3(0, 0).Determinant() - _matrix[1, 0] * SubMatrix3(1, 0).Determinant() + _matrix[2, 0] * SubMatrix3(2, 0).Determinant() - _matrix[3, 0] * SubMatrix3(3, 0).Determinant();
+        }
+
+        public Matrix3 SubMatrix3(int r, int c)
+        {
+            var m3 = new Matrix3();
+            int x = 0, y = 0;
+
+            for (int i = 0; i < 4; i++)
+            {
+                y = 0;
+                if (i == r)
+                    continue;
+
+                for (int j = 0; j < 4; j++)
+                {
+                    if (j == c)
+                        continue;
+
+                    m3[x, y] = _matrix[i, j];
+                    y++;
+                }
+                x++;
+            }
+
+            return m3;
         }
     }
 }
