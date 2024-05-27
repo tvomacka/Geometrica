@@ -389,6 +389,7 @@ namespace GeometricaTests
             Assert.AreEqual("", actual);
         }
 
+        [TestMethod]
         public void IncircleTest_Delaunay_ReturnsTrue()
         {
             var p1 = new Point2(0, 0);
@@ -397,6 +398,17 @@ namespace GeometricaTests
             var p4 = new Point2(1.1, 1.1);
 
             Assert.IsTrue(DelaunayTriangulation.InCircle(p1, p2, p3, p4));
+        }
+
+        [TestMethod]
+        public void IncircleTest_NonDelaunay_ReturnsFalse()
+        {
+            var p1 = new Point2(0, 0);
+            var p2 = new Point2(1, 0);
+            var p3 = new Point2(0, 1);
+            var p4 = new Point2(0.9, 0.9);
+
+            Assert.IsFalse(DelaunayTriangulation.InCircle(p1, p2, p3, p4));
         }
 
         private static Triangle[] PrepareRegularGrid(int resolutionX, int resolutionY)

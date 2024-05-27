@@ -1,6 +1,7 @@
 ﻿using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices.ComTypes;
 using System.Xml.Linq;
+using Geometrica.Algebra;
 using Geometrica.Primitives;
 
 namespace Geometrica.DataStructures;
@@ -307,6 +308,17 @@ public class DelaunayTriangulation
         }
 
         return distY2 < distY3 ? 1 : 2;
+    }
+
+    public static bool InCircle(Point2 p1, Point2 p2, Point2 p3, Point2 p4)
+    {
+        var m = new Matrix4(
+            p1.X, p1.Y, p1.X * p1.X + p1.Y * p1.Y, 1,
+            p2.X, p2.Y, p2.X * p2.X + p2.Y * p2.Y, 1,
+            p3.X, p3.Y, p3.X * p3.X + p3.Y * p3.Y, 1,
+            p4.X, p4.Y, p4.X * p4.X + p4.Y * p4.Y, 1);
+
+        return m.Determinant() < -double.Epsilon;
     }
 }
 

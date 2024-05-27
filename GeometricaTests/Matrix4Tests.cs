@@ -6,6 +6,20 @@ namespace GeometricaTests
     public class Matrix4Tests
     {
         [TestMethod]
+        public void Matrix4_Returns_Negative022()
+        {
+            var m = new Matrix4(
+                0, 0, 0, 1,
+                1, 0, 1, 1,
+                0, 1, 1, 1,
+                1.1, 1.1, 2.42, 1);
+
+            var det = m.Determinant();
+
+            Assert.AreEqual(-0.22, det, 1e-3);
+        }
+
+        [TestMethod]
         public void Matrix4_Members_CanBeEditedWithIndexers()
         {
             var m = new Matrix4();
