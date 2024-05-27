@@ -2,6 +2,20 @@
 
 Delaunay triangulation over a set of points _S_ is such a triangulation which satisfies the condition that no point of _S_ lies inside a circumcircle of any of the triangles in the triangulation. It is often denoted _DT(S)_.
 
+## Delaunay Criterium
+
+Delaunay criterium or an In-Circle test is perhaps the most essential test of any of the construction algorithms. It determines if a given point is outside the circumcircle of a given triangle, therefore confirming the basic condition of the Delaunay triangulation.
+
+If you need to determine if a point _p4_ lies inside the triangle _p1, p2, p3_, you can do so by calling this method. Note that the triangle needs to be oriented counter-clockwise to get the expected result.
+
+<!-- snippet: IncircleTest -->
+```cs
+DelaunayTriangulation.InCircle(p1, p2, p3, p4);
+```
+<!-- endSnippet -->
+
+This method returns _true_ if the point lies outside the circumcircle and the Delaunay criterium is therefore satisfied.
+
 # Creation Algorithms
 
 ## Incremental Construction
