@@ -208,7 +208,7 @@ namespace GeometricaTests
 
             Assert.AreEqual(t4, triangles[0].GetNeighbor(0));
             Assert.AreEqual(t2, triangles[1].GetNeighbor(0));
-            Assert.AreEqual(t3, triangles[2].GetNeighbor(0));
+            Assert.AreEqual(null, triangles[2].GetNeighbor(0));
         }
 
         [TestMethod]
