@@ -93,21 +93,29 @@ public class DelaunayTriangulation
         if (InCircle(targetTriangle[0], targetTriangle[1], targetTriangle[2], oppositeTriangle[oppositePointIndex]))
             return triangles;
 
-        var t1 = new Triangle(targetTriangle[neighborIndex], oppositeTriangle[oppositePointIndex], targetTriangle[(neighborIndex + 2) % 3]);
-        var t2 = new Triangle(targetTriangle[neighborIndex], targetTriangle[(neighborIndex + 1) % 3], oppositeTriangle[oppositePointIndex]);
+        var origNeighborsTarget = new[] { 
+            targetTriangle.GetNeighbor(neighborIndex), 
+            targetTriangle.GetNeighbor((neighborIndex + 1) % 3), 
+            targetTriangle.GetNeighbor((neighborIndex + 2) % 3) 
+        };
+        var origNeighborsOpposite = new[] {
+            oppositeTriangle.GetNeighbor(oppositePointIndex), 
+            oppositeTriangle.GetNeighbor((oppositePointIndex + 1) % 3), 
+            oppositeTriangle.GetNeighbor((oppositePointIndex + 2) % 3) 
+        };
+
+        if (origNeighborsTarget[2] != null)
+        {
+            var targetIndex = origNeighborsTarget[2].GetNeighborIndex(targetTriangle);
+            origNeighborsTarget[2].SetNeighbor(targetIndex, oppositeTriangle);
+        }
+        if (origNeighborsOpposite[2] != null)
+        {
+            var targetIndex = origNeighborsOpposite[2].GetNeighborIndex(oppositeTriangle);
+            origNeighborsOpposite[2].SetNeighbor(targetIndex, targetTriangle);
+        }
 
         //for each of the original neighbors, set their neighbor references to the newly created triangles
-        
-        t1.SetNeighbors(
-            oppositeTriangle.GetNeighbor((oppositePointIndex + 2) %3),
-            targetTriangle.GetNeighbor((neighborIndex + 1) % 3),
-            t2);
-        t2.SetNeighbors(
-            oppositeTriangle.GetNeighbor((oppositePointIndex + 1) %3),
-            t1,
-            targetTriangle.GetNeighbor((oppositePointIndex + 1) % 3));
-        //remove the original two triangles
-        //add the newly created triangles
 
         return triangles;
     }
