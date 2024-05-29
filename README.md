@@ -3,6 +3,10 @@
 [![on-push-do-docs](https://github.com/tvomacka/Geometrica/actions/workflows/on-push-do-docs.yml/badge.svg)](https://github.com/tvomacka/Geometrica/actions/workflows/on-push-do-docs.yml)
 [![Build and Run Unit Tests](https://github.com/tvomacka/Geometrica/actions/workflows/build-and-test.yml/badge.svg)](https://github.com/tvomacka/Geometrica/actions/workflows/build-and-test.yml)
 
+## Disclaimer
+
+This is a work in progress and does not aim to be a time-optimal implementation. You will probably find stuff that is incomplete or broken, be aware and use at your own risk.
+
 ## Primitives
 
 Basic information about the different types of primitives used by the algorithms can be found in [Primitives](Docs/Primitives.md).
