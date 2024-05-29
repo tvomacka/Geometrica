@@ -93,15 +93,29 @@ public class DelaunayTriangulation
         if (InCircle(targetTriangle[0], targetTriangle[1], targetTriangle[2], oppositeTriangle[oppositePointIndex]))
             return triangles;
 
-        var origNeighborsTarget = new[] { 
+        var origNeighborsTarget = new[] 
+        { 
             targetTriangle.GetNeighbor(neighborIndex), 
             targetTriangle.GetNeighbor((neighborIndex + 1) % 3), 
             targetTriangle.GetNeighbor((neighborIndex + 2) % 3) 
         };
-        var origNeighborsOpposite = new[] {
+        var origNeighborsOpposite = new[] 
+        {
             oppositeTriangle.GetNeighbor(oppositePointIndex), 
             oppositeTriangle.GetNeighbor((oppositePointIndex + 1) % 3), 
             oppositeTriangle.GetNeighbor((oppositePointIndex + 2) % 3) 
+        };
+        var origPointsTarget = new[]
+        {
+            targetTriangle[neighborIndex],
+            targetTriangle[(neighborIndex + 1) % 3],
+            targetTriangle[(neighborIndex + 2) % 3]
+        };
+        var origPointsOpposite = new[]
+        {
+            oppositeTriangle[oppositePointIndex],
+            oppositeTriangle[(oppositePointIndex + 1) % 3],
+            oppositeTriangle[(oppositePointIndex + 2) % 3]
         };
 
         if (origNeighborsTarget[2] != null)
@@ -115,7 +129,15 @@ public class DelaunayTriangulation
             origNeighborsOpposite[2].SetNeighbor(targetIndex, targetTriangle);
         }
 
-        //for each of the original neighbors, set their neighbor references to the newly created triangles
+        targetTriangle[0] = origPointsTarget[0];
+        targetTriangle[1] = origPointsOpposite[0];
+        targetTriangle[2] = origPointsTarget[2];
+        targetTriangle.SetNeighbors(origNeighborsOpposite[2], origNeighborsTarget[1], oppositeTriangle);
+
+        oppositeTriangle[0] = origPointsTarget[0];
+        oppositeTriangle[1] = origPointsOpposite[2];
+        oppositeTriangle[2] = origPointsOpposite[0];
+        oppositeTriangle.SetNeighbors(origNeighborsOpposite[1], origNeighborsTarget[2], targetTriangle);
 
         return triangles;
     }

@@ -386,7 +386,7 @@ namespace GeometricaTests
             triangles = DelaunayTriangulation.LegalizeTriangle(triangles, t1, 0);
 
             var actual = string.Join<Triangle>(" ", triangles);
-            Assert.AreEqual("", actual);
+            Assert.AreEqual("Triangle [0; 0] [0.9; 0.9] [0; 1] Triangle [0; 0] [1; 0] [0.9; 0.9]", actual);
         }
 
         [TestMethod]
