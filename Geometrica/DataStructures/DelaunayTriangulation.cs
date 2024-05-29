@@ -68,9 +68,29 @@ public class DelaunayTriangulation
                 t1 = new Triangle(innerPoint, target[1], target[2]);
                 t2 = new Triangle(innerPoint, target[2], target[0]);
 
-                t0.SetNeighbors(target.GetNeighbor(2), t1, t2);
-                t1.SetNeighbors(target.GetNeighbor(0), t2, t0);
-                t2.SetNeighbors(target.GetNeighbor(1), t0, t1);
+                var n2 = target.GetNeighbor(2);
+                t0.SetNeighbors(n2, t1, t2);
+                if(n2 != null)
+                {
+                    var i = n2.GetNeighborIndex(target);
+                    n2.SetNeighbor(i, t0);
+                }
+                
+                var n0 = target.GetNeighbor(0);
+                t1.SetNeighbors(n0, t2, t0);
+                if(n0 != null)
+                {
+                    var i = n0.GetNeighborIndex(target);
+                    n0.SetNeighbor(i, t1);
+                }
+                
+                var n1 = target.GetNeighbor(1);
+                t2.SetNeighbors(n1, t0, t1);
+                if(n1 != null)
+                {
+                    var i = n1.GetNeighborIndex(target);
+                    n1.SetNeighbor(i, t2);
+                }
 
                 newTriangles[index++] = t0;
                 newTriangles[index++] = t1;
@@ -87,6 +107,61 @@ public class DelaunayTriangulation
 
     public static Triangle[] LegalizeTriangle(Triangle[] triangles, Triangle targetTriangle, int neighborIndex)
     {
+        var oppositeTriangle = targetTriangle.GetNeighbor(neighborIndex);
+        if (oppositeTriangle == null)
+            return triangles;
+
+        var oppositePointIndex = oppositeTriangle.GetNeighborIndex(targetTriangle);
+
+        if (InCircle(targetTriangle[0], targetTriangle[1], targetTriangle[2], oppositeTriangle[oppositePointIndex]))
+            return triangles;
+
+        var origNeighborsTarget = new[] 
+        { 
+            targetTriangle.GetNeighbor(neighborIndex), 
+            targetTriangle.GetNeighbor((neighborIndex + 1) % 3), 
+            targetTriangle.GetNeighbor((neighborIndex + 2) % 3) 
+        };
+        var origNeighborsOpposite = new[] 
+        {
+            oppositeTriangle.GetNeighbor(oppositePointIndex), 
+            oppositeTriangle.GetNeighbor((oppositePointIndex + 1) % 3), 
+            oppositeTriangle.GetNeighbor((oppositePointIndex + 2) % 3) 
+        };
+        var origPointsTarget = new[]
+        {
+            targetTriangle[neighborIndex],
+            targetTriangle[(neighborIndex + 1) % 3],
+            targetTriangle[(neighborIndex + 2) % 3]
+        };
+        var origPointsOpposite = new[]
+        {
+            oppositeTriangle[oppositePointIndex],
+            oppositeTriangle[(oppositePointIndex + 1) % 3],
+            oppositeTriangle[(oppositePointIndex + 2) % 3]
+        };
+
+        if (origNeighborsTarget[2] != null)
+        {
+            var targetIndex = origNeighborsTarget[2].GetNeighborIndex(targetTriangle);
+            origNeighborsTarget[2].SetNeighbor(targetIndex, oppositeTriangle);
+        }
+        if (origNeighborsOpposite[2] != null)
+        {
+            var targetIndex = origNeighborsOpposite[2].GetNeighborIndex(oppositeTriangle);
+            origNeighborsOpposite[2].SetNeighbor(targetIndex, targetTriangle);
+        }
+
+        targetTriangle[0] = origPointsTarget[0];
+        targetTriangle[1] = origPointsOpposite[0];
+        targetTriangle[2] = origPointsTarget[2];
+        targetTriangle.SetNeighbors(origNeighborsOpposite[2], origNeighborsTarget[1], oppositeTriangle);
+
+        oppositeTriangle[0] = origPointsTarget[0];
+        oppositeTriangle[1] = origPointsOpposite[2];
+        oppositeTriangle[2] = origPointsOpposite[0];
+        oppositeTriangle.SetNeighbors(origNeighborsOpposite[1], origNeighborsTarget[2], targetTriangle);
+
         return triangles;
     }
 

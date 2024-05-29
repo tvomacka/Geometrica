@@ -26,6 +26,15 @@ public class Triangle : IPolygon
                     $"The provided index {key} was out of bounds, please use index values 0, 1, 2 for triangle point access.")
             };
         }
+        set
+        {
+            if (key == 0)
+                _a = value;
+            else if (key == 1)
+                _b = value;
+            else if (key == 2)
+                _c = value;
+        }
     }
 
     public int Count => 3;

@@ -208,7 +208,7 @@ namespace GeometricaTests
 
             Assert.AreEqual(t4, triangles[0].GetNeighbor(0));
             Assert.AreEqual(t2, triangles[1].GetNeighbor(0));
-            Assert.AreEqual(t3, triangles[2].GetNeighbor(0));
+            Assert.AreEqual(null, triangles[2].GetNeighbor(0));
         }
 
         [TestMethod]
@@ -386,7 +386,7 @@ namespace GeometricaTests
             triangles = DelaunayTriangulation.LegalizeTriangle(triangles, t1, 0);
 
             var actual = string.Join<Triangle>(" ", triangles);
-            Assert.AreEqual("", actual);
+            Assert.AreEqual("Triangle [0; 0] [0.9; 0.9] [0; 1] Triangle [0; 0] [1; 0] [0.9; 0.9]", actual);
         }
 
         [TestMethod]
