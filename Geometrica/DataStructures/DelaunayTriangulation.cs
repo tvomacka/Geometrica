@@ -97,7 +97,15 @@ public class DelaunayTriangulation
         var t2 = new Triangle(targetTriangle[neighborIndex], targetTriangle[(neighborIndex + 1) % 3], oppositeTriangle[oppositePointIndex]);
 
         //for each of the original neighbors, set their neighbor references to the newly created triangles
-        //set the neighbor references of the newly created triangles
+        
+        t1.SetNeighbors(
+            oppositeTriangle.GetNeighbor((oppositePointIndex + 2) %3),
+            targetTriangle.GetNeighbor((neighborIndex + 1) % 3),
+            t2);
+        t2.SetNeighbors(
+            oppositeTriangle.GetNeighbor((oppositePointIndex + 1) %3),
+            t1,
+            targetTriangle.GetNeighbor((oppositePointIndex + 1) % 3));
         //remove the original two triangles
         //add the newly created triangles
 
