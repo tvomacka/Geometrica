@@ -93,7 +93,9 @@ public class DelaunayTriangulation
         if (InCircle(targetTriangle[0], targetTriangle[1], targetTriangle[2], oppositeTriangle[oppositePointIndex]))
             return triangles;
 
-        //create two new triangles
+        var t1 = new Triangle(targetTriangle[neighborIndex], oppositeTriangle[oppositePointIndex], targetTriangle[(neighborIndex + 2) % 3]);
+        var t2 = new Triangle(targetTriangle[neighborIndex], targetTriangle[(neighborIndex + 1) % 3], oppositeTriangle[oppositePointIndex]);
+
         //for each of the original neighbors, set their neighbor references to the newly created triangles
         //set the neighbor references of the newly created triangles
         //remove the original two triangles
