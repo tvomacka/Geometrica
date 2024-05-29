@@ -88,6 +88,9 @@ public class DelaunayTriangulation
     public static Triangle[] LegalizeTriangle(Triangle[] triangles, Triangle targetTriangle, int neighborIndex)
     {
         var oppositeTriangle = targetTriangle.GetNeighbor(neighborIndex);
+        if (oppositeTriangle == null)
+            return triangles;
+
         var oppositePointIndex = oppositeTriangle.GetNeighborIndex(targetTriangle);
 
         if (InCircle(targetTriangle[0], targetTriangle[1], targetTriangle[2], oppositeTriangle[oppositePointIndex]))
