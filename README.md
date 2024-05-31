@@ -7,6 +7,10 @@
 
 This is a work in progress and does not aim to be a time-optimal implementation. You will probably find stuff that is incomplete or broken, be aware and use at your own risk.
 
+## Algebra
+
+Tools for algebraic operations are covered in [Algebra](Docs/Algebra.md).
+
 ## Primitives
 
 Basic information about the different types of primitives used by the algorithms can be found in [Primitives](Docs/Primitives.md).
