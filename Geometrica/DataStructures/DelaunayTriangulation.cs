@@ -31,8 +31,6 @@ public class DelaunayTriangulation
     {
         if (ConvexHull?.Contains(p) ?? false)
         {
-            //if the newly added point lies inside CH(p) find the triangle containing it
-            //split this triangle
             var t = FindTriangleContainingPoint(Triangles, p);
             Triangles = SplitTriangle(Triangles, t, p);
         }
